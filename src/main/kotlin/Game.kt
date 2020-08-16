@@ -6,6 +6,8 @@ class Game {
     }
 
     fun tick() {
+        val switchTile = floorPlan.getTile(2,2)
+        floorPlan.getTile(2,2).solid = !floorPlan.getTile(2,2).solid
         // air flow
         //energy flow
     }
