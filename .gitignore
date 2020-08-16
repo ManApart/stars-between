@@ -2,3 +2,5 @@
 .gradle/
 build/
 out/
+node_modules/
+dist/
