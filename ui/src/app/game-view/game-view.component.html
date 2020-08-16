@@ -1,1 +1,13 @@
-<p>game-view works!</p>
+Game View:
+
+
+<div *ngIf="data">
+  Data:
+  <table>
+    <tr *ngFor="let row of data.tiles">
+      <td *ngFor="let tile of row">
+        {{ tile.solid }}
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { WebsocketService } from '../websocket.service';
-// import { ChatService } from '../chat.service';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { WebsocketService } from '../websocket.service';
 
 @Component({
   selector: 'app-game-view',
@@ -9,11 +7,12 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   styleUrls: ['./game-view.component.css']
 })
 export class GameViewComponent {
+  private data;
 
-  constructor() {
-    const myWebSocket: WebSocketSubject<any> = webSocket('ws://localhost:1235');
-    myWebSocket.asObservable().subscribe(dataFromServer => {
-      console.log('data' + JSON.stringify(dataFromServer));
+  constructor(websocketService: WebsocketService) {
+    websocketService.data.subscribe(data => {
+      this.data = data;
+      console.log(data.tiles);
     });
   }
 
