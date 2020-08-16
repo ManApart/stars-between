@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from '../websocket.service';
+import { Component, OnInit } from '@angular/core'
+import { WebsocketService } from '../websocket.service'
+import { Tile } from '../tile/tile'
 
 @Component({
   selector: 'app-game-view',
@@ -7,13 +8,13 @@ import { WebsocketService } from '../websocket.service';
   styleUrls: ['./game-view.component.css']
 })
 export class GameViewComponent {
-  private data;
+  public data: Array<Array<Tile>>
 
   constructor(websocketService: WebsocketService) {
     websocketService.data.subscribe(data => {
-      this.data = data;
-      console.log(data.tiles);
-    });
+      this.data = data
+      // console.log(data.tiles);
+    })
   }
 
 }

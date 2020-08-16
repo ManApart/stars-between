@@ -1,5 +1,5 @@
 class FloorPlan(val size: Int = 5) {
-    val tiles = (0 until size).associateWith { (0 until size).associateWith { Tile() } }
+    val tiles = (0 until size).associate { x -> (x to (0 until size).associateWith { y -> Tile(Position(x, y)) }) }
     val allTiles = tiles.values.flatMap { it.values }
 
     fun getTile(pos: Position): Tile {

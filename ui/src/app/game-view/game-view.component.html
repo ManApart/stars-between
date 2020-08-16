@@ -6,7 +6,7 @@ Game View:
   <table>
     <tr *ngFor="let row of data.tiles">
       <td *ngFor="let tile of row">
-        {{ tile.solid }}
+        <app-tile [tile]="tile"></app-tile>
       </td>
     </tr>
   </table>

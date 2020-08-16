@@ -1,0 +1,12 @@
+.tile {
+  width: 20px;
+  height: 20px;
+}
+
+.open {
+  background-color: white;
+}
+
+.solid{
+  background-color: black;
+}
