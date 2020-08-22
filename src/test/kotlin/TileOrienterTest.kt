@@ -11,7 +11,6 @@ class TileOrienterTest {
         orient(tile, floorPlan)
 
         assertEquals(Adjacency.ALL, tile.adjacency)
-        assertEquals(0, tile.rotation)
     }
 
     @Test
@@ -22,7 +21,6 @@ class TileOrienterTest {
         orient(tile, floorPlan)
 
         assertEquals(Adjacency.NONE, tile.adjacency)
-        assertEquals(0, tile.rotation)
     }
 
     @Test

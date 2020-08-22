@@ -1,15 +1,24 @@
 enum class Adjacency(val getRotation: (Boolean, Boolean, Boolean, Boolean) -> Int) {
-    NONE(noRotation),
+    NONE(randomRotation),
     ONE_SIDE(oneSideRotation),
     TWO_SIDE(twoSideRotation),
     CORNER(cornerRotation),
     THREE_SIDE(threeSideRotation),
-    ALL(noRotation);
+    ALL(randomRotation);
 
 }
 
 private val noRotation = fun(_: Boolean, _: Boolean, _: Boolean, _: Boolean): Int {
     return 0
+}
+
+private val randomRotation = fun(_: Boolean, _: Boolean, _: Boolean, _: Boolean): Int {
+    return when ((0..4).random()) {
+        0 -> 90
+        1 -> 180
+        2 -> 270
+        else -> 0
+    }
 }
 
 private val oneSideRotation = fun(up: Boolean, down: Boolean, left: Boolean, right: Boolean): Int {
