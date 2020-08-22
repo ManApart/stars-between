@@ -1,4 +1,4 @@
-const val tickFrequency = 1000L
+const val tickFrequency = 1000000L
 
 fun main(){
     val game = Game()

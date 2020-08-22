@@ -1,6 +1,17 @@
 .tile {
   width: 20px;
   height: 20px;
+  position: relative;
+}
+
+.tile::before {
+  position: absolute;
+  content: '';
+  z-index: -1;
+  width: 10px;
+  height: 10px;
+  /* background-size: 300% 200%; */
+  background-image: url("../../assets/images/tiles/wall.png");
 }
 
 .open {
@@ -9,4 +20,19 @@
 
 .solid{
   background-color: black;
+}
+
+
+#graphic {
+  position: relative;
+  width: 200px;
+  height: 100px;
+}
+#graphic::before {
+  position: absolute;
+  content: '';
+  z-index: -1;
+  width: 200px;
+  height: 50px;
+  /* background-image: url(image.jpg); */
 }

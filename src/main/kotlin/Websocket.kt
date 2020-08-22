@@ -10,6 +10,7 @@ val port = 1235
 
 class Websocket : WebSocketServer(InetSocketAddress(url, port)) {
     private val mapper = jacksonObjectMapper()
+    private var lastMessage = ""
 
     init {
         startUp()
@@ -17,6 +18,7 @@ class Websocket : WebSocketServer(InetSocketAddress(url, port)) {
 
     override fun onOpen(conn: WebSocket?, handshake: ClientHandshake?) {
         println("Websocket Open")
+        broadcast(lastMessage)
     }
 
     override fun onClose(conn: WebSocket?, code: Int, reason: String?, remote: Boolean) {
@@ -36,8 +38,8 @@ class Websocket : WebSocketServer(InetSocketAddress(url, port)) {
     }
 
     fun send(floorPlan: SimpleFloorPlan) {
-        val json = mapper.writeValueAsString(floorPlan)
-        broadcast(json)
+        this.lastMessage = mapper.writeValueAsString(floorPlan)
+        broadcast(lastMessage)
     }
 
     private fun startUp(){
