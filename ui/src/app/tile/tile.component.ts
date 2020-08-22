@@ -12,10 +12,65 @@ export class TileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('on init', this.tile);
   }
 
   getImageUrl(): string {
     return '../../assets/images/tiles/' + this.tile.name.toLowerCase() + '.png';
+  }
+
+  getXOffset(): number {
+    let offset = 0;
+
+    switch (this.tile.adjacency) {
+      case 'NONE':
+        offset = 2;
+        break;
+      case 'ONE_SIDE':
+        offset = 1;
+        break;
+      case 'TWO_SIDE':
+        offset = 0;
+        break;
+      case 'CORNER':
+        offset = 2;
+        break;
+      case 'THREE_SIDE':
+        offset = 1;
+        break;
+      case 'ALL':
+        offset = 0;
+        break;
+    }
+
+    return offset * -20;
+  }
+
+  getYOffset(): number {
+    let offset = 0;
+
+    switch (this.tile.adjacency) {
+      case 'NONE':
+        offset = 1;
+        break;
+      case 'ONE_SIDE':
+        offset = 1;
+        break;
+      case 'TWO_SIDE':
+        offset = 1;
+        break;
+      case 'CORNER':
+        offset = 0;
+        break;
+      case 'THREE_SIDE':
+        offset = 0;
+        break;
+      case 'ALL':
+        offset = 0;
+        break;
+    }
+
+    return offset * -20;
   }
 
 }
