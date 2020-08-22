@@ -43,12 +43,11 @@ class AdjacencyTest {
         assertEquals(270, Adjacency.ONE_SIDE.getRotation(up, down, left, right))
     }
 
-
     @Test
     fun twoSideOrientation() {
         val up = false
         val down = false
-        val left = false
+        val left = true
         val right = true
 
         assertEquals(0, Adjacency.TWO_SIDE.getRotation(up, down, left, right))
@@ -56,15 +55,13 @@ class AdjacencyTest {
 
     @Test
     fun twoSideOrientationRotated90() {
-        val up = false
+        val up = true
         val down = true
         val left = false
         val right = false
 
         assertEquals(90, Adjacency.TWO_SIDE.getRotation(up, down, left, right))
     }
-
-
 
     @Test
     fun cornerOrientation() {

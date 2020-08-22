@@ -1,3 +1,7 @@
 class SimpleFloorPlan(floorPlan: FloorPlan) {
-    val tiles = floorPlan.getTileMap().values.map { row -> row.values.map { column -> SimpleTile(column) }.toList() }
+    val tiles = (0 until floorPlan.size).map {y ->
+        (0 until floorPlan.size).map { x ->
+            SimpleTile(floorPlan.getTile(x, y))
+        }
+    }
 }

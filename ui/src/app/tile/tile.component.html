@@ -1,4 +1,4 @@
-<div class="tile">
+<div class="tile" [ngStyle]="{'transform': 'rotate(' + tile.rotation +'deg)'}">
   <img *ngIf="tile" src={{getImageUrl()}} [ngStyle]="{'margin-left': getXOffset() + 'px', 'margin-top': getYOffset() + 'px'}">
   <div>
     {{tile.name}},

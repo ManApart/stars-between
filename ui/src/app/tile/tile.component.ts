@@ -12,7 +12,6 @@ export class TileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('on init', this.tile);
   }
 
   getImageUrl(): string {
