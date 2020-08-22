@@ -14,4 +14,8 @@ export class TileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getImageUrl(): string {
+    return '../../assets/images/tiles/' + this.tile.name.toLowerCase() + '.png';
+  }
+
 }

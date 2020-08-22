@@ -13,7 +13,7 @@ export class GameViewComponent {
   constructor(websocketService: WebsocketService) {
     websocketService.data.subscribe(data => {
       this.data = data
-      // console.log(data.tiles);
+      console.log(data.tiles[0][0])
     })
   }
 

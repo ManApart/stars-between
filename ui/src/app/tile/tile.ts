@@ -1,3 +1,4 @@
 export class Tile {
-  solid: boolean;
+  name: string
+  solid: boolean
 }
