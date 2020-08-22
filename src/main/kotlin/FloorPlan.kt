@@ -35,6 +35,7 @@ class FloorPlan(val size: Int = 5) {
             val newTile = tile.copy(position = Position(x, y))
             tiles[x]!![y] = newTile
             orient(newTile, this)
+            getNeighbors(newTile).forEach { orient(it, this) }
         }
     }
 

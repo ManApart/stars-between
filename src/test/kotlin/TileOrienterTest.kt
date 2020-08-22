@@ -89,5 +89,16 @@ class TileOrienterTest {
         assertEquals(0, tile.rotation)
     }
 
+    @Test
+    fun setTileOrientsNeighbors() {
+        val floorPlan = FloorPlan(3)
+        floorPlan.setTile(WALL, 1, 1)
+        val tile = floorPlan.getTile(1, 1)
+        floorPlan.setTile(WALL, tile.position.down())
+
+        assertEquals(Adjacency.ONE_SIDE, tile.adjacency)
+        assertEquals(Adjacency.ONE_SIDE, floorPlan.getTile(tile.position.down()).adjacency)
+    }
+
 
 }
