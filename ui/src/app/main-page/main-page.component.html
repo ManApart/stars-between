@@ -1,14 +1,4 @@
 <div style="width:100%;">
-  <app-build-toolkit class="section"></app-build-toolkit>
-  <app-game-view class="section"></app-game-view>
+  <app-build-toolkit class="section" (selectedTileChanged)="selectedTileChanged($event)"></app-build-toolkit>
+  <app-game-view class="section" (tileClicked)="tileClicked($event)"></app-game-view>
 </div>
-<!-- <table>
-  <tr>
-    <td>
-      <app-build-toolkit></app-build-toolkit>
-    </td>
-    <td>
-      <app-game-view></app-game-view>
-    </td>
-  </tr>
-</table> -->

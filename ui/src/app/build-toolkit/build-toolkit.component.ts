@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core'
 
 @Component({
   selector: 'app-build-toolkit',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuildToolkitComponent implements OnInit {
 
+  @Output() selectedTileChanged: EventEmitter<string> = new EventEmitter()
+
   constructor() { }
+  tileOptions = ['space', 'wall', 'floor']
 
   ngOnInit(): void {
+  }
+
+  changeTile(event): void {
+    this.selectedTileChanged.emit(event.target.value)
   }
 
 }

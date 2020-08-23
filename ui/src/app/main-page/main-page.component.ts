@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-main-page',
@@ -9,7 +9,18 @@ export class MainPageComponent implements OnInit {
 
   constructor() { }
 
+  selectedTilePalette = 'space'
+
   ngOnInit(): void {
+  }
+
+  selectedTileChanged(newTile): void {
+    console.log('event', newTile)
+    this.selectedTilePalette = newTile
+  }
+
+  tileClicked(newTile): void {
+    console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
   }
 
 }

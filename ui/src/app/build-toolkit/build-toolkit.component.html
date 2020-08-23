@@ -1,1 +1,3 @@
-<p>build-toolkit works!</p>
+<select (change)="changeTile($event)">
+  <option *ngFor="let option of tileOptions">{{option}}</option>
+</select>
