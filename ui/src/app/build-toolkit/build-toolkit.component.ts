@@ -11,12 +11,14 @@ export class BuildToolkitComponent implements OnInit {
 
   constructor() { }
   tileOptions = ['space', 'wall', 'floor']
+  selected = 'space'
 
   ngOnInit(): void {
   }
 
-  changeTile(event): void {
-    this.selectedTileChanged.emit(event.target.value)
+  changeTile(tileName): void {
+    this.selected = tileName
+    this.selectedTileChanged.emit(tileName)
   }
 
 }

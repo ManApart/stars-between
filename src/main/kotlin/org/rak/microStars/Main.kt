@@ -11,8 +11,6 @@ class MicroStarsApplication
 
 
 fun main(args: Array<String>) {
-    val socket = Websocket()
-
     val gameThread = Thread {
         while (true) {
             Game.tick()
@@ -23,7 +21,7 @@ fun main(args: Array<String>) {
 
     val broadCastThread = Thread {
         while (true) {
-            socket.send(SimpleFloorPlan(Game.floorPlan))
+            SocketManager.socket.send(SimpleFloorPlan(Game.floorPlan))
             Thread.sleep(broadcastFrequency)
         }
     }

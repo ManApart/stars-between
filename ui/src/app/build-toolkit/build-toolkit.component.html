@@ -1,3 +1,6 @@
-<select (change)="changeTile($event)">
-  <option *ngFor="let option of tileOptions">{{option}}</option>
-</select>
+<div class="selected"> {{selected}}</div>
+<div *ngFor="let option of tileOptions" class="option">
+  <button (click)="changeTile(option)">{{option}}</button>
+</div>
+<!-- <select (change)="changeTile($event)">
+</select> -->

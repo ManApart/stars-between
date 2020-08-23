@@ -17,6 +17,7 @@ class FloorPlanController {
         val tile = tileTypes.firstOrNull { it.name.toLowerCase() == update.tileType.toLowerCase() } ?: DEFAULT_TILE
 
         Game.floorPlan.setTile(tile, update.x, update.y)
+        SocketManager.socket.send(SimpleFloorPlan(Game.floorPlan))
         return SimpleTile(Game.floorPlan.getTile(update.x, update.y))
     }
 
