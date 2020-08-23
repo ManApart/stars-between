@@ -1,9 +1,9 @@
 class Game {
-    val floorPlan = FloorPlan(5)
+    val floorPlan = FloorPlan(10)
 
     init {
         val spaceTiles = floorPlan.getAllTiles().filter { it.isEdgeTile(floorPlan.size) }.map { it.position }
-        val wallTiles = floorPlan.getAllTiles().filter { hasSpaceNeighbor(it) }.map { it.position }.filter { !spaceTiles.contains(it) }
+        val wallTiles = floorPlan.getAllTiles().map { it.position }.filter { isWallPosition(it, floorPlan.size) }
         val floorTiles =
             floorPlan.getAllTiles().map { it.position }.filter { !spaceTiles.contains(it) && !wallTiles.contains(it) }
 
@@ -12,7 +12,9 @@ class Game {
         floorTiles.forEach { floorPlan.setTile(FLOOR, it) }
     }
 
-    private fun hasSpaceNeighbor(tile: Tile) = floorPlan.getNeighbors(tile).any { neighbor -> neighbor.isType(SPACE) }
+    private fun isWallPosition(position: Position, size: Int) : Boolean{
+        return (position.x == 1 || position.x == size-2 || position.y == 1 || position.y == size-2) && position.x != 0 && position.y != 0 && position.x != size-1 && position.y != size-1
+    }
 
     fun tick() {
         val tickPosition = Position(2, 2)

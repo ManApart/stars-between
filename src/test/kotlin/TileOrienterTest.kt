@@ -74,6 +74,15 @@ class TileOrienterTest {
     }
 
     @Test
+    fun allCornerOrientation() {
+        val floorPlan = FloorPlan(3)
+        val tile = floorPlan.getTile(0, 0)
+        orient(tile, floorPlan)
+
+        assertEquals(Adjacency.CORNER, tile.adjacency)
+    }
+
+    @Test
     fun threeSideOrientation() {
         val floorPlan = FloorPlan(3)
         floorPlan.setTile(WALL, 1, 1)

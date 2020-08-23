@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { GameViewComponent } from './game-view/game-view.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { TileComponent } from './tile/tile.component';
+import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameViewComponent,
     MainPageComponent,
-    TileComponent
+    TileComponent,
+    BuildToolkitComponent
   ],
   imports: [
     BrowserModule,

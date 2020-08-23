@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Tile } from './tile';
+import { Component, OnInit, Input } from '@angular/core'
+import { Tile } from './tile'
 
 @Component({
   selector: 'app-tile',
@@ -7,7 +7,9 @@ import { Tile } from './tile';
   styleUrls: ['./tile.component.css']
 })
 export class TileComponent implements OnInit {
-  @Input() tile: Tile;
+  @Input() tile: Tile
+
+  private tileSize = 40
 
   constructor() { }
 
@@ -15,61 +17,61 @@ export class TileComponent implements OnInit {
   }
 
   getImageUrl(): string {
-    return '../../assets/images/tiles/' + this.tile.name.toLowerCase() + '.png';
+    return '../../assets/images/tiles/' + this.tile.name.toLowerCase() + '.png'
   }
 
   getXOffset(): number {
-    let offset = 0;
+    let offset = 0
 
     switch (this.tile.adjacency) {
       case 'NONE':
-        offset = 2;
-        break;
+        offset = 2
+        break
       case 'ONE_SIDE':
-        offset = 1;
-        break;
+        offset = 1
+        break
       case 'TWO_SIDE':
-        offset = 0;
-        break;
+        offset = 0
+        break
       case 'CORNER':
-        offset = 2;
-        break;
+        offset = 2
+        break
       case 'THREE_SIDE':
-        offset = 1;
-        break;
+        offset = 1
+        break
       case 'ALL':
-        offset = 0;
-        break;
+        offset = 0
+        break
     }
 
-    return offset * -20;
+    return offset * -this.tileSize
   }
 
   getYOffset(): number {
-    let offset = 0;
+    let offset = 0
 
     switch (this.tile.adjacency) {
       case 'NONE':
-        offset = 1;
-        break;
+        offset = 1
+        break
       case 'ONE_SIDE':
-        offset = 1;
-        break;
+        offset = 1
+        break
       case 'TWO_SIDE':
-        offset = 1;
-        break;
+        offset = 1
+        break
       case 'CORNER':
-        offset = 0;
-        break;
+        offset = 0
+        break
       case 'THREE_SIDE':
-        offset = 0;
-        break;
+        offset = 0
+        break
       case 'ALL':
-        offset = 0;
-        break;
+        offset = 0
+        break
     }
 
-    return offset * -20;
+    return offset * -this.tileSize
   }
 
 }

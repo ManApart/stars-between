@@ -8,8 +8,8 @@ class FloorPlanTest {
         val floorPlan = FloorPlan(3)
         val neighbors = floorPlan.getNeighbors(floorPlan.getTile(1,1))
         val expectedNeighbors = listOf(
-            Position(1,2),
             Position(1,0),
+            Position(1,2),
             Position(0,1),
             Position(2,1)
         ).map { floorPlan.getTile(it) }

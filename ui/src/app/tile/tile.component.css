@@ -1,12 +1,12 @@
 .tile {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
 }
 
 .tile img {
-  width: 60px;
-  height: 40px;
+  width: 120px;
+  height: 80px;
   margin-left: 0px;
   margin-top: 0px;
   image-rendering: pixelated;
