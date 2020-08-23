@@ -1,3 +1,7 @@
+package org.rak.microStars
+
+import org.rak.microStars.Adjacency
+
 val SPACE = Tile("Space", airProduced = -10)
 val FLOOR = Tile("Floor")
 val WALL = Tile("Wall", solid = true)

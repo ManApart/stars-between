@@ -1,3 +1,5 @@
+package org.rak.microStars
+
 class FloorPlan(val size: Int = 5) {
 
     private val tiles = (0 until size).associate { x ->

@@ -1,3 +1,5 @@
+package org.rak.microStars
+
 class SimpleTile(tile: Tile) {
     val name = tile.name
     val x = tile.position.x

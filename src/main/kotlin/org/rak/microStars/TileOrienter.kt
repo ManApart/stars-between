@@ -1,3 +1,7 @@
+package org.rak.microStars
+
+import org.rak.microStars.Adjacency
+
 fun orient(tile: Tile, floorPlan: FloorPlan){
     val up = floorPlan.getTile(tile.position.up()).isType(tile)
     val down = floorPlan.getTile(tile.position.down()).isType(tile)

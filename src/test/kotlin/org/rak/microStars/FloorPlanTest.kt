@@ -1,3 +1,5 @@
+package org.rak.microStars
+
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 

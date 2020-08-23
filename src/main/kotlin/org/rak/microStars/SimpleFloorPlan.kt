@@ -1,3 +1,5 @@
+package org.rak.microStars
+
 class SimpleFloorPlan(floorPlan: FloorPlan) {
     val tiles = (0 until floorPlan.size).map {y ->
         (0 until floorPlan.size).map { x ->

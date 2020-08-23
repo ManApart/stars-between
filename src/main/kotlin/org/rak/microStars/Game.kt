@@ -1,4 +1,6 @@
-class Game {
+package org.rak.microStars
+
+object Game {
     val floorPlan = FloorPlan(10)
 
     init {
