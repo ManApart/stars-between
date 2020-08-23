@@ -7,3 +7,8 @@
 If the app complains that Swagger Config needs to be open, enable annotation processing in Intellij
 
 View the swagger at `http://localhost:8080/swagger-ui.html`
+
+### TODO
+
+fast refresh is preventing clicks due to tiles refreshing
+- currently just lowering pull rate

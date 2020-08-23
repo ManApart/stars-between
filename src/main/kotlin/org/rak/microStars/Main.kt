@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 const val gameTickFrequency = 1000L
-const val broadcastFrequency = 200L
+const val broadcastFrequency = 1000L
 
 @SpringBootApplication
 class MicroStarsApplication
