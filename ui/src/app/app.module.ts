@@ -1,12 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { GameViewComponent } from './game-view/game-view.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { TileComponent } from './tile/tile.component';
-import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { GameViewComponent } from './game-view/game-view.component'
+import { MainPageComponent } from './main-page/main-page.component'
+import { TileComponent } from './tile/tile.component'
+import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component'
+import { FloorPlanService } from './floorPlanService'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -18,9 +20,12 @@ import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    FloorPlanService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

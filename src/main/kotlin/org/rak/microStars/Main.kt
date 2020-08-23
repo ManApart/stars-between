@@ -3,7 +3,8 @@ package org.rak.microStars
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-const val tickFrequency = 1000000L
+const val gameTickFrequency = 1000L
+const val broadcastFrequency = 200L
 
 @SpringBootApplication
 class MicroStarsApplication
@@ -12,13 +13,21 @@ class MicroStarsApplication
 fun main(args: Array<String>) {
     val socket = Websocket()
 
-    Thread {
+    val gameThread = Thread {
         while (true) {
             Game.tick()
-            socket.send(SimpleFloorPlan(Game.floorPlan))
-            Thread.sleep(tickFrequency)
+            Thread.sleep(gameTickFrequency)
         }
-    }.start()
+    }
+    gameThread.start()
+
+    val broadCastThread = Thread {
+        while (true) {
+            socket.send(SimpleFloorPlan(Game.floorPlan))
+            Thread.sleep(broadcastFrequency)
+        }
+    }
+    broadCastThread.start()
 
     runApplication<MicroStarsApplication>(*args)
 }

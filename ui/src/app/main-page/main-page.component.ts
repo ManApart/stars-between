@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { FloorPlanService } from '../floorPlanService'
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core'
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private floorPlanService: FloorPlanService) { }
 
   selectedTilePalette = 'space'
 
@@ -15,12 +16,12 @@ export class MainPageComponent implements OnInit {
   }
 
   selectedTileChanged(newTile): void {
-    console.log('event', newTile)
     this.selectedTilePalette = newTile
   }
 
   tileClicked(newTile): void {
     console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
+    this.floorPlanService.setTile(this.selectedTilePalette, newTile.x, newTile.y).toPromise()
   }
 
 }

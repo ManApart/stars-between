@@ -1,12 +1,12 @@
 package org.rak.microStars
 
-import org.rak.microStars.Adjacency
-
 val SPACE = Tile("Space", airProduced = -10)
 val FLOOR = Tile("Floor")
 val WALL = Tile("Wall", solid = true)
 val VENT = Tile("Vent", airProduced = 10)
 val DEFAULT_TILE = Tile("Void")
+
+val tileTypes = listOf(SPACE, FLOOR, WALL, VENT)
 
 data class Tile(
     val name: String,

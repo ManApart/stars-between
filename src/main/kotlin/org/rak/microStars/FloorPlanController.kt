@@ -1,14 +1,28 @@
 package org.rak.microStars
 
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
-@RestController("/floorplan")
+@CrossOrigin(origins = ["*"])
+@RestController
+@RequestMapping("/floorPlan")
 class FloorPlanController {
 
-    @PutMapping
-    fun setTile(tile: String, x: Int, y: Int){
+    @GetMapping
+    fun getFloorPlan(): SimpleFloorPlan {
+        return SimpleFloorPlan(Game.floorPlan)
+    }
 
+    @PutMapping
+    fun setTile(@RequestBody update: TileUpdate) : SimpleTile{
+        val tile = tileTypes.firstOrNull { it.name.toLowerCase() == update.tileType.toLowerCase() } ?: DEFAULT_TILE
+
+        Game.floorPlan.setTile(tile, update.x, update.y)
+        return SimpleTile(Game.floorPlan.getTile(update.x, update.y))
+    }
+
+    @PostMapping
+    fun createFloorPlan(@RequestParam size: Int = 10) {
+        Game.floorPlan = Game.createFloorPlan(size)
     }
 
 }
