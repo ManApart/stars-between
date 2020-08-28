@@ -14,7 +14,15 @@ export class GameViewComponent {
 
   constructor(websocketService: WebsocketService) {
     websocketService.data.subscribe(data => {
-      this.data = data
+      if (this.data === undefined) {
+        this.data = data.tiles
+      } else {
+        data.tiles.forEach(row => {
+          row.forEach(tile => {
+            this.data[tile.y][tile.x] = tile
+          })
+        })
+      }
       // console.log(data.tiles[0][0])
     })
   }
@@ -22,6 +30,10 @@ export class GameViewComponent {
   clickTile(tile): void {
     console.log('clicked', tile)
     this.tileClicked.emit(tile)
+  }
+
+  trackTile(index, tile) {
+    return true
   }
 
 }
