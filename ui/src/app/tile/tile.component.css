@@ -1,3 +1,7 @@
+.tile-container {
+  position: relative;
+}
+
 .tile {
   width: 40px;
   height: 40px;
@@ -20,4 +24,11 @@
 
 .solid{
   background-color: black;
+}
+
+.number {
+  color: blue;
+  position: absolute;
+  top: 50%;
+  left: 0%;
 }

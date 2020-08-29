@@ -10,7 +10,7 @@ export class BuildToolkitComponent implements OnInit {
   @Output() selectedTileChanged: EventEmitter<string> = new EventEmitter()
 
   constructor() { }
-  tileOptions = ['space', 'wall', 'floor']
+  tileOptions = ['space', 'wall', 'floor', 'vent']
   selected = 'space'
 
   ngOnInit(): void {

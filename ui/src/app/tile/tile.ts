@@ -6,4 +6,5 @@ export class Tile {
   // Use Enum
   adjacency: string
   rotation: number
+  air: number
 }

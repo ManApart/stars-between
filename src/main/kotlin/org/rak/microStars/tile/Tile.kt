@@ -24,7 +24,11 @@ data class Tile(
 ) {
 
     var health = totalHealth
-    var air = 0
+    var air = if (solid) {
+        0
+    } else {
+        100
+    }
     var adjacency = Adjacency.NONE
     var rotation = 0
     var distanceMap = DistanceMap(this)
@@ -42,7 +46,7 @@ data class Tile(
     }
 }
 
-fun fromSimpleTile(simpleTile: SimpleTile) : Tile {
+fun fromSimpleTile(simpleTile: SimpleTile): Tile {
     val tile = tileTypes
         .first { it.name.toLowerCase() == simpleTile.name.toLowerCase() }
         .copy(position = Position(simpleTile.x, simpleTile.y), solid = simpleTile.solid)

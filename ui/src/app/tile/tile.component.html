@@ -1,12 +1,16 @@
-<div class="tile" [ngStyle]="{'transform': 'rotate(' + tile.rotation +'deg)'}">
-  <img *ngIf="tile" src={{getImageUrl()}} [ngStyle]="{'margin-left': getXOffset() + 'px', 'margin-top': getYOffset() + 'px'}">
-  <div>
-    {{tile.name}},
-    solid: {{tile.solid}},
-    adj: {{tile.adjacency}},
-    rot: {{tile.rotation}}
-    x: {{getXOffset()}},
-    y: {{getYOffset()}},
-    url: {{getImageUrl()}}
+<div class="tile-container ">
+  <div class="tile" [ngStyle]="{'transform': 'rotate(' + tile.rotation +'deg)'}">
+    <img *ngIf="tile" src={{getImageUrl()}} [ngStyle]="{'margin-left': getXOffset() + 'px', 'margin-top': getYOffset() + 'px'}">
+    <div>
+      {{tile.name}},
+      solid: {{tile.solid}},
+      adj: {{tile.adjacency}},
+      rot: {{tile.rotation}}
+      x: {{getXOffset()}},
+      y: {{getYOffset()}},
+      air: {{tile.air}}
+      url: {{getImageUrl()}}
+    </div>
   </div>
+  <div *ngIf="tile.air != 0" class="number">{{tile.air}}</div>
 </div>
