@@ -27,6 +27,7 @@ data class Tile(
     var air = 0
     var adjacency = Adjacency.NONE
     var rotation = 0
+    var distanceMap = DistanceMap(this)
 
     fun isSolid(): Boolean {
         return solid && health > 0

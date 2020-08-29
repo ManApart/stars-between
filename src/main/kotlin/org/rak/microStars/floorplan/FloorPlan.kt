@@ -9,7 +9,7 @@ class FloorPlan(val size: Int = 5) {
         }.toMutableMap())
     }
 
-    fun getTileMap() :Map<Int, Map<Int, Tile>> {
+    fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
     }
 
@@ -39,20 +39,34 @@ class FloorPlan(val size: Int = 5) {
             tiles[x]!![y] = newTile
             orient(newTile, this)
             getNeighbors(newTile).forEach { orient(it, this) }
+//            buildDistanceMaps()
         }
     }
 
-    fun getNeighbors(tile: Tile) : List<Tile> {
+    fun setTileWithoutUpdates(tile: Tile, x: Int, y: Int) {
+        if (x in 0 until size && y in 0 until size) {
+            val newTile = tile.copy(position = Position(x, y))
+            tiles[x]!![y] = newTile
+        }
+    }
+
+    fun getNeighbors(tile: Tile): List<Tile> {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
+    }
+
+    fun buildDistanceMaps() {
+        getAllTiles().forEach { it.distanceMap = createDistancesFrom(it, this) }
     }
 }
 
-fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan) : FloorPlan{
+fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan): FloorPlan {
     val size = simpleFloorPlan.tiles.flatten().maxBy { it.x }?.x ?: 10
     val floorPlan = FloorPlan(size)
     simpleFloorPlan.tiles.flatten().map {
-        floorPlan.setTile(fromSimpleTile(it), it.x, it.y)
+        floorPlan.setTileWithoutUpdates(fromSimpleTile(it), it.x, it.y)
     }
+    floorPlan.getAllTiles().forEach { orient(it, floorPlan) }
+    floorPlan.buildDistanceMaps()
 
     return floorPlan
 }
