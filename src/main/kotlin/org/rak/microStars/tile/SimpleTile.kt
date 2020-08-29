@@ -1,4 +1,6 @@
-package org.rak.microStars
+package org.rak.microStars.tile
+
+import org.rak.microStars.tile.Tile
 
 class SimpleTile(tile: Tile) {
     val name = tile.name

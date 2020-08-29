@@ -1,4 +1,9 @@
-package org.rak.microStars
+package org.rak.microStars.floorplan
+
+import org.rak.microStars.tile.DEFAULT_TILE
+import org.rak.microStars.tile.SPACE
+import org.rak.microStars.tile.Tile
+import org.rak.microStars.tile.orient
 
 class FloorPlan(val size: Int = 5) {
 

@@ -1,5 +1,7 @@
 package org.rak.microStars
 
+import org.rak.microStars.floorplan.SimpleFloorPlan
+import org.rak.microStars.wiring.SocketManager
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 

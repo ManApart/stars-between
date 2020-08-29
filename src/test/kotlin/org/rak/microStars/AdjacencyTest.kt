@@ -2,7 +2,7 @@ package org.rak.microStars
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.rak.microStars.Adjacency
+import org.rak.microStars.tile.Adjacency
 
 class AdjacencyTest {
 

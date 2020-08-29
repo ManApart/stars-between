@@ -1,4 +1,4 @@
-package org.rak.microStars
+package org.rak.microStars.wiring
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

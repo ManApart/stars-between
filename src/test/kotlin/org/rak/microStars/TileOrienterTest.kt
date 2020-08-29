@@ -2,7 +2,10 @@ package org.rak.microStars
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.rak.microStars.Adjacency
+import org.rak.microStars.floorplan.FloorPlan
+import org.rak.microStars.tile.Adjacency
+import org.rak.microStars.tile.WALL
+import org.rak.microStars.tile.orient
 
 class TileOrienterTest {
 

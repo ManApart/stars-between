@@ -1,4 +1,4 @@
-package org.rak.microStars
+package org.rak.microStars.tile
 
 enum class Adjacency(val getRotation: (Boolean, Boolean, Boolean, Boolean) -> Int) {
     NONE(randomRotation),

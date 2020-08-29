@@ -1,9 +1,15 @@
 package org.rak.microStars
 
+import org.rak.microStars.floorplan.FloorPlan
+import org.rak.microStars.floorplan.Position
+import org.rak.microStars.tile.FLOOR
+import org.rak.microStars.tile.SPACE
+import org.rak.microStars.tile.WALL
+
 object Game {
     var floorPlan = createFloorPlan(10)
 
-    fun createFloorPlan(size: Int = 10) : FloorPlan{
+    fun createFloorPlan(size: Int = 10) : FloorPlan {
         val floorPlan = FloorPlan(size)
         val spaceTiles = floorPlan.getAllTiles().filter { it.isEdgeTile(floorPlan.size) }.map { it.position }
         val wallTiles = floorPlan.getAllTiles().map { it.position }.filter { isWallPosition(it, floorPlan.size) }

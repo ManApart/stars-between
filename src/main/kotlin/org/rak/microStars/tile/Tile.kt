@@ -1,4 +1,6 @@
-package org.rak.microStars
+package org.rak.microStars.tile
+
+import org.rak.microStars.floorplan.Position
 
 val SPACE = Tile("Space", airProduced = -10)
 val FLOOR = Tile("Floor")
@@ -6,7 +8,12 @@ val WALL = Tile("Wall", solid = true)
 val VENT = Tile("Vent", airProduced = 10)
 val DEFAULT_TILE = Tile("Void")
 
-val tileTypes = listOf(SPACE, FLOOR, WALL, VENT)
+val tileTypes = listOf(
+    SPACE,
+    FLOOR,
+    WALL,
+    VENT
+)
 
 data class Tile(
     val name: String,

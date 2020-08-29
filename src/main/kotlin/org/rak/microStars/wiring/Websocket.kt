@@ -1,16 +1,20 @@
-package org.rak.microStars
+package org.rak.microStars.wiring
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.java_websocket.WebSocket
 import org.java_websocket.handshake.ClientHandshake
 import org.java_websocket.server.WebSocketServer
+import org.rak.microStars.floorplan.SimpleFloorPlan
 import java.lang.Exception
 import java.net.InetSocketAddress
 
 val url = "localhost"
 val port = 1235
 
-class Websocket : WebSocketServer(InetSocketAddress(url, port)) {
+class Websocket : WebSocketServer(InetSocketAddress(
+    url,
+    port
+)) {
     private val mapper = jacksonObjectMapper()
     private var lastMessage = ""
 

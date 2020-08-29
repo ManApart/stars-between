@@ -1,5 +1,6 @@
 package org.rak.microStars
 
+import org.rak.microStars.tile.tileTypes
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])
