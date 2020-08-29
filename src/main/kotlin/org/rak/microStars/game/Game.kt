@@ -1,5 +1,6 @@
-package org.rak.microStars
+package org.rak.microStars.game
 
+import org.rak.microStars.airflow.simulateAir
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.floorplan.Position
 import org.rak.microStars.tile.FLOOR
@@ -28,12 +29,7 @@ object Game {
     }
 
     fun tick() {
-        val tickPosition = Position(2, 2)
-        if (floorPlan.getTile(tickPosition).isSolid()) {
-            floorPlan.setTile(FLOOR, tickPosition)
-        } else {
-            floorPlan.setTile(WALL, tickPosition)
-        }
+        simulateAir(floorPlan)
         // air flow
         //energy flow
     }

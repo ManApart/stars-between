@@ -2,10 +2,10 @@ package org.rak.microStars.tile
 
 import org.rak.microStars.floorplan.Position
 
-val SPACE = Tile("Space", airProduced = -10)
+val SPACE = Tile("Space", airProduced = -100)
 val FLOOR = Tile("Floor")
 val WALL = Tile("Wall", solid = true)
-val VENT = Tile("Vent", airProduced = 10)
+val VENT = Tile("Vent", airProduced = 100)
 val DEFAULT_TILE = Tile("Void")
 
 val tileTypes = listOf(

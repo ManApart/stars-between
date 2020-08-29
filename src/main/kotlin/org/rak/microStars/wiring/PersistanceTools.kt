@@ -2,7 +2,7 @@ package org.rak.microStars.wiring
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import org.rak.microStars.Game
+import org.rak.microStars.game.Game
 import org.rak.microStars.floorplan.SimpleFloorPlan
 import org.rak.microStars.floorplan.fromSimpleFloorPlan
 import java.io.File

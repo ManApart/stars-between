@@ -1,4 +1,4 @@
-package org.rak.microStars
+package org.rak.microStars.game
 
 import org.rak.microStars.tile.tileTypes
 import org.rak.microStars.wiring.SocketManager
