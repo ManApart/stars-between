@@ -1,12 +1,8 @@
 package org.rak.microStars.floorplan
 
-import org.rak.microStars.tile.DEFAULT_TILE
-import org.rak.microStars.tile.SPACE
-import org.rak.microStars.tile.Tile
-import org.rak.microStars.tile.orient
+import org.rak.microStars.tile.*
 
 class FloorPlan(val size: Int = 5) {
-
     private val tiles = (0 until size).associate { x ->
         (x to (0 until size).associateWith { y ->
             SPACE.copy(position = Position(x, y))
@@ -49,4 +45,14 @@ class FloorPlan(val size: Int = 5) {
     fun getNeighbors(tile: Tile) : List<Tile> {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
     }
+}
+
+fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan) : FloorPlan{
+    val size = simpleFloorPlan.tiles.flatten().maxBy { it.x }?.x ?: 10
+    val floorPlan = FloorPlan(size)
+    simpleFloorPlan.tiles.flatten().map {
+        floorPlan.setTile(fromSimpleTile(it), it.x, it.y)
+    }
+
+    return floorPlan
 }

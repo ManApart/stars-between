@@ -8,7 +8,9 @@ import { MainPageComponent } from './main-page/main-page.component'
 import { TileComponent } from './tile/tile.component'
 import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component'
 import { FloorPlanService } from './floorPlanService'
-import { HttpClientModule } from '@angular/common/http'
+import { GameService } from './gameService'
+import { HttpClientModule } from '@angular/common/http';
+import { SystemMenuComponent } from './system-menu/system-menu.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http'
     GameViewComponent,
     MainPageComponent,
     TileComponent,
-    BuildToolkitComponent
+    BuildToolkitComponent,
+    SystemMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http'
     AppRoutingModule
   ],
   providers: [
-    FloorPlanService
+    FloorPlanService,
+    GameService
   ],
   bootstrap: [AppComponent]
 })

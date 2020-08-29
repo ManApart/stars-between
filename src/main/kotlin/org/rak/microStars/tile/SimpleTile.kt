@@ -1,14 +1,23 @@
 package org.rak.microStars.tile
 
-import org.rak.microStars.tile.Tile
-
-class SimpleTile(tile: Tile) {
-    val name = tile.name
-    val x = tile.position.x
-    val y = tile.position.y
-    val solid = tile.isSolid()
-    val air = tile.air
-    val health = tile.health
-    val adjacency = tile.adjacency
-    val rotation = tile.rotation
+class SimpleTile(
+    val name: String,
+    val x: Int,
+    val y: Int,
+    val solid: Boolean,
+    val air: Int,
+    val health: Int,
+    val adjacency: Adjacency,
+    val rotation: Int
+) {
+    constructor(tile: Tile) : this(
+        tile.name,
+        tile.position.x,
+        tile.position.y,
+        tile.isSolid(),
+        tile.air,
+        tile.health,
+        tile.adjacency,
+        tile.rotation
+    )
 }

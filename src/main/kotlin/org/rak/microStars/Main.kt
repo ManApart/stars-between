@@ -2,6 +2,7 @@ package org.rak.microStars
 
 import org.rak.microStars.floorplan.SimpleFloorPlan
 import org.rak.microStars.wiring.SocketManager
+import org.rak.microStars.wiring.loadGame
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -13,6 +14,7 @@ class MicroStarsApplication
 
 
 fun main(args: Array<String>) {
+    loadGame()
     val gameThread = Thread {
         while (true) {
             Game.tick()
