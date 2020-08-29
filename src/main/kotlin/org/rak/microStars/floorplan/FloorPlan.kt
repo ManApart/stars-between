@@ -3,8 +3,8 @@ package org.rak.microStars.floorplan
 import org.rak.microStars.tile.*
 
 class FloorPlan(val size: Int = 5) {
-    private val tiles = (0 until size).associate { x ->
-        (x to (0 until size).associateWith { y ->
+    private val tiles = (0 until size).associate { y ->
+        (y to (0 until size).associateWith { x ->
             SPACE.copy(position = Position(x, y))
         }.toMutableMap())
     }
@@ -23,7 +23,7 @@ class FloorPlan(val size: Int = 5) {
 
     fun getTile(x: Int, y: Int): Tile {
         return if (x in 0 until size && y in 0 until size) {
-            tiles[x]!![y] ?: DEFAULT_TILE
+            tiles[y]!![x] ?: DEFAULT_TILE
         } else {
             DEFAULT_TILE
         }
@@ -36,7 +36,7 @@ class FloorPlan(val size: Int = 5) {
     fun setTile(tile: Tile, x: Int, y: Int) {
         if (x in 0 until size && y in 0 until size) {
             val newTile = tile.copy(position = Position(x, y))
-            tiles[x]!![y] = newTile
+            tiles[y]!![x] = newTile
             orient(newTile, this)
             getNeighbors(newTile).forEach { orient(it, this) }
 //            buildDistanceMaps()
@@ -46,7 +46,7 @@ class FloorPlan(val size: Int = 5) {
     fun setTileWithoutUpdates(tile: Tile, x: Int, y: Int) {
         if (x in 0 until size && y in 0 until size) {
             val newTile = tile.copy(position = Position(x, y))
-            tiles[x]!![y] = newTile
+            tiles[y]!![x] = newTile
         }
     }
 
