@@ -37,9 +37,8 @@ private fun flowAir(airTiles: List<Tile>, floorPlan: FloorPlan) {
     }
 }
 
-
-private fun pushAir(source: Tile, others: List<Tile>) {
+fun pushAir(source: Tile, others: List<Tile>) {
     val tiles = others + source
     val avgAir = tiles.sumBy { it.air } / tiles.size
-    others.forEach { it.air = avgAir }
+    tiles.forEach { it.air = avgAir }
 }

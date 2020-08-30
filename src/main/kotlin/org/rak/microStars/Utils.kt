@@ -1,6 +1,6 @@
 package org.rak.microStars
 
-fun <T> Array<Array<T>>.toMap(): Map<Int, Map<Int, T>> {
+fun <T> List<List<T>>.toMap(): Map<Int, Map<Int, T>> {
     return withIndex().associate { (index, ints) ->
         index to ints.withIndex().associate { (index, value) -> index to value }
     }

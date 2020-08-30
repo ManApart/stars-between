@@ -13,10 +13,10 @@ class UtilsTest {
             2 to mapOf(0 to 7, 1 to 8, 2 to 9)
         )
 
-        val actual = arrayOf(
-            arrayOf(1, 2, 3),
-            arrayOf(4, 5, 6),
-            arrayOf(7, 8, 9)
+        val actual = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9)
         ).toMap()
 
         assertEquals(expected, actual)
@@ -24,16 +24,16 @@ class UtilsTest {
 
     @Test
     fun transposeMap() {
-        val expected = arrayOf(
-            arrayOf(1, 2, 3),
-            arrayOf(4, 5, 6),
-            arrayOf(7, 8, 9)
+        val expected = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9)
         ).toMap()
 
-        val actual = arrayOf(
-            arrayOf(1, 4, 7),
-            arrayOf(2, 5, 8),
-            arrayOf(3, 6, 9)
+        val actual = listOf(
+            listOf(1, 4, 7),
+            listOf(2, 5, 8),
+            listOf(3, 6, 9)
         ).toMap().transpose()
 
         assertEquals(expected, actual)
@@ -41,15 +41,15 @@ class UtilsTest {
 
     @Test
     fun transposeNonSquareMap() {
-        val expected = arrayOf(
-            arrayOf(1, 2),
-            arrayOf(4, 5),
-            arrayOf(7, 8)
+        val expected = listOf(
+            listOf(1, 2),
+            listOf(4, 5),
+            listOf(7, 8)
         ).toMap()
 
-        val actual = arrayOf(
-            arrayOf(1, 4, 7),
-            arrayOf(2, 5, 8)
+        val actual = listOf(
+            listOf(1, 4, 7),
+            listOf(2, 5, 8)
         ).toMap().transpose()
 
         assertEquals(expected, actual)
@@ -57,16 +57,16 @@ class UtilsTest {
 
     @Test
     fun transposeJaggedMap() {
-        val expected = arrayOf(
-            arrayOf(1, 2, 3),
-            arrayOf(4, 5),
-            arrayOf(7, 8)
+        val expected = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5),
+            listOf(7, 8)
         ).toMap()
 
-        val actual = arrayOf(
-            arrayOf(1, 4, 7),
-            arrayOf(2, 5, 8),
-            arrayOf(3)
+        val actual = listOf(
+            listOf(1, 4, 7),
+            listOf(2, 5, 8),
+            listOf(3)
         ).toMap().transpose()
 
         assertEquals(expected, actual)

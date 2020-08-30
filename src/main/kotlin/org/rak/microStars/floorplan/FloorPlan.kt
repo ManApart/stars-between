@@ -50,6 +50,10 @@ class FloorPlan(val size: Int = 5) {
         }
     }
 
+    fun getNeighbors(x: Int, y: Int): List<Tile> {
+        return getNeighbors(getTile(x, y))
+    }
+
     fun getNeighbors(tile: Tile): List<Tile> {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
     }
