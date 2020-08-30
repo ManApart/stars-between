@@ -11,14 +11,16 @@ fun createDistancesFrom(source: Tile, floorPlan: FloorPlan): DistanceMap {
         open.add(source)
         distanceMap.setDistance(source, 0)
 
-        while (open.size > 0) {
-            val current = open[0]
+        while (open.isNotEmpty()) {
+            val current = open.first()
             open.remove(current)
             closed.add(current)
 
-            val distance = distanceMap.getMinDistanceTo(current, floorPlan) + 1
-            distanceMap.setDistance(current, distance)
-            open.addAll(floorPlan.getNeighbors(current).filter { !it.isSolid() && !closed.contains(it) })
+            if (!closed.contains(current)) {
+                val distance = distanceMap.getMinDistanceTo(current, floorPlan) + 1
+                distanceMap.setDistance(current, distance)
+                open.addAll(floorPlan.getNeighbors(current).filter { !it.isSolid() && !closed.contains(it) })
+            }
         }
     }
 
