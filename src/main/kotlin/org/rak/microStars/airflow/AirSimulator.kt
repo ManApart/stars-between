@@ -5,19 +5,27 @@ import org.rak.microStars.tile.Tile
 import kotlin.math.max
 import kotlin.math.min
 
-const val airTakenPerTick = 50
-
 fun simulateAir(floorPlan: FloorPlan) {
     val airTiles = floorPlan.getAllTiles().filter { !it.isSolid() }
 
-    airTiles.forEach {
-        consumeOrProduceAir(it)
-    }
+    consumeOrProduceAir(airTiles)
+//    evaporate(airTiles)
     flowAir(airTiles, floorPlan)
+    //do another pass where each tile with 1 air finds closest space tile and 'leaks' towards it
 }
 
-fun consumeOrProduceAir(tile: Tile) {
-    tile.air = min(100, max(0, tile.air + tile.airProduced))
+private fun consumeOrProduceAir(airTiles: List<Tile>) {
+    airTiles.forEach { tile ->
+        tile.air = min(100, max(0, tile.air + tile.airProduced))
+    }
+}
+
+fun evaporate(airTiles: List<Tile>) {
+    //Randomly subtract a single air to keep things from getting stale
+    val tile = airTiles.filter { it.air > 0 }.randomOrNull()
+    if (tile != null) {
+        tile.air = tile.air - 1
+    }
 }
 
 private fun flowAir(airTiles: List<Tile>, floorPlan: FloorPlan) {
@@ -39,6 +47,11 @@ private fun flowAir(airTiles: List<Tile>, floorPlan: FloorPlan) {
 
 fun pushAir(source: Tile, others: List<Tile>) {
     val tiles = others + source
-    val avgAir = tiles.sumBy { it.air } / tiles.size
+    val totalAir = tiles.sumBy { it.air }
+    val avgAir = totalAir / tiles.size
+    val remainder = totalAir % tiles.size
     tiles.forEach { it.air = avgAir }
+    if (remainder > 0) {
+        tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
+    }
 }

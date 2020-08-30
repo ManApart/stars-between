@@ -75,6 +75,54 @@ class AirSimulatorTest {
         assertEquals(expected, airMap)
     }
 
+    @Test
+    fun remainder() {
+        val floorPlan = createFloorPlanWithAir(
+            listOf(
+                listOf(0, 0, 0),
+                listOf(0, 51, 0),
+                listOf(0, 0, 0)
+            )
+        )
+
+        val expected = listOf(
+            listOf(0, 10, 0),
+            listOf(10, 11, 10),
+            listOf(0, 10, 0)
+        )
+
+        val tile = floorPlan.getTile(1, 1)
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        pushAir(tile, neighbors)
+
+        val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
+        assertEquals(expected, airMap)
+    }
+
+    @Test
+    fun remainderDistributed() {
+        val floorPlan = createFloorPlanWithAir(
+            listOf(
+                listOf(0, 0, 0),
+                listOf(0, 52, 0),
+                listOf(0, 0, 0)
+            )
+        )
+
+        val expected = listOf(
+            listOf(0, 10, 0),
+            listOf(10, 11, 11),
+            listOf(0, 10, 0)
+        )
+
+        val tile = floorPlan.getTile(1, 1)
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        pushAir(tile, neighbors)
+
+        val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
+        assertEquals(expected, airMap)
+    }
+
 
     private fun createFloorPlanWithAir(plan: List<List<Int>>): FloorPlan {
         val floorPlan = FloorPlan(plan.size)
