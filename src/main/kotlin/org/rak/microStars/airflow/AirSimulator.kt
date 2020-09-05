@@ -1,6 +1,7 @@
 package org.rak.microStars.airflow
 
 import org.rak.microStars.floorplan.FloorPlan
+import org.rak.microStars.tile.SPACE
 import org.rak.microStars.tile.Tile
 import kotlin.math.max
 import kotlin.math.min
@@ -10,7 +11,7 @@ fun simulateAir(floorPlan: FloorPlan) {
 
     consumeOrProduceAir(airTiles)
     flowAir(airTiles, floorPlan)
-    //do another pass where each tile with 1 air finds closest space tile and 'leaks' towards it
+    moveLowAirTowardsExits(airTiles, floorPlan)
 }
 
 private fun consumeOrProduceAir(airTiles: List<Tile>) {
@@ -45,5 +46,19 @@ fun pushAir(source: Tile, others: List<Tile>) {
     tiles.forEach { it.air = avgAir }
     if (remainder > 0) {
         tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
+    }
+}
+
+fun moveLowAirTowardsExits(airTiles: List<Tile>, floorPlan: FloorPlan) {
+    airTiles.filter { !it.isType(SPACE) && it.air == 1 }.forEach { tile ->
+        val spaceTile = tile.distanceMap.getNearestTileOfType(SPACE, floorPlan)
+        if (spaceTile != null) {
+//            val route = floorPlan.findRoute(tile, spaceTile)
+            val nextStep = spaceTile.distanceMap.getNextStep(tile, floorPlan)
+            if (nextStep != null && nextStep.air < 100) {
+                tile.air--
+                nextStep.air++
+            }
+        }
     }
 }

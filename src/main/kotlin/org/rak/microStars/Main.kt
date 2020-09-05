@@ -15,7 +15,7 @@ class MicroStarsApplication
 
 
 fun main(args: Array<String>) {
-    loadGame()
+//    loadGame()
     val gameThread = Thread {
         while (true) {
             Game.tick()

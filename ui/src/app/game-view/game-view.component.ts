@@ -28,7 +28,6 @@ export class GameViewComponent {
   }
 
   clickTile(tile): void {
-    console.log('clicked', tile)
     this.tileClicked.emit(tile)
   }
 

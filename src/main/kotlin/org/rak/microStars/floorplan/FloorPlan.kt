@@ -61,6 +61,26 @@ class FloorPlan(val size: Int = 5) {
     fun buildDistanceMaps() {
         getAllTiles().forEach { it.distanceMap = createDistancesFrom(it, this) }
     }
+
+    fun findRoute(source: Tile, destination: Tile): List<Tile> {
+        val route = mutableListOf<Tile>()
+
+        //Don't find a route if there is no path from destination to source
+        if (!destination.distanceMap.hasPathTo(source)) {
+            return route
+        }
+
+        var current: Tile? = source
+        while (current != destination && current != null) {
+            current = destination.distanceMap.nearest(getNeighbors(current))
+            if (current != null) {
+                route.add(current)
+            }
+        }
+
+        return route
+    }
+
 }
 
 fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan): FloorPlan {

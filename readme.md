@@ -10,5 +10,4 @@ View the swagger at `http://localhost:8080/swagger-ui.html`
 
 ### TODO
 
-fast refresh is preventing clicks due to tiles refreshing
-- currently just lowering pull rate
+on game load outer space not present

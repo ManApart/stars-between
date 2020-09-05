@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit {
   }
 
   tileClicked(newTile): void {
-    console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
+    // console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
     this.floorPlanService.setTile(this.selectedTilePalette, newTile.x, newTile.y).toPromise()
   }
 
