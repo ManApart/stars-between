@@ -12,11 +12,18 @@ fun simulateAir(floorPlan: FloorPlan) {
     consumeOrProduceAir(airTiles)
     flowAir(airTiles, floorPlan)
     moveLowAirTowardsExits(airTiles, floorPlan)
+    clampAir(airTiles)
 }
 
 private fun consumeOrProduceAir(airTiles: List<Tile>) {
     airTiles.forEach { tile ->
-        tile.air = min(100, max(0, tile.air + tile.airProduced))
+        tile.air = tile.air + tile.airProduced
+    }
+}
+
+private fun clampAir(airTiles: List<Tile>) {
+    airTiles.forEach { tile ->
+        tile.air = min(100, max(0, tile.air))
     }
 }
 
@@ -45,7 +52,12 @@ fun pushAir(source: Tile, others: List<Tile>) {
 
     tiles.forEach { it.air = avgAir }
     if (remainder > 0) {
-        tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
+        val spaceTile = tiles.firstOrNull { it.isType(SPACE) && it.air <= 100 - remainder }
+        if (spaceTile != null) {
+            spaceTile.air += remainder
+        } else {
+            tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
+        }
     }
 }
 
@@ -53,7 +65,6 @@ fun moveLowAirTowardsExits(airTiles: List<Tile>, floorPlan: FloorPlan) {
     airTiles.filter { !it.isType(SPACE) && it.air == 1 }.forEach { tile ->
         val spaceTile = tile.distanceMap.getNearestTileOfType(SPACE, floorPlan)
         if (spaceTile != null) {
-//            val route = floorPlan.findRoute(tile, spaceTile)
             val nextStep = spaceTile.distanceMap.getNextStep(tile, floorPlan)
             if (nextStep != null && nextStep.air < 100) {
                 tile.air--

@@ -39,8 +39,12 @@ class FloorPlan(val size: Int = 5) {
             tiles[y]!![x] = newTile
             orient(newTile, this)
             getNeighbors(newTile).forEach { orient(it, this) }
-//            buildDistanceMaps()
+            buildDistanceMaps()
         }
+    }
+
+    fun setTileWithoutUpdates(tile: Tile, pos: Position) {
+        setTileWithoutUpdates(tile, pos.x, pos.y)
     }
 
     fun setTileWithoutUpdates(tile: Tile, x: Int, y: Int) {
