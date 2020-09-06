@@ -18,4 +18,11 @@ export class GameService {
       responseType: 'json'
     })
   }
+
+  getTileTypes() {
+    return this.http.get(`http://localhost:8080/game/tileTypes`, {
+      headers: new HttpHeaders({}),
+      responseType: 'json'
+    })
+  }
 }

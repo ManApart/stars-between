@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core'
+import { GameService } from '../gameService'
 
 @Component({
   selector: 'app-build-toolkit',
@@ -9,9 +10,16 @@ export class BuildToolkitComponent implements OnInit {
 
   @Output() tilePaletteChanged: EventEmitter<string> = new EventEmitter()
 
-  constructor() { }
-  tileOptions = ['space', 'wall', 'floor', 'vent']
+  tileOptions = []
   selected = 'space'
+
+  constructor(private gameService: GameService) {
+    this.gameService.getTileTypes().toPromise().then(data => {
+      console.log('data', data)
+      this.tileOptions = data as Array<string>
+    })
+  }
+  // Replace with call to get enum
 
   ngOnInit(): void {
   }

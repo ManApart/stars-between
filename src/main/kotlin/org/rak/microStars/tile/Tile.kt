@@ -2,17 +2,23 @@ package org.rak.microStars.tile
 
 import org.rak.microStars.floorplan.Position
 
-val SPACE = Tile(TileType.SPACE, airProduced = -10)
-val FLOOR = Tile(TileType.FLOOR)
-val WALL = Tile(TileType.WALL, solid = true)
-val VENT = Tile(TileType.VENT, airProduced = 10)
 val DEFAULT_TILE = Tile(TileType.VOID)
+val ENGINE = Tile(TileType.ENGINE)
+val FLOOR = Tile(TileType.FLOOR)
+val SPACE = Tile(TileType.SPACE, airProduced = -10)
+val VENT = Tile(TileType.VENT, airProduced = 10)
+val WALL = Tile(TileType.WALL, solid = true)
+val WIRE_FLOOR = Tile(TileType.WIRE_FLOOR)
+val WIRE_WALL = Tile(TileType.WIRE_WALL, solid = true)
 
 val tileTypes = listOf(
-    SPACE,
+    ENGINE,
     FLOOR,
+    SPACE,
+    VENT,
     WALL,
-    VENT
+    WIRE_FLOOR,
+    WIRE_WALL
 )
 
 data class Tile(

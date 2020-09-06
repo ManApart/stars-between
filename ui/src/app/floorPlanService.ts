@@ -12,7 +12,8 @@ export class FloorPlanService {
     })
   }
 
-  setTile(tileType, x, y) {
+  setTile(tileTypeName: string, x, y) {
+    const tileType = tileTypeName.toUpperCase()
     return this.http.put(`http://localhost:8080/floorPlan`, { tileType, x, y }, {
       headers: new HttpHeaders({}),
       responseType: 'json'

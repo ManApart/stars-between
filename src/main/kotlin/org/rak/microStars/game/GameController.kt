@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*
 class GameController {
 
     @GetMapping("/tileTypes")
-    fun getTileTypes() : Array<TileType> {
-        return TileType.values()
+    fun getTileTypes() : List<TileType> {
+        return TileType.values().filter { it != TileType.VOID }.toList()
     }
 
     @PostMapping("/save")

@@ -1,9 +1,12 @@
 package org.rak.microStars.tile
 
 enum class TileType {
-    SPACE,
+    ENGINE,
     FLOOR,
-    WALL,
+    SPACE,
     VENT,
+    WALL,
+    WIRE_FLOOR,
+    WIRE_WALL,
     VOID
 }
