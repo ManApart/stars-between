@@ -66,6 +66,7 @@ class FloorPlan(val size: Int = 5) {
 
     fun buildDistanceMaps() {
         getAllTiles().forEach { it.distanceMap = createDistancesFrom(it, this) }
+        setSelectedTile(selectedTile)
     }
 
     fun findRoute(source: Tile, destination: Tile): List<Tile> {

@@ -26,7 +26,7 @@ export class MainPageComponent implements OnInit {
 
   tileClicked(newTile): void {
     // console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
-    if (this.selectedMode === 'build') {
+    if (this.selectedMode === 'build' || this.selectedMode === 'air') {
       this.floorPlanService.setTile(this.selectedTilePalette, newTile.x, newTile.y).toPromise()
     } else if (this.selectedMode === 'distance') {
       this.floorPlanService.selectTile(newTile.x, newTile.y).toPromise()
