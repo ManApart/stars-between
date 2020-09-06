@@ -1,5 +1,6 @@
 package org.rak.microStars.game
 
+import org.rak.microStars.tile.TileType
 import org.rak.microStars.tile.tileTypes
 import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.wiring.loadGame
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.*
 class GameController {
 
     @GetMapping("/tileTypes")
-    fun getTileTypes() : List<String> {
-        return tileTypes.map { it.name }
+    fun getTileTypes() : Array<TileType> {
+        return TileType.values()
     }
 
     @PostMapping("/save")

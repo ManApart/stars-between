@@ -9,5 +9,3 @@ If the app complains that Swagger Config needs to be open, enable annotation pro
 View the swagger at `http://localhost:8080/swagger-ui.html`
 
 ### TODO
-
-on game load outer space not present

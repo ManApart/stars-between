@@ -7,6 +7,7 @@ import org.rak.microStars.floorplan.Position
 import org.rak.microStars.floorplan.createDistancesFrom
 import org.rak.microStars.tile.SPACE
 import org.rak.microStars.tile.Tile
+import org.rak.microStars.tile.TileType
 import org.rak.microStars.tile.WALL
 
 class DistanceBuilderTest {
@@ -36,11 +37,11 @@ class DistanceBuilderTest {
         )
 
         assertTrue(spacePositions.all {
-            floorPlan.getTile(it).isType(SPACE)
+            floorPlan.getTile(it).type == TileType.SPACE
         })
 
         assertTrue(wallPositions.all {
-            floorPlan.getTile(it).isType(WALL)
+            floorPlan.getTile(it).type == TileType.WALL
         })
     }
 
@@ -91,7 +92,7 @@ class DistanceBuilderTest {
         val floorPlan = createFloorPlanWithTiles(plan)
         val source = floorPlan.getTile(0, 1)
         val distanceMap = createDistancesFrom(source, floorPlan)
-        val nearestSpace = distanceMap.getNearestTileOfType(SPACE, floorPlan)
+        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
         val expected = floorPlan.getTile(1, 0)
 
         assertEquals(expected, nearestSpace)
@@ -108,7 +109,7 @@ class DistanceBuilderTest {
         val floorPlan = createFloorPlanWithTiles(plan)
         val source = floorPlan.getTile(0, 1)
         val distanceMap = createDistancesFrom(source, floorPlan)
-        val nearestSpace = distanceMap.getNearestTileOfType(SPACE, floorPlan)
+        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
 
         assertNull(nearestSpace)
     }

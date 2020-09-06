@@ -2,11 +2,11 @@ package org.rak.microStars.tile
 
 import org.rak.microStars.floorplan.Position
 
-val SPACE = Tile("Space", airProduced = -10)
-val FLOOR = Tile("Floor")
-val WALL = Tile("Wall", solid = true)
-val VENT = Tile("Vent", airProduced = 10)
-val DEFAULT_TILE = Tile("Void")
+val SPACE = Tile(TileType.SPACE, airProduced = -10)
+val FLOOR = Tile(TileType.FLOOR)
+val WALL = Tile(TileType.WALL, solid = true)
+val VENT = Tile(TileType.VENT, airProduced = 10)
+val DEFAULT_TILE = Tile(TileType.VOID)
 
 val tileTypes = listOf(
     SPACE,
@@ -16,7 +16,7 @@ val tileTypes = listOf(
 )
 
 data class Tile(
-    val name: String,
+    val type: TileType,
     val position: Position = Position(),
     private val totalHealth: Int = 100,
     private val solid: Boolean = false,
@@ -38,10 +38,6 @@ data class Tile(
         return solid && health > 0
     }
 
-    fun isType(other: Tile): Boolean {
-        return name == other.name
-    }
-
     fun isEdgeTile(floorPlanSize: Int): Boolean {
         return position.x == 0 || position.y == 0 || position.x == floorPlanSize - 1 || position.y == floorPlanSize - 1
     }
@@ -49,7 +45,7 @@ data class Tile(
 
 fun fromSimpleTile(simpleTile: SimpleTile): Tile {
     val tile = tileTypes
-        .first { it.name.toLowerCase() == simpleTile.name.toLowerCase() }
+        .first { it.type == simpleTile.type }
         .copy(position = Position(simpleTile.x, simpleTile.y), solid = simpleTile.solid)
 
     tile.health = simpleTile.health

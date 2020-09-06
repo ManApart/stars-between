@@ -1,5 +1,5 @@
 export class Tile {
-  name: string
+  type: string
   x: number
   y: number
   solid: boolean

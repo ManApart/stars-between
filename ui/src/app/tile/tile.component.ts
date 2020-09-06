@@ -18,7 +18,7 @@ export class TileComponent implements OnInit {
   }
 
   getImageUrl(): string {
-    return '../../assets/images/tiles/' + this.tile.name.toLowerCase() + '.png'
+    return '../../assets/images/tiles/' + this.tile.type.toLowerCase() + '.png'
   }
 
   getXOffset(): number {

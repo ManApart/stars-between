@@ -3,10 +3,10 @@ package org.rak.microStars.tile
 import org.rak.microStars.floorplan.FloorPlan
 
 fun orient(tile: Tile, floorPlan: FloorPlan){
-    val up = floorPlan.getTile(tile.position.up()).isType(tile)
-    val down = floorPlan.getTile(tile.position.down()).isType(tile)
-    val left = floorPlan.getTile(tile.position.left()).isType(tile)
-    val right = floorPlan.getTile(tile.position.right()).isType(tile)
+    val up = floorPlan.getTile(tile.position.up()).type == tile.type
+    val down = floorPlan.getTile(tile.position.down()).type == tile.type
+    val left = floorPlan.getTile(tile.position.left()).type == tile.type
+    val right = floorPlan.getTile(tile.position.right()).type == tile.type
     val matchingNeighbors = listOf(up, down, left, right).count { it }
 
     tile.adjacency = when {

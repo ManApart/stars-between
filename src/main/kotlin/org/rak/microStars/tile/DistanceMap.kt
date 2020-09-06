@@ -5,7 +5,7 @@ import kotlin.math.min
 
 class DistanceMap(val source: Tile) {
     val costs = mutableMapOf<Int, MutableMap<Int, Int>>()
-    val nearestType = mutableMapOf<String, Tile?>()
+    val nearestType = mutableMapOf<TileType, Tile?>()
 
     fun setDistance(source: Tile, distance: Int) {
         val x = source.position.x
@@ -28,15 +28,15 @@ class DistanceMap(val source: Tile) {
         return costs[x]?.getOrDefault(y, Int.MAX_VALUE) ?: Int.MAX_VALUE
     }
 
-    fun getNearestTileOfType(tileType: Tile, floorPlan: FloorPlan): Tile? {
-        if (!nearestType.containsKey(tileType.name)) {
-            nearestType[tileType.name] = findNearestTileOfType(tileType, floorPlan)
+    fun getNearestTileOfType(tileType: TileType, floorPlan: FloorPlan): Tile? {
+        if (!nearestType.containsKey(tileType)) {
+            nearestType[tileType] = findNearestTileOfType(tileType, floorPlan)
         }
-        return nearestType[tileType.name]
+        return nearestType[tileType]
     }
 
-    private fun findNearestTileOfType(tileType: Tile, floorPlan: FloorPlan): Tile? {
-        val tilesOfType = floorPlan.getAllTiles().filter { it.isType(tileType) }
+    private fun findNearestTileOfType(tileType: TileType, floorPlan: FloorPlan): Tile? {
+        val tilesOfType = floorPlan.getAllTiles().filter { it.type == tileType }
         return nearest(tilesOfType)
     }
 

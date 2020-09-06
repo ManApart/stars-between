@@ -20,7 +20,7 @@ class FloorPlanController {
 
     @PutMapping
     fun setTile(@RequestBody update: TileUpdate) : SimpleTile {
-        val tile = tileTypes.firstOrNull { it.name.toLowerCase() == update.tileType.toLowerCase() } ?: DEFAULT_TILE
+        val tile = tileTypes.firstOrNull { it.type == update.tileType } ?: DEFAULT_TILE
 
         Game.floorPlan.setTile(tile, update.x, update.y)
         SocketManager.sendUpdate()

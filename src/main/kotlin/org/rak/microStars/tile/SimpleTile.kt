@@ -1,7 +1,7 @@
 package org.rak.microStars.tile
 
 class SimpleTile(
-    val name: String,
+    val type: TileType,
     val x: Int,
     val y: Int,
     val solid: Boolean,
@@ -12,7 +12,7 @@ class SimpleTile(
     val distance: Int = 0
 ) {
     constructor(tile: Tile) : this(
-        tile.name,
+        tile.type,
         tile.position.x,
         tile.position.y,
         tile.isSolid(),

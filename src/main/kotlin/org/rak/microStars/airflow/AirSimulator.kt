@@ -1,8 +1,8 @@
 package org.rak.microStars.airflow
 
 import org.rak.microStars.floorplan.FloorPlan
-import org.rak.microStars.tile.SPACE
 import org.rak.microStars.tile.Tile
+import org.rak.microStars.tile.TileType
 import kotlin.math.max
 import kotlin.math.min
 
@@ -52,18 +52,19 @@ fun pushAir(source: Tile, others: List<Tile>) {
 
     tiles.forEach { it.air = avgAir }
     if (remainder > 0) {
-        val spaceTile = tiles.firstOrNull { it.isType(SPACE) && it.air <= 100 - remainder }
-        if (spaceTile != null) {
-            spaceTile.air += remainder
-        } else {
+        val spaceTile = tiles.firstOrNull { it.type == TileType.SPACE && it.air <= 100 - remainder }
+        //Update tests and then use this to prefer giving remanders to space
+//        if (spaceTile != null) {
+//            spaceTile.air += remainder
+//        } else {
             tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
-        }
+//        }
     }
 }
 
 fun moveLowAirTowardsExits(airTiles: List<Tile>, floorPlan: FloorPlan) {
-    airTiles.filter { !it.isType(SPACE) && it.air == 1 }.forEach { tile ->
-        val spaceTile = tile.distanceMap.getNearestTileOfType(SPACE, floorPlan)
+    airTiles.filter { it.type != TileType.SPACE && it.air == 1 }.forEach { tile ->
+        val spaceTile = tile.distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
         if (spaceTile != null) {
             val nextStep = spaceTile.distanceMap.getNextStep(tile, floorPlan)
             if (nextStep != null && nextStep.air < 100) {
