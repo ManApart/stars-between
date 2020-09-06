@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core'
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
 import { WebsocketService } from '../websocket.service'
 import { Tile } from '../tile/tile'
 
@@ -10,6 +10,7 @@ import { Tile } from '../tile/tile'
 export class GameViewComponent {
   public data: Array<Array<Tile>>
 
+  @Input() mode: string
   @Output() tileClicked: EventEmitter<Tile> = new EventEmitter()
 
   constructor(websocketService: WebsocketService) {

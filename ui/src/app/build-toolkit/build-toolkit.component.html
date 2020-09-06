@@ -1,6 +1,5 @@
-<div class="selected"> {{selected}}</div>
+<div class="header">Tile Select:</div>
+<div class="selected">Current: {{selected}}</div>
 <div *ngFor="let option of tileOptions" class="option">
   <button (click)="changeTile(option)">{{option}}</button>
 </div>
-<!-- <select (change)="changeTile($event)">
-</select> -->

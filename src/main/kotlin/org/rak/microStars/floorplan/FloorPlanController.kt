@@ -32,4 +32,9 @@ class FloorPlanController {
         Game.floorPlan = Game.createFloorPlan(size)
     }
 
+    @PostMapping("/tile")
+    fun selectTile(@RequestParam x: Int, @RequestParam y: Int) {
+        Game.floorPlan.setSelectedTile(Game.floorPlan.getTile(x, y))
+    }
+
 }

@@ -8,7 +8,8 @@ class SimpleTile(
     val air: Int,
     val health: Int,
     val adjacency: Adjacency,
-    val rotation: Int
+    val rotation: Int,
+    val distance: Int = 0
 ) {
     constructor(tile: Tile) : this(
         tile.name,
@@ -18,6 +19,7 @@ class SimpleTile(
         tile.air,
         tile.health,
         tile.adjacency,
-        tile.rotation
+        tile.rotation,
+        tile.distanceFromSelected
     )
 }

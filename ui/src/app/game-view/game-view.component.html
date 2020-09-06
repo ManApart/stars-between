@@ -2,7 +2,7 @@
   <table>
     <tr *ngFor="let row of data">
       <td *ngFor="let tile of row; trackBy: trackTile">
-        <app-tile [tile]="tile" (click)="clickTile(tile)"></app-tile>
+        <app-tile [tile]="tile" [mode]="mode" (click)="clickTile(tile)"></app-tile>
       </td>
     </tr>
   </table>

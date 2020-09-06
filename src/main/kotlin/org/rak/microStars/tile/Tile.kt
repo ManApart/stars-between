@@ -32,6 +32,7 @@ data class Tile(
     var adjacency = Adjacency.NONE
     var rotation = 0
     var distanceMap = DistanceMap(this)
+    var distanceFromSelected = 0
 
     fun isSolid(): Boolean {
         return solid && health > 0

@@ -30,7 +30,6 @@ object Game {
 
     fun tick() {
         simulateAir(floorPlan)
-        // air flow
         //energy flow
     }
 }

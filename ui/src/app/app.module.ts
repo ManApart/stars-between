@@ -10,7 +10,8 @@ import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component'
 import { FloorPlanService } from './floorPlanService'
 import { GameService } from './gameService'
 import { HttpClientModule } from '@angular/common/http';
-import { SystemMenuComponent } from './system-menu/system-menu.component'
+import { SystemMenuComponent } from './system-menu/system-menu.component';
+import { ModeSelectComponent } from './mode-select/mode-select.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SystemMenuComponent } from './system-menu/system-menu.component'
     MainPageComponent,
     TileComponent,
     BuildToolkitComponent,
-    SystemMenuComponent
+    SystemMenuComponent,
+    ModeSelectComponent
   ],
   imports: [
     BrowserModule,

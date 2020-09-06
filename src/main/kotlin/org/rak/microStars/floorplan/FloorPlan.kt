@@ -9,6 +9,8 @@ class FloorPlan(val size: Int = 5) {
         }.toMutableMap())
     }
 
+    private var selectedTile = getAllTiles().first()
+
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
     }
@@ -83,6 +85,13 @@ class FloorPlan(val size: Int = 5) {
         }
 
         return route
+    }
+
+    fun setSelectedTile(selectedTile: Tile) {
+        this.selectedTile = selectedTile
+        getAllTiles().forEach {tile ->
+            tile.distanceFromSelected = selectedTile.distanceMap.getDistance(tile)
+        }
     }
 
 }

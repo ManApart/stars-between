@@ -18,4 +18,11 @@ export class FloorPlanService {
       responseType: 'json'
     })
   }
+
+  selectTile(x, y) {
+    return this.http.post(`http://localhost:8080/floorPlan/tile?x=${x}&y=${y}`, {
+      headers: new HttpHeaders({}),
+      responseType: 'json',
+    })
+  }
 }

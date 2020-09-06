@@ -1,5 +1,8 @@
 <div class="container">
-  <app-build-toolkit class="section" (selectedTileChanged)="selectedTileChanged($event)"></app-build-toolkit>
-  <app-game-view class="section" (tileClicked)="tileClicked($event)"></app-game-view>
+  <div class="section">
+    <app-mode-select class="row" (modeChanged)="modeChanged($event)"></app-mode-select>
+    <app-build-toolkit class="row" (tilePaletteChanged)="tilePaletteChanged($event)"></app-build-toolkit>
+  </div>
+  <app-game-view class="section" (tileClicked)="tileClicked($event)" [mode]="selectedMode"></app-game-view>
 </div>
 <app-system-menu></app-system-menu>

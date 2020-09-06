@@ -7,7 +7,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core'
 })
 export class BuildToolkitComponent implements OnInit {
 
-  @Output() selectedTileChanged: EventEmitter<string> = new EventEmitter()
+  @Output() tilePaletteChanged: EventEmitter<string> = new EventEmitter()
 
   constructor() { }
   tileOptions = ['space', 'wall', 'floor', 'vent']
@@ -18,7 +18,7 @@ export class BuildToolkitComponent implements OnInit {
 
   changeTile(tileName): void {
     this.selected = tileName
-    this.selectedTileChanged.emit(tileName)
+    this.tilePaletteChanged.emit(tileName)
   }
 
 }

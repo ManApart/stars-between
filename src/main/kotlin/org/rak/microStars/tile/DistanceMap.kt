@@ -21,7 +21,11 @@ class DistanceMap(val source: Tile) {
     }
 
     fun getDistance(tile: Tile): Int {
-        return costs[tile.position.x]?.getOrDefault(tile.position.y, Int.MAX_VALUE) ?: Int.MAX_VALUE
+        return getDistance(tile.position.x, tile.position.y)
+    }
+
+    fun getDistance(x: Int, y: Int): Int {
+        return costs[x]?.getOrDefault(y, Int.MAX_VALUE) ?: Int.MAX_VALUE
     }
 
     fun getNearestTileOfType(tileType: Tile, floorPlan: FloorPlan): Tile? {
