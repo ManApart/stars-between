@@ -53,12 +53,11 @@ fun pushAir(source: Tile, others: List<Tile>) {
     tiles.forEach { it.air = avgAir }
     if (remainder > 0) {
         val spaceTile = tiles.firstOrNull { it.type == TileType.SPACE && it.air <= 100 - remainder }
-        //Update tests and then use this to prefer giving remanders to space
-//        if (spaceTile != null) {
-//            spaceTile.air += remainder
-//        } else {
+        if (spaceTile != null) {
+            spaceTile.air += remainder
+        } else {
             tiles.reversed().subList(0, remainder).forEach { it.air = avgAir + 1 }
-//        }
+        }
     }
 }
 
