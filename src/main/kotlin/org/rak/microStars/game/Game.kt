@@ -3,6 +3,8 @@ package org.rak.microStars.game
 import org.rak.microStars.airflow.simulateAir
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.floorplan.Position
+import org.rak.microStars.power.simulatePower
+import org.rak.microStars.systems.tickSystems
 import org.rak.microStars.tile.FLOOR
 import org.rak.microStars.tile.SPACE
 import org.rak.microStars.tile.WALL
@@ -29,7 +31,8 @@ object Game {
     }
 
     fun tick() {
+        simulatePower(floorPlan)
+        tickSystems(floorPlan)
         simulateAir(floorPlan)
-        //energy flow
     }
 }

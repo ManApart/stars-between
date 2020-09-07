@@ -41,7 +41,8 @@ data class Tile(
     var rotation = 0
     var distanceMap = DistanceMap(this)
     var distanceFromSelected = 0
-    var power = powerProduced
+    var power = totalPowerCapacity
+
 
     fun isSolid(): Boolean {
         return solid && health > 0

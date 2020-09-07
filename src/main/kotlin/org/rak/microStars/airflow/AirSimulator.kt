@@ -9,15 +9,15 @@ import kotlin.math.min
 fun simulateAir(floorPlan: FloorPlan) {
     val airTiles = floorPlan.getAllTiles().filter { !it.isSolid() }
 
-    consumeOrProduceAir(airTiles)
+    consumeAir(airTiles)
     flowAir(airTiles, floorPlan)
     moveLowAirTowardsExits(airTiles, floorPlan)
     clampAir(airTiles)
 }
 
-private fun consumeOrProduceAir(airTiles: List<Tile>) {
-    airTiles.forEach { tile ->
-        tile.air = tile.air + tile.airProduced
+private fun consumeAir(airTiles: List<Tile>) {
+    airTiles.filter { it.airProduced < 0 }.forEach { tile ->
+        tile.air += tile.airProduced
     }
 }
 

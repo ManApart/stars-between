@@ -2,6 +2,7 @@ package org.rak.microStars.tile
 
 import org.rak.microStars.floorplan.FloorPlan
 
+//TODO - pass a list of 'like tiles' and see if type is contained in them
 fun orient(tile: Tile, floorPlan: FloorPlan){
     val up = floorPlan.getTile(tile.position.up()).type == tile.type
     val down = floorPlan.getTile(tile.position.down()).type == tile.type
