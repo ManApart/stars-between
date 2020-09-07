@@ -1,5 +1,14 @@
 <div class="header">Tile Select:</div>
 <div class="selected">Current: {{selected}}</div>
-<div *ngFor="let option of tileOptions" class="option">
-  <button (click)="changeTile(option)">{{option}}</button>
-</div>
+<table>
+  <tr *ngFor="let option of tileOptions" (click)="changeTile(option)" class="option">
+    <td>
+      <div class="image-wrapper">
+        <img src={{getImageUrl(option)}} class="button-image">
+      </div>
+    </td>
+    <td>
+      {{option}}
+    </td>
+  </tr>
+</table>

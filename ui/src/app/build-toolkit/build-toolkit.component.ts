@@ -27,4 +27,8 @@ export class BuildToolkitComponent implements OnInit {
     this.tilePaletteChanged.emit(tileName)
   }
 
+  getImageUrl(type): string {
+    return '../../assets/images/tiles/' + type.toLowerCase() + '.png'
+  }
+
 }
