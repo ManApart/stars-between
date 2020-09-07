@@ -31,8 +31,8 @@ object Game {
     }
 
     fun tick() {
-        simulatePower(floorPlan)
         tickSystems(floorPlan)
+        simulatePower(floorPlan)
         simulateAir(floorPlan)
     }
 }

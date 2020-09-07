@@ -3,13 +3,13 @@ package org.rak.microStars.tile
 import org.rak.microStars.floorplan.Position
 
 val DEFAULT_TILE = Tile(TileType.VOID)
-val ENGINE = Tile(TileType.ENGINE)
+val ENGINE = Tile(TileType.ENGINE, powerProduced = 100, totalPowerCapacity = 100)
 val FLOOR = Tile(TileType.FLOOR)
 val SPACE = Tile(TileType.SPACE, airProduced = -10)
-val VENT = Tile(TileType.VENT, airProduced = 10)
+val VENT = Tile(TileType.VENT, airProduced = 10, powerProduced = -10, totalPowerCapacity = 50)
 val WALL = Tile(TileType.WALL, solid = true)
-val WIRE_FLOOR = Tile(TileType.WIRE_FLOOR)
-val WIRE_WALL = Tile(TileType.WIRE_WALL, solid = true)
+val WIRE_FLOOR = Tile(TileType.WIRE_FLOOR, totalPowerCapacity = 5)
+val WIRE_WALL = Tile(TileType.WIRE_WALL, solid = true, totalPowerCapacity = 5)
 
 val tileTypes = listOf(
     ENGINE,
@@ -28,7 +28,7 @@ data class Tile(
     private val solid: Boolean = false,
     val airProduced: Int = 0,
     val powerProduced: Int = 0,
-    private val totalPowerCapacity: Int = 0
+    val totalPowerCapacity: Int = 0
 ) {
 
     var health = totalHealth

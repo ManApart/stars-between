@@ -15,7 +15,6 @@ export class BuildToolkitComponent implements OnInit {
 
   constructor(private gameService: GameService) {
     this.gameService.getTileTypes().toPromise().then(data => {
-      console.log('data', data)
       this.tileOptions = data as Array<string>
     })
   }
