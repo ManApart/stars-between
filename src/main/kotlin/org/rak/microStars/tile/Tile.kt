@@ -26,7 +26,9 @@ data class Tile(
     val position: Position = Position(),
     private val totalHealth: Int = 100,
     private val solid: Boolean = false,
-    val airProduced: Int = 0
+    val airProduced: Int = 0,
+    val powerProduced: Int = 0,
+    private val totalPowerCapacity: Int = 0
 ) {
 
     var health = totalHealth
@@ -39,6 +41,7 @@ data class Tile(
     var rotation = 0
     var distanceMap = DistanceMap(this)
     var distanceFromSelected = 0
+    var power = powerProduced
 
     fun isSolid(): Boolean {
         return solid && health > 0
@@ -55,6 +58,7 @@ fun fromSimpleTile(simpleTile: SimpleTile): Tile {
         .copy(position = Position(simpleTile.x, simpleTile.y), solid = simpleTile.solid)
 
     tile.health = simpleTile.health
+    tile.power = simpleTile.power
     tile.air = simpleTile.air
     tile.adjacency = simpleTile.adjacency
     tile.rotation = simpleTile.rotation

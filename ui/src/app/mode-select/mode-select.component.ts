@@ -10,7 +10,7 @@ export class ModeSelectComponent implements OnInit {
   @Output() modeChanged: EventEmitter<string> = new EventEmitter()
 
   constructor() { }
-  modeOptions = ['build', 'air', 'distance']
+  modeOptions = ['build', 'air', 'distance', 'power']
   selected = 'build'
 
   ngOnInit(): void {

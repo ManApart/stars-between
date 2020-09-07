@@ -7,5 +7,6 @@ export class Tile {
   adjacency: string
   rotation: number
   air: number
+  power: number
   distance: number
 }

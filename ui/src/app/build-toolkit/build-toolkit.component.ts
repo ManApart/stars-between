@@ -19,7 +19,6 @@ export class BuildToolkitComponent implements OnInit {
       this.tileOptions = data as Array<string>
     })
   }
-  // Replace with call to get enum
 
   ngOnInit(): void {
   }

@@ -7,6 +7,7 @@ class SimpleTile(
     val solid: Boolean,
     val air: Int,
     val health: Int,
+    val power: Int,
     val adjacency: Adjacency,
     val rotation: Int,
     val distance: Int = 0
@@ -18,6 +19,7 @@ class SimpleTile(
         tile.isSolid(),
         tile.air,
         tile.health,
+        tile.power,
         tile.adjacency,
         tile.rotation,
         tile.distanceFromSelected
