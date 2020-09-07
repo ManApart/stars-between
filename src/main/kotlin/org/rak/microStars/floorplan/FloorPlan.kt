@@ -98,7 +98,7 @@ class FloorPlan(val size: Int = 5) {
 }
 
 fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan): FloorPlan {
-    val size = simpleFloorPlan.tiles.flatten().maxBy { it.x }?.x ?: 10
+    val size = (simpleFloorPlan.tiles.flatten().maxByOrNull { it.x }?.x ?: 9) + 1
     val floorPlan = FloorPlan(size)
     simpleFloorPlan.tiles.flatten().map {
         floorPlan.setTileWithoutUpdates(fromSimpleTile(it), it.x, it.y)
