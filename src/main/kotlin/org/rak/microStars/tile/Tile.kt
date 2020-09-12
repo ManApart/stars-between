@@ -43,6 +43,8 @@ data class Tile(
     var distanceFromSelected = 0
     var power = totalPowerCapacity
 
+    var lastReceivedPowerFrom: Tile? = null
+
 
     fun isSolid(): Boolean {
         return solid && health > 0

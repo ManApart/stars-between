@@ -11,6 +11,8 @@ class FloorPlan(val size: Int = 5) {
 
     private var selectedTile = getAllTiles().first()
 
+    private val airAreas = AreaGroup(this) { it.isSolid() }
+
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
     }
