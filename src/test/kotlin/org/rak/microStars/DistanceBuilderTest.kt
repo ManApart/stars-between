@@ -10,6 +10,7 @@ import org.rak.microStars.tile.Tile
 import org.rak.microStars.tile.TileType
 import org.rak.microStars.tile.WALL
 
+//TODO - take area instead of floorplan
 class DistanceBuilderTest {
 
     @Test
@@ -49,7 +50,7 @@ class DistanceBuilderTest {
     fun simpleDistances() {
         val floorPlan = FloorPlan(3)
         val source = floorPlan.getTile(0, 1)
-        val distanceMap = createDistancesFrom(source, floorPlan)
+        val distanceMap = createDistancesFrom(source, floorPlan.airAreas.areas.first())
 
         val expected = listOf(
             listOf(1, 2, 3),
@@ -70,7 +71,7 @@ class DistanceBuilderTest {
 
         val floorPlan = createFloorPlanWithTiles(plan)
         val source = floorPlan.getTile(0, 1)
-        val distanceMap = createDistancesFrom(source, floorPlan)
+        val distanceMap = createDistancesFrom(source, floorPlan.airAreas.areas.first())
 
         val expected = listOf(
             listOf(1, 2, 3),
@@ -90,9 +91,10 @@ class DistanceBuilderTest {
         )
 
         val floorPlan = createFloorPlanWithTiles(plan)
+        val area = floorPlan.airAreas.areas.first()
         val source = floorPlan.getTile(0, 1)
-        val distanceMap = createDistancesFrom(source, floorPlan)
-        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
+        val distanceMap = createDistancesFrom(source, area)
+        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, area)
         val expected = floorPlan.getTile(1, 0)
 
         assertEquals(expected, nearestSpace)
@@ -107,9 +109,10 @@ class DistanceBuilderTest {
         )
 
         val floorPlan = createFloorPlanWithTiles(plan)
+        val area = floorPlan.airAreas.areas.first()
         val source = floorPlan.getTile(0, 1)
-        val distanceMap = createDistancesFrom(source, floorPlan)
-        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
+        val distanceMap = createDistancesFrom(source, area)
+        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, area)
 
         assertNull(nearestSpace)
     }

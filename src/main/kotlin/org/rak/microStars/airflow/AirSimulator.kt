@@ -1,5 +1,6 @@
 package org.rak.microStars.airflow
 
+import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.tile.Tile
 import org.rak.microStars.tile.TileType
@@ -7,36 +8,36 @@ import kotlin.math.max
 import kotlin.math.min
 
 fun simulateAir(floorPlan: FloorPlan) {
-    val airTiles = floorPlan.getAllTiles().filter { !it.isSolid() }
-
-    consumeAir(airTiles)
-    flowAir(airTiles, floorPlan)
-    moveLowAirTowardsExits(airTiles, floorPlan)
-    clampAir(airTiles)
+    floorPlan.airAreas.areas.forEach { area ->
+        consumeAir(area)
+        flowAir(area)
+        moveLowAirTowardsExits(area)
+        clampAir(area)
+    }
 }
 
-private fun consumeAir(airTiles: List<Tile>) {
-    airTiles.filter { it.airProduced < 0 }.forEach { tile ->
+private fun consumeAir(area: Area) {
+    area.tiles.filter { it.airProduced < 0 }.forEach { tile ->
         tile.air += tile.airProduced
     }
 }
 
-private fun clampAir(airTiles: List<Tile>) {
-    airTiles.forEach { tile ->
+private fun clampAir(area: Area) {
+    area.tiles.forEach { tile ->
         tile.air = min(100, max(0, tile.air))
     }
 }
 
-private fun flowAir(airTiles: List<Tile>, floorPlan: FloorPlan) {
-    val maxAir = airTiles.maxOf { it.air }
-    val open = airTiles.filter { it.air == maxAir }.toMutableList()
+private fun flowAir(area: Area) {
+    val maxAir = area.tiles.maxOf { it.air }
+    val open = area.tiles.filter { it.air == maxAir }.toMutableList()
     val closed = mutableListOf<Tile>()
 
     while (open.isNotEmpty()) {
         val current = open.first()
         open.remove(current)
         if (current.air > 0 && !closed.contains(current)) {
-            val neighbors = floorPlan.getNeighbors(current).filter { !it.isSolid() && it.air != 100 }
+            val neighbors = area.getNeighbors(current).filter { it.air != 100 }
             pushAir(current, neighbors)
             open.addAll(neighbors)
         }
@@ -61,11 +62,11 @@ fun pushAir(source: Tile, others: List<Tile>) {
     }
 }
 
-fun moveLowAirTowardsExits(airTiles: List<Tile>, floorPlan: FloorPlan) {
-    airTiles.filter { it.type != TileType.SPACE && it.air == 1 }.forEach { tile ->
-        val spaceTile = tile.distanceMap.getNearestTileOfType(TileType.SPACE, floorPlan)
+fun moveLowAirTowardsExits(area: Area) {
+    area.tiles.filter { it.type != TileType.SPACE && it.air == 1 }.forEach { tile ->
+        val spaceTile = tile.distanceMap.getNearestTileOfType(TileType.SPACE, area)
         if (spaceTile != null) {
-            val nextStep = spaceTile.distanceMap.getNextStep(tile, floorPlan)
+            val nextStep = spaceTile.distanceMap.getNextStep(tile, area)
             if (nextStep != null && nextStep.air < 100) {
                 tile.air--
                 nextStep.air++

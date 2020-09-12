@@ -3,7 +3,7 @@ package org.rak.microStars.floorplan
 import org.rak.microStars.tile.DistanceMap
 import org.rak.microStars.tile.Tile
 
-fun createDistancesFrom(source: Tile, floorPlan: FloorPlan): DistanceMap {
+fun createDistancesFrom(source: Tile, area: Area): DistanceMap {
     val distanceMap = DistanceMap(source)
     if (!source.isSolid()) {
         val open = mutableListOf<Tile>()
@@ -16,9 +16,9 @@ fun createDistancesFrom(source: Tile, floorPlan: FloorPlan): DistanceMap {
             open.remove(current)
 
             if (!closed.contains(current)) {
-                val distance = distanceMap.getMinDistanceTo(current, floorPlan) + 1
+                val distance = distanceMap.getMinDistanceTo(current, area) + 1
                 distanceMap.setDistance(current, distance)
-                open.addAll(floorPlan.getNeighbors(current).filter { !it.isSolid() && !closed.contains(it) })
+                open.addAll(area.getNeighbors(current).filter { !closed.contains(it) })
             }
             closed.add(current)
         }

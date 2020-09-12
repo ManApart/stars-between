@@ -1,8 +1,9 @@
 package org.rak.microStars.tile
 
+import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
 import kotlin.math.min
-
+//Should be specific to an area
 class DistanceMap(val source: Tile) {
     val costs = mutableMapOf<Int, MutableMap<Int, Int>>()
     val nearestType = mutableMapOf<TileType, Tile?>()
@@ -16,8 +17,8 @@ class DistanceMap(val source: Tile) {
         costs[x]!![y] = min(distance, current)
     }
 
-    fun getMinDistanceTo(tile: Tile, floorPlan: FloorPlan): Int {
-        return floorPlan.getNeighbors(tile).map { getDistance(it) }.filter { it != Int.MAX_VALUE }.minOrNull() ?: 0
+    fun getMinDistanceTo(tile: Tile, area: Area): Int {
+        return area.getNeighbors(tile).map { getDistance(it) }.filter { it != Int.MAX_VALUE }.minOrNull() ?: 0
     }
 
     fun getDistance(tile: Tile): Int {
@@ -28,15 +29,15 @@ class DistanceMap(val source: Tile) {
         return costs[x]?.getOrDefault(y, Int.MAX_VALUE) ?: Int.MAX_VALUE
     }
 
-    fun getNearestTileOfType(tileType: TileType, floorPlan: FloorPlan): Tile? {
+    fun getNearestTileOfType(tileType: TileType, area: Area): Tile? {
         if (!nearestType.containsKey(tileType)) {
-            nearestType[tileType] = findNearestTileOfType(tileType, floorPlan)
+            nearestType[tileType] = findNearestTileOfType(tileType, area)
         }
         return nearestType[tileType]
     }
 
-    private fun findNearestTileOfType(tileType: TileType, floorPlan: FloorPlan): Tile? {
-        val tilesOfType = floorPlan.getAllTiles().filter { it.type == tileType }
+    private fun findNearestTileOfType(tileType: TileType, area: Area): Tile? {
+        val tilesOfType = area.tiles.filter { it.type == tileType }
         return nearest(tilesOfType)
     }
 
@@ -48,8 +49,8 @@ class DistanceMap(val source: Tile) {
         return costs.containsKey(source.position.x) && costs[source.position.x]!!.containsKey(source.position.y)
     }
 
-    fun getNextStep(source: Tile, floorPlan: FloorPlan) : Tile? {
-        val nearestNeighbor = floorPlan.getNeighbors(source).minByOrNull { getDistance(it) }
+    fun getNextStep(source: Tile, area: Area) : Tile? {
+        val nearestNeighbor = area.getNeighbors(source).minByOrNull { getDistance(it) }
 
         if (nearestNeighbor != null && getDistance(nearestNeighbor) < getDistance(source)){
             return nearestNeighbor
