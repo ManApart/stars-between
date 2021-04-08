@@ -12,6 +12,7 @@ class FloorPlan(val size: Int = 5) {
     private var selectedTile = getAllTiles().first()
 
     var airAreas = AreaGroup(this) { !it.isSolid() }
+    var powerAreas = AreaGroup(this) { it.totalPowerCapacity > 0 }
 
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
@@ -68,6 +69,7 @@ class FloorPlan(val size: Int = 5) {
 
     fun updateAreas(){
         airAreas = AreaGroup(this) { !it.isSolid() }
+        powerAreas = AreaGroup(this) { it.totalPowerCapacity > 0 }
         setSelectedTile(selectedTile)
     }
 

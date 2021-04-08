@@ -1,5 +1,6 @@
 package org.rak.microStars.power
 
+import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.tile.Tile
 import org.rak.microStars.tile.TileType
@@ -7,21 +8,23 @@ import kotlin.math.max
 import kotlin.math.min
 
 fun simulatePower(floorPlan: FloorPlan) {
-    val powerTiles = floorPlan.getAllTiles().filter { it.totalPowerCapacity > 0 }
+//    val powerTiles = floorPlan.getAllTiles().filter { it.totalPowerCapacity > 0 }
+//
+//    if (powerTiles.isEmpty()) {
+//        return
+//    }
 
-    if (powerTiles.isEmpty()) {
-        return
+    floorPlan.powerAreas.areas.forEach { area ->
+        distributeEnginePower(area)
+        distributeWirePower(area)
+        clampPower(area)
     }
-
-    distributeEnginePower(powerTiles, floorPlan)
-    distributeWirePower(powerTiles, floorPlan)
-    clampPower(powerTiles)
 }
 
-private fun distributeEnginePower(powerTiles: List<Tile>, floorPlan: FloorPlan) {
-    val engines = powerTiles.filter { it.type == TileType.ENGINE }
+private fun distributeEnginePower(area: Area) {
+    val engines = area.tiles.filter { it.type == TileType.ENGINE }
     engines.forEach { engine ->
-        val neighbors = floorPlan.getNeighbors(engine).filter { it.power < it.totalPowerCapacity }
+        val neighbors = area.getNeighbors(engine).filter { it.power < it.totalPowerCapacity }
         neighbors.forEach {
             val need = it.totalPowerCapacity - it.power
             val given = min(engine.power, need)
@@ -31,12 +34,12 @@ private fun distributeEnginePower(powerTiles: List<Tile>, floorPlan: FloorPlan) 
     }
 }
 
-private fun distributeWirePower(powerTiles: List<Tile>, floorPlan: FloorPlan) {
-    val wires = powerTiles.filter { it.type == TileType.WIRE_WALL || it.type == TileType.WIRE_FLOOR && it.power > 0 }
+private fun distributeWirePower(area: Area) {
+    val wires = area.tiles.filter { it.type == TileType.WIRE_WALL || it.type == TileType.WIRE_FLOOR && it.power > 0 }
     wires.forEach { wire ->
-        val neighbors = floorPlan.getNeighbors(wire).filter { it != wire.lastReceivedPowerFrom }
+        val neighbors = area.getNeighbors(wire).filter { it != wire.lastReceivedPowerFrom }
         val greatestNeed = neighbors.maxByOrNull { it.totalPowerCapacity - it.power }
-        if (greatestNeed != null){
+        if (greatestNeed != null) {
             val need = greatestNeed.totalPowerCapacity - greatestNeed.power
             val given = min(need, wire.power)
             greatestNeed.power += given
@@ -74,8 +77,8 @@ private fun pullPower(source: Tile, others: List<Tile>) {
 
 }
 
-private fun clampPower(powerTiles: List<Tile>) {
-    powerTiles.forEach {
+private fun clampPower(area: Area) {
+    area.tiles.forEach {
         it.power = min(it.totalPowerCapacity, max(0, it.power))
     }
 }
