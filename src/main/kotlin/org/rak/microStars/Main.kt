@@ -6,31 +6,24 @@ import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.wiring.loadGame
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import kotlin.concurrent.fixedRateTimer
 
-const val gameTickFrequency = 1000L
-const val broadcastFrequency = 1000L
+const val gameTickFrequency = 200L
+const val broadcastFrequency = 200L
 
 @SpringBootApplication
 class MicroStarsApplication
 
-
 fun main(args: Array<String>) {
     loadGame()
-    val gameThread = Thread {
-        while (true) {
-            Game.tick()
-            Thread.sleep(gameTickFrequency)
-        }
-    }
-    gameThread.start()
 
-    val broadCastThread = Thread {
-        while (true) {
-            SocketManager.socket.send(SimpleFloorPlan(Game.floorPlan))
-            Thread.sleep(broadcastFrequency)
-        }
+    fixedRateTimer("gametick", true, 0L, gameTickFrequency){
+        Game.tick()
     }
-    broadCastThread.start()
+
+    fixedRateTimer("broadcast", true, 0L, broadcastFrequency){
+        SocketManager.socket.send(SimpleFloorPlan(Game.floorPlan))
+    }
 
     runApplication<MicroStarsApplication>(*args)
 }
