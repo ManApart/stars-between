@@ -1,2 +1,2 @@
-rootProject.name = "micro-stars"
+rootProject.name = "stars-between"
 
