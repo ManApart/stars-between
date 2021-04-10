@@ -21,17 +21,4 @@ class SimpleTile(
         tile.distanceFromSelected
     )
 
-//    fun fromSimpleTile(simpleTile: SimpleTile): Tile {
-//        val tile = tileTypes
-//            .first { it.type == simpleTile.type }
-//            .copy(position = Position(simpleTile.x, simpleTile.y), solid = simpleTile.solid)
-//
-//        tile.health = simpleTile.health
-//        tile.power = simpleTile.power
-//        tile.air = simpleTile.air
-//        tile.adjacency = simpleTile.adjacency
-//        tile.rotation = simpleTile.rotation
-//
-//        return tile
-//    }
 }

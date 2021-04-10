@@ -6,6 +6,6 @@ import org.rak.microStars.views.persistence.PersistedSystem
 
 class Floor : ShipSystem("Floor", SystemType.FLOOR) {
     override fun persisted(): PersistedSystem {
-        TODO("Not yet implemented")
+        return PersistedFloor(this)
     }
 }
