@@ -1,5 +1,8 @@
 package org.rak.microStars.shipStructor
 
 import org.rak.microStars.systems.ShipSystem
+import org.rak.microStars.tile.SystemType
 
-class Space : ShipSystem("Space" ,0, false)
+val SPACE_SYSTEM = Space()
+
+class Space : ShipSystem("Space" , SystemType.SPACE, 0, false)

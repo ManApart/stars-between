@@ -3,8 +3,7 @@ package org.rak.microStars.wiring
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.rak.microStars.game.Game
-import org.rak.microStars.floorplan.SimpleFloorPlan
-import org.rak.microStars.floorplan.fromSimpleFloorPlan
+import org.rak.microStars.views.SimpleFloorPlan
 import java.io.File
 
 const val directoryName = "./saves/"

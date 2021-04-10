@@ -3,7 +3,7 @@ package org.rak.microStars.airflow
 import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.tile.Tile
-import org.rak.microStars.tile.TileType
+import org.rak.microStars.tile.SystemType
 import kotlin.math.max
 import kotlin.math.min
 
@@ -17,8 +17,8 @@ fun simulateAir(floorPlan: FloorPlan) {
 }
 
 private fun consumeAir(area: Area) {
-    area.tiles.filter { it.airProduced < 0 }.forEach { tile ->
-        tile.air += tile.airProduced
+    area.tiles.filter { it.system is Vent && it.system.airProduced > 0 }.forEach { tile ->
+        tile.air += (tile.system as Vent).airProduced
     }
 }
 
@@ -53,7 +53,7 @@ fun pushAir(source: Tile, others: List<Tile>) {
 
     tiles.forEach { it.air = avgAir }
     if (remainder > 0) {
-        val spaceTile = tiles.firstOrNull { it.type == TileType.SPACE && it.air <= 100 - remainder }
+        val spaceTile = tiles.firstOrNull { it.system.type == SystemType.SPACE && it.air <= 100 - remainder }
         if (spaceTile != null) {
             spaceTile.air += remainder
         } else {
@@ -63,8 +63,8 @@ fun pushAir(source: Tile, others: List<Tile>) {
 }
 
 fun moveLowAirTowardsExits(area: Area) {
-    area.tiles.filter { it.type != TileType.SPACE && it.air == 1 }.forEach { tile ->
-        val spaceTile = tile.distanceMap.getNearestTileOfType(TileType.SPACE, area)
+    area.tiles.filter { it.system.type != SystemType.SPACE && it.air == 1 }.forEach { tile ->
+        val spaceTile = tile.distanceMap.getNearestTileOfType(SystemType.SPACE, area)
         if (spaceTile != null) {
             val nextStep = spaceTile.distanceMap.getNextStep(tile, area)
             if (nextStep != null && nextStep.air < 100) {

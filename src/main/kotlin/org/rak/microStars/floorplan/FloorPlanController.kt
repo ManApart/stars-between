@@ -3,9 +3,10 @@ package org.rak.microStars.floorplan
 import org.rak.microStars.game.Game
 import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.tile.DEFAULT_TILE
-import org.rak.microStars.tile.SimpleTile
+import org.rak.microStars.views.SimpleTile
 import org.rak.microStars.tile.TileUpdate
-import org.rak.microStars.tile.tileTypes
+import org.rak.microStars.tile.defaultTiles
+import org.rak.microStars.views.SimpleFloorPlan
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])
@@ -20,7 +21,7 @@ class FloorPlanController {
 
     @PutMapping
     fun setTile(@RequestBody update: TileUpdate) : SimpleTile {
-        val tile = tileTypes.firstOrNull { it.type == update.tileType } ?: DEFAULT_TILE
+        val tile = defaultTiles.firstOrNull { it.system.type == update.systemType } ?: DEFAULT_TILE
 
         Game.floorPlan.setTile(tile, update.x, update.y)
         SocketManager.sendUpdate()

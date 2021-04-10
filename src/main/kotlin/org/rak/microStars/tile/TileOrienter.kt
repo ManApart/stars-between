@@ -3,21 +3,21 @@ package org.rak.microStars.tile
 import org.rak.microStars.floorplan.FloorPlan
 
 private val siblings = mapOf(
-    TileType.ENGINE to listOf(TileType.ENGINE),
-    TileType.FLOOR to listOf(TileType.FLOOR, TileType.WIRE_FLOOR),
-    TileType.WIRE_FLOOR to listOf(TileType.WIRE_FLOOR, TileType.ENGINE, TileType.WIRE_WALL, TileType.VENT),
-    TileType.SPACE to listOf(TileType.SPACE),
-    TileType.VENT to listOf(TileType.VENT),
-    TileType.WALL to listOf(TileType.WALL, TileType.WIRE_WALL),
-    TileType.WIRE_WALL to listOf(TileType.WIRE_WALL, TileType.WALL),
-    TileType.VOID to listOf(TileType.VOID)
+    SystemType.ENGINE to listOf(SystemType.ENGINE),
+    SystemType.FLOOR to listOf(SystemType.FLOOR, SystemType.WIRE_FLOOR),
+    SystemType.WIRE_FLOOR to listOf(SystemType.WIRE_FLOOR, SystemType.ENGINE, SystemType.WIRE_WALL, SystemType.VENT),
+    SystemType.SPACE to listOf(SystemType.SPACE),
+    SystemType.VENT to listOf(SystemType.VENT),
+    SystemType.WALL to listOf(SystemType.WALL, SystemType.WIRE_WALL),
+    SystemType.WIRE_WALL to listOf(SystemType.WIRE_WALL, SystemType.WALL),
+    SystemType.VOID to listOf(SystemType.VOID)
 )
 
 fun orient(tile: Tile, floorPlan: FloorPlan) {
-    val up = matches(tile.type, floorPlan.getTile(tile.position.up()).type)
-    val down = matches(tile.type, floorPlan.getTile(tile.position.down()).type)
-    val left = matches(tile.type, floorPlan.getTile(tile.position.left()).type)
-    val right = matches(tile.type, floorPlan.getTile(tile.position.right()).type)
+    val up = matches(tile.system.type, floorPlan.getTile(tile.position.up()).system.type)
+    val down = matches(tile.system.type, floorPlan.getTile(tile.position.down()).system.type)
+    val left = matches(tile.system.type, floorPlan.getTile(tile.position.left()).system.type)
+    val right = matches(tile.system.type, floorPlan.getTile(tile.position.right()).system.type)
     val matchingNeighbors = listOf(up, down, left, right).count { it }
 
     tile.adjacency = when {
@@ -33,7 +33,7 @@ fun orient(tile: Tile, floorPlan: FloorPlan) {
 
 }
 
-private fun matches(type: TileType, other: TileType): Boolean {
+private fun matches(type: SystemType, other: SystemType): Boolean {
     return siblings.getOrDefault(type, listOf()).contains(other)
 }
 

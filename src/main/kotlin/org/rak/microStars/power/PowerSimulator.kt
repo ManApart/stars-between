@@ -3,7 +3,7 @@ package org.rak.microStars.power
 import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.tile.Tile
-import org.rak.microStars.tile.TileType
+import org.rak.microStars.tile.SystemType
 import kotlin.math.max
 import kotlin.math.min
 
@@ -22,29 +22,32 @@ fun simulatePower(floorPlan: FloorPlan) {
 }
 
 private fun distributeEnginePower(area: Area) {
-    val engines = area.tiles.filter { it.type == TileType.ENGINE }
-    engines.forEach { engine ->
-        val neighbors = area.getNeighbors(engine).filter { it.power < it.totalPowerCapacity }
+    val engines = area.tiles.filter { it.system.type == SystemType.ENGINE }
+    engines.forEach { engineTile ->
+        val engine = engineTile.system as Engine
+        val neighbors = area.getNeighbors(engineTile).filter { it.system is Powerable && it.system.power < it.system.totalPowerCapacity }
         neighbors.forEach {
-            val need = it.totalPowerCapacity - it.power
+            val system = it.system as Powerable
+            val need = system.totalPowerCapacity - system.power
             val given = min(engine.power, need)
             engine.power -= given
-            it.power += given
+            it.system.power += given
         }
     }
 }
 
 private fun distributeWirePower(area: Area) {
-    val wires = area.tiles.filter { it.type == TileType.WIRE_WALL || it.type == TileType.WIRE_FLOOR && it.power > 0 }
-    wires.forEach { wire ->
-        val neighbors = area.getNeighbors(wire).filter { it != wire.lastReceivedPowerFrom }
+    val wires = area.tiles.filter { it.system is Wire && it.system.power > 0 }
+    wires.forEach { wireTile ->
+        val wire = wireTile.system as Wire
+        val neighbors = area.getNeighbors(wireTile).filter { it != wire.lastReceivedPowerFrom && it.system is Powerable }.map { it.system as Powerable }
         val greatestNeed = neighbors.maxByOrNull { it.totalPowerCapacity - it.power }
         if (greatestNeed != null) {
             val need = greatestNeed.totalPowerCapacity - greatestNeed.power
             val given = min(need, wire.power)
             greatestNeed.power += given
             wire.power -= given
-            greatestNeed.lastReceivedPowerFrom = wire
+            greatestNeed.lastReceivedPowerFrom = wireTile
         }
     }
 }
@@ -65,20 +68,20 @@ private fun distributeWirePower(area: Area) {
 //        closed.add(current)
 //    }
 
-private fun pullPower(source: Tile, others: List<Tile>) {
-    //if multiple have same low power, user more distance from source?
-    val winner = others.maxByOrNull { it.power }
-    if (winner != null) {
-        val need = source.totalPowerCapacity - source.power
-        val given = min(need, winner.power)
-        source.power += given
-        winner.power -= given
-    }
-
-}
+//private fun pullPower(source: Tile, others: List<Tile>) {
+//    //if multiple have same low power, user more distance from source?
+//    val winner = others.maxByOrNull { it.power }
+//    if (winner != null) {
+//        val need = source.totalPowerCapacity - source.power
+//        val given = min(need, winner.power)
+//        source.power += given
+//        winner.power -= given
+//    }
+//
+//}
 
 private fun clampPower(area: Area) {
-    area.tiles.forEach {
+    area.tiles.filter { it.system is Powerable }.map { it.system as Powerable }.forEach {
         it.power = min(it.totalPowerCapacity, max(0, it.power))
     }
 }

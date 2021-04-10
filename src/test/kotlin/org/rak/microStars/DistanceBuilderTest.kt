@@ -5,10 +5,7 @@ import org.junit.Test
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.floorplan.Position
 import org.rak.microStars.floorplan.createDistancesFrom
-import org.rak.microStars.tile.SPACE
-import org.rak.microStars.tile.Tile
-import org.rak.microStars.tile.TileType
-import org.rak.microStars.tile.WALL
+import org.rak.microStars.tile.SystemType
 
 //TODO - take area instead of floorplan
 class DistanceBuilderTest {
@@ -38,11 +35,11 @@ class DistanceBuilderTest {
         )
 
         assertTrue(spacePositions.all {
-            floorPlan.getTile(it).type == TileType.SPACE
+            floorPlan.getTile(it).type == SystemType.SPACE
         })
 
         assertTrue(wallPositions.all {
-            floorPlan.getTile(it).type == TileType.WALL
+            floorPlan.getTile(it).type == SystemType.WALL
         })
     }
 
@@ -94,7 +91,7 @@ class DistanceBuilderTest {
         val area = floorPlan.airAreas.areas.first()
         val source = floorPlan.getTile(0, 1)
         val distanceMap = createDistancesFrom(source, area)
-        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, area)
+        val nearestSpace = distanceMap.getNearestTileOfType(SystemType.SPACE, area)
         val expected = floorPlan.getTile(1, 0)
 
         assertEquals(expected, nearestSpace)
@@ -112,7 +109,7 @@ class DistanceBuilderTest {
         val area = floorPlan.airAreas.areas.first()
         val source = floorPlan.getTile(0, 1)
         val distanceMap = createDistancesFrom(source, area)
-        val nearestSpace = distanceMap.getNearestTileOfType(TileType.SPACE, area)
+        val nearestSpace = distanceMap.getNearestTileOfType(SystemType.SPACE, area)
 
         assertNull(nearestSpace)
     }

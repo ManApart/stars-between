@@ -1,12 +1,11 @@
 package org.rak.microStars.tile
 
 import org.rak.microStars.floorplan.Area
-import org.rak.microStars.floorplan.FloorPlan
 import kotlin.math.min
 //Should be specific to an area
 class DistanceMap(val source: Tile) {
     val costs = mutableMapOf<Int, MutableMap<Int, Int>>()
-    val nearestType = mutableMapOf<TileType, Tile?>()
+    val nearestType = mutableMapOf<SystemType, Tile?>()
 
     fun setDistance(source: Tile, distance: Int) {
         val x = source.position.x
@@ -29,15 +28,15 @@ class DistanceMap(val source: Tile) {
         return costs[x]?.getOrDefault(y, Int.MAX_VALUE) ?: Int.MAX_VALUE
     }
 
-    fun getNearestTileOfType(tileType: TileType, area: Area): Tile? {
-        if (!nearestType.containsKey(tileType)) {
-            nearestType[tileType] = findNearestTileOfType(tileType, area)
+    fun getNearestTileOfType(systemType: SystemType, area: Area): Tile? {
+        if (!nearestType.containsKey(systemType)) {
+            nearestType[systemType] = findNearestTileOfType(systemType, area)
         }
-        return nearestType[tileType]
+        return nearestType[systemType]
     }
 
-    private fun findNearestTileOfType(tileType: TileType, area: Area): Tile? {
-        val tilesOfType = area.tiles.filter { it.type == tileType }
+    private fun findNearestTileOfType(systemType: SystemType, area: Area): Tile? {
+        val tilesOfType = area.tiles.filter { it.system.type == systemType }
         return nearest(tilesOfType)
     }
 

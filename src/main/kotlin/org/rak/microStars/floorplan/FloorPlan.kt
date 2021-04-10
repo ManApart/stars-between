@@ -1,18 +1,21 @@
 package org.rak.microStars.floorplan
 
-import org.rak.microStars.tile.*
+import org.rak.microStars.shipStructor.SPACE_SYSTEM
+import org.rak.microStars.tile.DEFAULT_TILE
+import org.rak.microStars.tile.Tile
+import org.rak.microStars.tile.orient
 
 class FloorPlan(val size: Int = 5) {
     private val tiles = (0 until size).associate { y ->
         (y to (0 until size).associateWith { x ->
-            SPACE.copy(position = Position(x, y))
+            Tile(Position(x, y), SPACE_SYSTEM)
         }.toMutableMap())
     }
 
     private var selectedTile = getAllTiles().first()
 
-    var airAreas = AreaGroup(this) { !it.isSolid() }
-    var powerAreas = AreaGroup(this) { it.totalPowerCapacity > 0 }
+    var airAreas = AreaGroup(this) { !it.system.isSolid() }
+    var powerAreas = AreaGroup(this) { it.system.type.isPowerType()}
 
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
@@ -68,8 +71,8 @@ class FloorPlan(val size: Int = 5) {
     }
 
     fun updateAreas(){
-        airAreas = AreaGroup(this) { !it.isSolid() }
-        powerAreas = AreaGroup(this) { it.totalPowerCapacity > 0 }
+        airAreas = AreaGroup(this) { !it.system.isSolid() }
+        powerAreas = AreaGroup(this) { it.system.type.isPowerType() }
         setSelectedTile(selectedTile)
     }
 
@@ -82,14 +85,4 @@ class FloorPlan(val size: Int = 5) {
 
 }
 
-fun fromSimpleFloorPlan(simpleFloorPlan: SimpleFloorPlan): FloorPlan {
-    val size = (simpleFloorPlan.tiles.flatten().maxByOrNull { it.x }?.x ?: 9) + 1
-    val floorPlan = FloorPlan(size)
-    simpleFloorPlan.tiles.flatten().map {
-        floorPlan.setTileWithoutUpdates(fromSimpleTile(it), it.x, it.y)
-    }
-    floorPlan.getAllTiles().forEach { orient(it, floorPlan) }
-    floorPlan.updateAreas()
 
-    return floorPlan
-}
