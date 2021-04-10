@@ -6,7 +6,6 @@ import org.rak.microStars.power.Engine
 import org.rak.microStars.power.Wire
 import org.rak.microStars.shipStructor.Floor
 import org.rak.microStars.shipStructor.SPACE_SYSTEM
-import org.rak.microStars.shipStructor.Space
 import org.rak.microStars.shipStructor.Wall
 import org.rak.microStars.systems.ShipSystem
 

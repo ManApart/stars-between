@@ -46,7 +46,7 @@ class AirSimulatorTest {
         )
 
         val tile = floorPlan.getTile(1, 1)
-        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.system.isSolid() && it.air != 100 }
         pushAir(tile, neighbors)
 
         val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
@@ -70,7 +70,7 @@ class AirSimulatorTest {
         )
 
         val tile = floorPlan.getTile(1, 1)
-        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.system.isSolid() && it.air != 100 }
         pushAir(tile, neighbors)
 
         val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
@@ -94,7 +94,7 @@ class AirSimulatorTest {
         )
 
         val tile = floorPlan.getTile(1, 1)
-        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.system.isSolid() && it.air != 100 }
         pushAir(tile, neighbors)
 
         val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
@@ -118,7 +118,7 @@ class AirSimulatorTest {
         )
 
         val tile = floorPlan.getTile(1, 1)
-        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.system.isSolid() && it.air != 100 }
         pushAir(tile, neighbors)
 
         val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }
@@ -148,7 +148,7 @@ class AirSimulatorTest {
         val spaceTile = floorPlan.getTile(2, 1)
         spaceTile.air = 0
 
-        val neighbors = floorPlan.getNeighbors(tile).filter { !it.isSolid() && it.air != 100 }
+        val neighbors = floorPlan.getNeighbors(tile).filter { !it.system.isSolid() && it.air != 100 }
         pushAir(tile, neighbors)
 
         val airMap = floorPlan.getTileMap().map { row -> row.value.map { column -> column.value.air } }

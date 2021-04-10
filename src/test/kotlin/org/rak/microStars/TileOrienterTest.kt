@@ -82,6 +82,9 @@ class TileOrienterTest {
     @Test
     fun allCornerOrientation() {
         val floorPlan = FloorPlan(3)
+        floorPlan.setTile(WALL, 0, 0)
+        floorPlan.setTile(WALL, 1, 0)
+        floorPlan.setTile(WALL, 0, 1)
         val tile = floorPlan.getTile(0, 0)
         orient(tile, floorPlan)
 

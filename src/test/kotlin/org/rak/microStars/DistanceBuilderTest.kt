@@ -1,6 +1,6 @@
 package org.rak.microStars
 
-import junit.framework.Assert.*
+import org.junit.Assert.*
 import org.junit.Test
 import org.rak.microStars.floorplan.FloorPlan
 import org.rak.microStars.floorplan.Position
@@ -35,11 +35,11 @@ class DistanceBuilderTest {
         )
 
         assertTrue(spacePositions.all {
-            floorPlan.getTile(it).type == SystemType.SPACE
+            floorPlan.getTile(it).system.type == SystemType.SPACE
         })
 
         assertTrue(wallPositions.all {
-            floorPlan.getTile(it).type == SystemType.WALL
+            floorPlan.getTile(it).system.type == SystemType.WALL
         })
     }
 

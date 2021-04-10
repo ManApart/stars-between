@@ -2,6 +2,7 @@ package org.rak.microStars.systems
 
 import org.rak.microStars.tile.SystemType
 import org.rak.microStars.tile.Tile
+import org.rak.microStars.views.persistence.PersistedSystem
 
 abstract class ShipSystem(
     val name: String,
@@ -16,4 +17,6 @@ abstract class ShipSystem(
     }
 
     open fun tick(parent: Tile) {}
+
+    abstract fun persisted(): PersistedSystem
 }

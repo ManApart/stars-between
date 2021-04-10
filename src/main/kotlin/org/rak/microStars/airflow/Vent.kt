@@ -4,6 +4,7 @@ import org.rak.microStars.power.Powerable
 import org.rak.microStars.systems.ShipSystem
 import org.rak.microStars.tile.SystemType
 import org.rak.microStars.tile.Tile
+import org.rak.microStars.views.persistence.PersistedSystem
 import kotlin.math.abs
 
 class Vent(
@@ -20,6 +21,10 @@ class Vent(
             power -= powerConsumedPerTick
             parent.air += airProduced
         }
+    }
+
+    override fun persisted(): PersistedSystem {
+        return PersistedVent(this)
     }
 
 }

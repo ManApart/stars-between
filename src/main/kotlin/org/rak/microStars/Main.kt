@@ -1,6 +1,6 @@
 package org.rak.microStars
 
-import org.rak.microStars.views.SimpleFloorPlan
+import org.rak.microStars.views.overview.SimpleFloorPlan
 import org.rak.microStars.game.Game
 import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.wiring.loadGame

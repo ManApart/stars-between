@@ -5,7 +5,7 @@ import org.rak.microStars.tile.Tile
 
 fun createDistancesFrom(source: Tile, area: Area): DistanceMap {
     val distanceMap = DistanceMap(source)
-    if (!source.isSolid()) {
+    if (!source.system.isSolid()) {
         val open = mutableListOf<Tile>()
         val closed = mutableListOf<Tile>()
         open.add(source)

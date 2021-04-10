@@ -4,7 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.java_websocket.WebSocket
 import org.java_websocket.handshake.ClientHandshake
 import org.java_websocket.server.WebSocketServer
-import org.rak.microStars.views.SimpleFloorPlan
+import org.rak.microStars.views.overview.SimpleFloorPlan
 import java.lang.Exception
 import java.net.InetSocketAddress
 

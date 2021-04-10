@@ -3,10 +3,10 @@ package org.rak.microStars.floorplan
 import org.rak.microStars.game.Game
 import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.tile.DEFAULT_TILE
-import org.rak.microStars.views.SimpleTile
+import org.rak.microStars.views.overview.SimpleTile
 import org.rak.microStars.tile.TileUpdate
 import org.rak.microStars.tile.defaultTiles
-import org.rak.microStars.views.SimpleFloorPlan
+import org.rak.microStars.views.overview.SimpleFloorPlan
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])

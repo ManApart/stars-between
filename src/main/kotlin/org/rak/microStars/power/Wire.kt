@@ -3,6 +3,7 @@ package org.rak.microStars.power
 import org.rak.microStars.systems.ShipSystem
 import org.rak.microStars.tile.Tile
 import org.rak.microStars.tile.SystemType
+import org.rak.microStars.views.persistence.PersistedSystem
 
 class Wire(
     name: String,
@@ -13,4 +14,8 @@ class Wire(
     override val powerConsumedPerTick = 0
     override var power = totalPowerCapacity
     override var lastReceivedPowerFrom: Tile? = null
+
+    override fun persisted(): PersistedSystem {
+        return PersistedWire(this)
+    }
 }

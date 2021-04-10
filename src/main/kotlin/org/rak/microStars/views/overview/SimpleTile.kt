@@ -1,4 +1,4 @@
-package org.rak.microStars.views
+package org.rak.microStars.views.overview
 
 import org.rak.microStars.tile.Adjacency
 import org.rak.microStars.tile.Tile
