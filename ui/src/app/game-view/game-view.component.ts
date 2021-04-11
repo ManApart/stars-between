@@ -14,11 +14,11 @@ export class GameViewComponent {
   @Output() tileClicked: EventEmitter<Tile> = new EventEmitter()
 
   constructor(websocketService: WebsocketService) {
-    websocketService.data.subscribe(data => {
+    websocketService.data.subscribe(wrapper => {
       if (this.data === undefined) {
-        this.data = data.tiles
+        this.data = wrapper.data.tiles
       } else {
-        data.tiles.forEach(row => {
+        wrapper.data.tiles.forEach(row => {
           row.forEach(tile => {
             this.data[tile.y][tile.x] = tile
           })

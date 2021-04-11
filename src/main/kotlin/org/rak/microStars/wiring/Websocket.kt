@@ -4,7 +4,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.java_websocket.WebSocket
 import org.java_websocket.handshake.ClientHandshake
 import org.java_websocket.server.WebSocketServer
-import org.rak.microStars.views.overview.SimpleFloorPlan
+import org.rak.microStars.views.View
+import org.rak.microStars.views.ViewWrapper
 import java.lang.Exception
 import java.net.InetSocketAddress
 
@@ -43,8 +44,8 @@ class Websocket : WebSocketServer(InetSocketAddress(
         println("Websocket errored")
     }
 
-    fun send(floorPlan: SimpleFloorPlan) {
-        this.lastMessage = mapper.writeValueAsString(floorPlan)
+    fun send(view: ViewWrapper) {
+        this.lastMessage = mapper.writeValueAsString(view)
         broadcast(lastMessage)
     }
 

@@ -9,6 +9,7 @@ import org.rak.microStars.tile.SPACE
 import org.rak.microStars.tile.WALL
 
 object Game {
+    var currentView = ViewType.OVERVIEW
     var floorPlan = createFloorPlan(10)
 
     fun createFloorPlan(size: Int = 10): FloorPlan {

@@ -1,7 +1,7 @@
 package org.rak.microStars
 
-import org.rak.microStars.views.overview.SimpleFloorPlan
 import org.rak.microStars.game.Game
+import org.rak.microStars.views.ViewWrapper
 import org.rak.microStars.wiring.SocketManager
 import org.rak.microStars.wiring.loadGame
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
     }
 
     fixedRateTimer("broadcast", true, 0L, broadcastFrequency){
-        SocketManager.socket.send(SimpleFloorPlan(Game.floorPlan))
+        SocketManager.socket.send(ViewWrapper(Game.currentView))
     }
 
     runApplication<MicroStarsApplication>(*args)
