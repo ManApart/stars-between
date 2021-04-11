@@ -11,7 +11,7 @@ export class MainPageComponent implements OnInit {
   constructor(private floorPlanService: FloorPlanService) { }
 
   selectedTilePalette = 'space'
-  selectedMode = 'build'
+  selectedMode = 'OVERVIEW'
 
   ngOnInit(): void {
   }
@@ -26,9 +26,9 @@ export class MainPageComponent implements OnInit {
 
   tileClicked(newTile): void {
     // console.log('setting tile', newTile.x, newTile.y, 'to ', this.selectedTilePalette)
-    if (this.selectedMode === 'build' || this.selectedMode === 'air' || this.selectedMode === 'power') {
+    if (this.selectedMode === 'OVERVIEW' || this.selectedMode === 'AIR' || this.selectedMode === 'POWER') {
       this.floorPlanService.setTile(this.selectedTilePalette, newTile.x, newTile.y).toPromise()
-    } else if (this.selectedMode === 'distance') {
+    } else if (this.selectedMode === 'DISTANCE') {
       this.floorPlanService.selectTile(newTile.x, newTile.y).toPromise()
     } else {
       console.log('Unknown mode:', this.selectedMode)

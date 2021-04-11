@@ -16,6 +16,16 @@ class GameController {
         return SystemType.values().filter { it != SystemType.VOID }.toList()
     }
 
+    @GetMapping("/views")
+    fun getViews() : List<ViewType> {
+        return ViewType.values().toList()
+    }
+
+    @PutMapping("/views")
+    fun setView(@RequestParam viewType: ViewType) {
+        Game.currentView = viewType
+    }
+
     @PostMapping("/save")
     fun save() {
         saveGame()
