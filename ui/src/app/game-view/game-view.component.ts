@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
 import { WebsocketService } from '../websocket.service'
-import { Tile } from '../tile/tile'
 
 @Component({
   selector: 'app-game-view',
@@ -8,10 +7,10 @@ import { Tile } from '../tile/tile'
   styleUrls: ['./game-view.component.css']
 })
 export class GameViewComponent {
-  public data: Array<Array<Tile>>
+  public data: Array<Array<any>>
 
   @Input() mode: string
-  @Output() tileClicked: EventEmitter<Tile> = new EventEmitter()
+  @Output() tileClicked: EventEmitter<any> = new EventEmitter()
 
   constructor(websocketService: WebsocketService) {
     websocketService.data.subscribe(wrapper => {

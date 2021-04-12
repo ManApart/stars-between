@@ -2,6 +2,7 @@ package org.rak.microStars.airflow
 
 import org.rak.microStars.floorplan.Area
 import org.rak.microStars.floorplan.FloorPlan
+import org.rak.microStars.shipStructor.Space
 import org.rak.microStars.tile.Tile
 import org.rak.microStars.tile.SystemType
 import kotlin.math.max
@@ -17,6 +18,7 @@ fun simulateAir(floorPlan: FloorPlan) {
 }
 
 private fun consumeAir(area: Area) {
+    area.tiles.filter { it.system is Space }.forEach { it.air -= (it.system as Space).airConsumed }
     area.tiles.filter { it.system is Vent && it.system.airProduced > 0 }.forEach { tile ->
         tile.air += (tile.system as Vent).airProduced
     }

@@ -13,7 +13,7 @@
       url: {{getImageUrl()}}
     </div>
   </div>
-  <div *ngIf="mode === 'air' && tile.air != 0" class="number">{{tile.air}}</div>
-  <div *ngIf="mode === 'power' && tile.power != 0" class="number">{{tile.power}}</div>
-  <div *ngIf="mode === 'distance' && tile.distance != 0 && tile.distance != 2147483647" class="number">{{tile.distance}}</div>
+  <div *ngIf="mode === 'AIR' && tile.air != 0" class="number">{{tile.air}}</div>
+  <div *ngIf="mode === 'POWER' && tile.power != 0" class="number">{{tile.power}}</div>
+  <div *ngIf="mode === 'DISTANCE' && tile.distance != 0 && tile.distance != 2147483647" class="number">{{tile.distance}}</div>
 </div>

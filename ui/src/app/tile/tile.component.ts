@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { Tile } from './tile'
 
 @Component({
   selector: 'app-tile',
@@ -7,7 +6,7 @@ import { Tile } from './tile'
   styleUrls: ['./tile.component.css']
 })
 export class TileComponent implements OnInit {
-  @Input() tile: Tile
+  @Input() tile
   @Input() mode: string
 
   private tileSize = 40
