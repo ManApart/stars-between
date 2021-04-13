@@ -6,6 +6,7 @@ private val siblings = mapOf(
     SystemType.ENGINE to listOf(SystemType.ENGINE),
     SystemType.FLOOR to listOf(SystemType.FLOOR, SystemType.WIRE_FLOOR),
     SystemType.WIRE_FLOOR to listOf(SystemType.WIRE_FLOOR, SystemType.ENGINE, SystemType.WIRE_WALL, SystemType.VENT),
+    SystemType.SHIELD to listOf(SystemType.SHIELD),
     SystemType.SPACE to listOf(SystemType.SPACE),
     SystemType.VENT to listOf(SystemType.VENT),
     SystemType.WALL to listOf(SystemType.WALL, SystemType.WIRE_WALL),

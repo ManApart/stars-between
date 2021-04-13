@@ -7,6 +7,7 @@ import org.rak.microStars.power.Wire
 import org.rak.microStars.shipStructor.Floor
 import org.rak.microStars.shipStructor.SPACE_SYSTEM
 import org.rak.microStars.shipStructor.Wall
+import org.rak.microStars.systems.Shield
 import org.rak.microStars.systems.ShipSystem
 
 val DEFAULT_TILE = Tile(Position(), SPACE_SYSTEM)
@@ -18,6 +19,7 @@ val defaultTiles = listOf(
     SPACE,
     WALL,
     FLOOR,
+    Tile(Position(), Shield()),
     Tile(Position(), Vent()),
     Tile(Position(), Engine()),
     Tile(Position(), Wire("Floor Wire", SystemType.WIRE_FLOOR)),

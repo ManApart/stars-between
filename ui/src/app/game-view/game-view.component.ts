@@ -8,6 +8,7 @@ import { WebsocketService } from '../websocket.service'
 })
 export class GameViewComponent {
   public data: Array<Array<any>>
+  public shields: Array<any>
 
   @Input() mode: string
   @Output() tileClicked: EventEmitter<any> = new EventEmitter()
@@ -22,6 +23,10 @@ export class GameViewComponent {
             this.data[tile.y][tile.x] = tile
           })
         })
+      }
+      if (wrapper.data.shields) {
+        this.shields = wrapper.data.shields
+        console.log(wrapper.data.shields)
       }
       // console.log(data.tiles[0][0])
     })
