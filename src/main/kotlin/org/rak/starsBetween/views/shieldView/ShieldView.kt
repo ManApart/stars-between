@@ -16,5 +16,6 @@ private fun buildSimpleTiles(floorPlan: FloorPlan) = (0 until floorPlan.size).ma
 }
 
 private fun buildShields(floorPlan: FloorPlan): List<SimpleShield> {
-    return floorPlan.getAllTiles().filter { it.system is Shield }.map { simpleShield(it) }
+    var id = 1
+    return floorPlan.getAllTiles().filter { it.system is Shield }.map { simpleShield(it, id++) }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { GameService } from '../gameService'
 
 @Component({
-  selector: 'app-mode-select',
+  selector: 'mode-select',
   templateUrl: './mode-select.component.html',
   styleUrls: ['./mode-select.component.css']
 })

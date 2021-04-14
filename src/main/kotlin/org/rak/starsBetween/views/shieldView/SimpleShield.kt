@@ -7,8 +7,8 @@ import java.lang.IllegalArgumentException
 class SimpleShield(
     val x: Int,
     val y: Int,
+    val id: Int,
     val frequency: Int,
-    val cycleTime: Int,
     val power: Int,
     val totalPowerCapacity: Int,
     val currentPowerPull: Int,
@@ -16,7 +16,7 @@ class SimpleShield(
 
 )
 
-fun simpleShield(tile: Tile): SimpleShield {
+fun simpleShield(tile: Tile, id: Int): SimpleShield {
     if (tile.system !is Shield) {
         throw IllegalArgumentException("Simple Shield can only be constructed from Tiles that are Shields")
     }
@@ -24,8 +24,8 @@ fun simpleShield(tile: Tile): SimpleShield {
     return SimpleShield(
         tile.position.x,
         tile.position.y,
+        id,
         shield.frequency,
-        shield.cycleTime,
         shield.power,
         shield.totalPowerCapacity,
         shield.currentPowerPull,

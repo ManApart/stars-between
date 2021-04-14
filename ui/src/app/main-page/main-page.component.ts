@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FloorPlanService } from '../floorPlanService'
 
 @Component({
-  selector: 'app-main-page',
+  selector: 'main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })

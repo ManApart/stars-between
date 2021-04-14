@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core'
 import { GameService } from '../gameService'
 
 @Component({
-  selector: 'app-build-toolkit',
+  selector: 'build-toolkit',
   templateUrl: './build-toolkit.component.html',
   styleUrls: ['./build-toolkit.component.css']
 })

@@ -11,7 +11,9 @@ import { FloorPlanService } from './floorPlanService'
 import { GameService } from './gameService'
 import { HttpClientModule } from '@angular/common/http';
 import { SystemMenuComponent } from './system-menu/system-menu.component';
-import { ModeSelectComponent } from './mode-select/mode-select.component'
+import { ModeSelectComponent } from './mode-select/mode-select.component';
+import { ShieldMenuComponent } from './shield-menu/shield-menu.component';
+import { ShieldPanelComponent } from './shield-panel/shield-panel.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ModeSelectComponent } from './mode-select/mode-select.component'
     TileComponent,
     BuildToolkitComponent,
     SystemMenuComponent,
-    ModeSelectComponent
+    ModeSelectComponent,
+    ShieldMenuComponent,
+    ShieldPanelComponent
   ],
   imports: [
     BrowserModule,
