@@ -18,7 +18,7 @@ class SimpleShield(
 
 fun simpleShield(tile: Tile, id: Int): SimpleShield {
     if (tile.system !is Shield) {
-        throw IllegalArgumentException("Simple Shield can only be constructed from Tiles that are Shields")
+        throw IllegalArgumentException("Simple Shield can only be constructed from Tiles that are not Shields")
     }
     val shield = tile.system
     return SimpleShield(
