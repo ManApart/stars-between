@@ -27,8 +27,9 @@
 }
 
 .number {
-  color: blue;
+  color: #000;
   position: absolute;
   top: 50%;
   left: 0%;
+  text-shadow: 0px 0px 2px #fff;
 }

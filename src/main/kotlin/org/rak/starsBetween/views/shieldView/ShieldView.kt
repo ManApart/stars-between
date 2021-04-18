@@ -5,23 +5,28 @@ import org.rak.starsBetween.systems.Shield
 import org.rak.starsBetween.views.View
 
 class ShieldView(val tiles: List<List<SimpleTile>>, val shields: List<SimpleShield>) : View {
-    constructor(floorPlan: FloorPlan) : this(buildSimpleTiles(floorPlan), buildShields(floorPlan))
 }
 
-private fun buildSimpleTiles(floorPlan: FloorPlan) = (0 until floorPlan.size).map { y ->
-    var id = 1
-    (0 until floorPlan.size).map { x ->
-        val tile = floorPlan.getTile(x, y)
-        val idToUse = if (tile.system is Shield){
-            id++
-        } else {
-            0
+fun FloorPlan.toShieldView(): ShieldView {
+    val shields = mutableListOf<SimpleShield>()
+    var id = 0
+
+    val tiles = (0 until size).map { y ->
+        (0 until size).map { x ->
+            val tile = getTile(x, y)
+            if (tile.system is Shield) {
+                id++
+                shields.add(simpleShield(tile, id))
+            }
+
+            val idToUse = if (tile.system is Shield) {
+                id
+            } else {
+                0
+            }
+            SimpleTile(tile, idToUse)
         }
-        SimpleTile(tile, idToUse)
     }
-}
 
-private fun buildShields(floorPlan: FloorPlan): List<SimpleShield> {
-    var id = 1
-    return floorPlan.getAllTiles().filter { it.system is Shield }.map { simpleShield(it, id++) }
+    return ShieldView(tiles, shields)
 }

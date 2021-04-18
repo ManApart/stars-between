@@ -11,9 +11,16 @@ export class ShieldMenuComponent implements OnInit {
 
   constructor(websocketService: WebsocketService) {
     websocketService.data.subscribe(wrapper => {
-      if (wrapper.data.shields) {
-        this.shields = wrapper.data.shields
-        // console.log(wrapper.data.shields)
+      let shields = wrapper.data.shields
+      if (shields) {
+        if (this.shields === undefined) {
+          this.shields = wrapper.data.shields
+        } else {
+          for (let i = 0; i < shields.length; i++) {
+            this.shields[i] = shields[i]
+          }
+          this.shields.length = shields.length
+        }
       }
     })
   }

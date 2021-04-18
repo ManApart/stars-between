@@ -14,6 +14,7 @@
       url: {{getImageUrl()}}
     </div>
   </div>
+
   <div *ngIf="mode === 'AIR' && tile.air != 0" class="number">{{tile.air}}</div>
   <div *ngIf="mode === 'POWER' && tile.power != 0" class="number">{{tile.power}}</div>
   <div *ngIf="mode === 'SHIELDS' && tile.id != 0" class="number">{{tile.id}}</div>

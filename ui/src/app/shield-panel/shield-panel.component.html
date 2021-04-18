@@ -1,8 +1,9 @@
-<div>
+<div class="shield-panel">
   ID: {{shield.id}}<br />
   Radius: {{shield.radius}}<br />
-  Frequency Slider: {{shield.frequency}}<br />
-  Desired Power Slider: {{shield.currentPowerPull}}<br />
+  Frequency: <br />
+  <input type="range" min="1" max="10" value="{{shield.frequency}}" class="slider"><br />
+  Desired Power: <br />
+  <input type="range" min="1" max="10" value="{{shield.currentPowerPull}}" class="slider"><br />
   Power: {{shield.power}}/{{shield.totalPowerCapacity}}<br />
-
 </div>
