@@ -1,5 +1,6 @@
 package org.rak.starsBetween.floorplan
 
+import org.rak.starsBetween.power.Powerable
 import org.rak.starsBetween.shipStructor.SPACE_SYSTEM
 import org.rak.starsBetween.tile.DEFAULT_TILE
 import org.rak.starsBetween.tile.Tile
@@ -15,7 +16,7 @@ class FloorPlan(val size: Int = 5) {
     private var selectedTile = getAllTiles().first()
 
     var airAreas = AreaGroup(this) { !it.system.isSolid() }
-    var powerAreas = AreaGroup(this) { it.system.type.isPowerType()}
+    var powerAreas = AreaGroup(this) { it.system.type.isPowerType() || it.system is Powerable }
 
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
@@ -70,15 +71,15 @@ class FloorPlan(val size: Int = 5) {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
     }
 
-    fun updateAreas(){
+    fun updateAreas() {
         airAreas = AreaGroup(this) { !it.system.isSolid() }
-        powerAreas = AreaGroup(this) { it.system.type.isPowerType() }
+        powerAreas = AreaGroup(this) { it.system.type.isPowerType() || it.system is Powerable }
         setSelectedTile(selectedTile)
     }
 
     fun setSelectedTile(selectedTile: Tile) {
         this.selectedTile = selectedTile
-        getAllTiles().forEach {tile ->
+        getAllTiles().forEach { tile ->
             tile.distanceFromSelected = selectedTile.distanceMap.getDistance(tile)
         }
     }

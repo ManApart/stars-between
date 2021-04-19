@@ -72,4 +72,11 @@ class UtilsTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun clap() {
+        assertEquals(0, clamp(-10, 0, 5))
+        assertEquals(5, clamp(10, 0, 5))
+        assertEquals(10, clamp(10, 0, 100))
+    }
+
 }

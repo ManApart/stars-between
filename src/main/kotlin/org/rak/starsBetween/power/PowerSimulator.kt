@@ -1,8 +1,10 @@
 package org.rak.starsBetween.power
 
+import org.rak.starsBetween.clamp
 import org.rak.starsBetween.floorplan.Area
 import org.rak.starsBetween.floorplan.FloorPlan
 import org.rak.starsBetween.tile.SystemType
+import org.rak.starsBetween.tile.Tile
 import kotlin.math.max
 import kotlin.math.min
 
@@ -16,6 +18,7 @@ fun simulatePower(floorPlan: FloorPlan) {
     floorPlan.powerAreas.areas.forEach { area ->
         distributeEnginePower(area)
         distributeWirePower(area)
+        distributeSystemPower(area)
         clampPower(area)
     }
 }
@@ -51,6 +54,30 @@ private fun distributeWirePower(area: Area) {
     }
 }
 
+private fun distributeSystemPower(area: Area) {
+    val systems = area.tiles.filter { !it.system.type.isPowerType() }
+    val powered = mutableListOf<Tile>()
+
+    systems.forEach { systemTile ->
+        if (!powered.contains(systemTile)) {
+            val neighbors = listOf(systemTile) + area.getNeighbors(systemTile).filter { it.system is Powerable && !it.system.type.isPowerType() }
+            powered.addAll(neighbors)
+            if (neighbors.size > 1) {
+                val powerBank = neighbors.sumBy { (it.system as Powerable).power }
+                val powerPerSystem = powerBank / neighbors.size
+                var powerLeft = powerBank
+
+                neighbors.forEach {
+                    val neighbor = it.system as Powerable
+                    val given = min(powerLeft, min(powerPerSystem, neighbor.totalPowerCapacity - neighbor.power))
+                    powerLeft -= given
+                    neighbor.power = given
+                }
+            }
+        }
+    }
+}
+
 //    val open = powerTiles.filter { it.type == TileType.VENT }.toMutableList()
 //    val closed = mutableListOf<Tile>()
 //
@@ -81,6 +108,6 @@ private fun distributeWirePower(area: Area) {
 
 private fun clampPower(area: Area) {
     area.tiles.filter { it.system is Powerable }.map { it.system as Powerable }.forEach {
-        it.power = min(it.totalPowerCapacity, max(0, it.power))
+        it.power = clamp(it.power, 0, it.totalPowerCapacity)
     }
 }
