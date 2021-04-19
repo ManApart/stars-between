@@ -1,5 +1,5 @@
 <!-- <td *ngFor="let shield of shields; trackBy: trackTile"> -->
-<div *ngFor="let shield of shields">
+<div *ngFor="let entry of shields | keyvalue">
   <!-- <shield-panel [shield]="entry.value"></shield-panel> -->
-  <shield-panel [shield]="shield" [shieldUpdate]="shieldUpdates[shield.id]"></shield-panel>
+  <shield-panel [shield]="entry.value"></shield-panel>
 </div>

@@ -8,26 +8,25 @@ import { WebsocketService } from '../websocket.service';
   styleUrls: ['./shield-menu.component.css']
 })
 export class ShieldMenuComponent implements OnInit {
-  public shields: Array<any>
-  public shieldUpdates: {}
+  public shields: {}
+  // public shields: Array<any>
+  // public shieldUpdates: {}
 
   constructor(private websocketService: WebsocketService, private shieldService: ShieldService) {
     this.refreshShields()
     websocketService.data.subscribe(wrapper => {
       let shields = wrapper.data.shields
       if (shields) {
-        if (this.shieldUpdates === undefined) {
-          this.shieldUpdates = wrapper.data.shields
+        if (this.shields === undefined) {
+          this.shields = wrapper.data.shields
         } else {
           for (let i = 0; i < shields.length; i++) {
             const newShield = shields[i]
-            this.shieldUpdates[newShield.id] = shields[i]
-            // const existing = this.shields[newShield.id]
-            // existing.power = newShield.power
-            // existing.totalPowerCapacity = newShield.totalPowerCapacity
-            // existing.radius = newShield.radius
-            // this.shields[newShield.id] = existing
-            console.log(this.shields[newShield.id])
+            // this.shieldUpdates[newShield.id] = shields[i]
+            const existing = this.shields[newShield.id]
+            existing.power = newShield.power
+            existing.radius = newShield.radius
+            this.shields[newShield.id] = existing
 
             // this.shields[i] = shields[i]
           }
@@ -41,10 +40,10 @@ export class ShieldMenuComponent implements OnInit {
 
   refreshShields() {
     this.shieldService.getShieldControls().toPromise().then(data => {
-      this.shields = data as Array<any>;
-      // (data as Array<any>).forEach(it => {
-      //   this.shields[it.id] = it
-      // });
+      this.shields = {};
+      (data as Array<any>).forEach(it => {
+        this.shields[it.id] = it
+      });
       console.log(this.shields)
     })
 

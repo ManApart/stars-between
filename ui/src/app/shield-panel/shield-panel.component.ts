@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShieldPanelComponent implements OnInit {
   @Input() shield
-  @Input() shieldUpdate
 
   constructor() { }
 
