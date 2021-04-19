@@ -2,7 +2,9 @@ package org.rak.starsBetween.floorplan
 
 import org.rak.starsBetween.power.Powerable
 import org.rak.starsBetween.shipStructor.SPACE_SYSTEM
+import org.rak.starsBetween.systems.ShipSystem
 import org.rak.starsBetween.tile.DEFAULT_TILE
+import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
 import org.rak.starsBetween.tile.orient
 
@@ -17,6 +19,8 @@ class FloorPlan(val size: Int = 5) {
 
     var airAreas = AreaGroup(this) { !it.system.isSolid() }
     var powerAreas = AreaGroup(this) { it.system.type.isPowerType() || it.system is Powerable }
+
+    private var systemsById = mapOf<SystemType, Map<Int, Tile>>()
 
     fun getTileMap(): Map<Int, Map<Int, Tile>> {
         return tiles.toMap()
@@ -49,6 +53,7 @@ class FloorPlan(val size: Int = 5) {
             orient(newTile, this)
             getNeighbors(newTile).forEach { orient(it, this) }
             updateAreas()
+            updateSystemsById()
         }
     }
 
@@ -61,6 +66,18 @@ class FloorPlan(val size: Int = 5) {
             val newTile = tile.copy(position = Position(x, y))
             tiles[y]!![x] = newTile
         }
+    }
+
+    fun getId(system: ShipSystem) : Int {
+        return systemsById[system.type]!!.entries.firstOrNull { it.value.system == system }?.key ?: 0
+    }
+
+    fun getSystem(type: SystemType, id: Int): Tile? {
+        return systemsById[type]!![id]
+    }
+
+    fun getSystems(type: SystemType): Map<Int, Tile> {
+        return systemsById[type]!!
     }
 
     fun getNeighbors(x: Int, y: Int): List<Tile> {
@@ -82,6 +99,16 @@ class FloorPlan(val size: Int = 5) {
         getAllTiles().forEach { tile ->
             tile.distanceFromSelected = selectedTile.distanceMap.getDistance(tile)
         }
+    }
+
+    fun updateSystemsById() {
+        val map = SystemType.values().associate { it to mutableMapOf<Int, Tile>() }
+        getAllTiles().forEach {
+            val systemMap = map[it.system.type]!!
+            val id = (systemMap.keys.maxOrNull() ?: 0) + 1
+            systemMap[id] = it
+        }
+        systemsById = map
     }
 
 }

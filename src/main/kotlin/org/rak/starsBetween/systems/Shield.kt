@@ -1,6 +1,5 @@
 package org.rak.starsBetween.systems
 
-import com.sun.javafx.util.Utils.clamp
 import org.rak.starsBetween.power.Powerable
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
@@ -10,7 +9,7 @@ import kotlin.math.min
 class Shield(
     health: Int = 100,
     //1-10
-    val frequency: Int = 1,
+    var frequency: Int = 1,
     //How many tiles this shield protects
     val radius: Int = 1,
     //How much damage is blocked per unit of power
@@ -26,18 +25,18 @@ class Shield(
     override var power = totalPowerCapacity
     override var lastReceivedPowerFrom: Tile? = null
     //Current amount of power to pull each tick
-    var currentPowerPull = 1
+    var currentDesiredPower = 1
     //Strength of shield; based on amount of power pulled last tick * shield strength factor
     var shieldStrength = 0f
 
-    override val powerConsumedPerTick: Int; get() = currentPowerPull
+    override val powerConsumedPerTick: Int; get() = currentDesiredPower
 
     override fun persisted(): PersistedSystem {
         return PersistedShield(this)
     }
 
     override fun tick(parent: Tile) {
-        val powerPulled = min(currentPowerPull, power)
+        val powerPulled = min(currentDesiredPower, power)
         shieldStrength = powerToStrength * powerPulled
         power-= powerPulled
     }

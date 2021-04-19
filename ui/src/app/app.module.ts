@@ -8,6 +8,7 @@ import { MainPageComponent } from './main-page/main-page.component'
 import { TileComponent } from './tile/tile.component'
 import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component'
 import { FloorPlanService } from './floorPlanService'
+import { ShieldService } from './shieldService'
 import { GameService } from './gameService'
 import { HttpClientModule } from '@angular/common/http';
 import { SystemMenuComponent } from './system-menu/system-menu.component';
@@ -34,7 +35,8 @@ import { ShieldPanelComponent } from './shield-panel/shield-panel.component'
   ],
   providers: [
     FloorPlanService,
-    GameService
+    GameService,
+    ShieldService
   ],
   bootstrap: [AppComponent]
 })

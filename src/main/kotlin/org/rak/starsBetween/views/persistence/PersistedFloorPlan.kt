@@ -19,6 +19,7 @@ class PersistedFloorPlan(val tiles: List<List<PersistedTile>>) {
         }
         floorPlan.getAllTiles().forEach { orient(it, floorPlan) }
         floorPlan.updateAreas()
+        floorPlan.updateSystemsById()
 
         return floorPlan
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShieldService } from '../shieldService';
 import { WebsocketService } from '../websocket.service';
 
 @Component({
@@ -8,24 +9,49 @@ import { WebsocketService } from '../websocket.service';
 })
 export class ShieldMenuComponent implements OnInit {
   public shields: Array<any>
+  public shieldUpdates: {}
 
-  constructor(websocketService: WebsocketService) {
+  constructor(private websocketService: WebsocketService, private shieldService: ShieldService) {
+    this.refreshShields()
     websocketService.data.subscribe(wrapper => {
       let shields = wrapper.data.shields
       if (shields) {
-        if (this.shields === undefined) {
-          this.shields = wrapper.data.shields
+        if (this.shieldUpdates === undefined) {
+          this.shieldUpdates = wrapper.data.shields
         } else {
           for (let i = 0; i < shields.length; i++) {
-            this.shields[i] = shields[i]
+            const newShield = shields[i]
+            this.shieldUpdates[newShield.id] = shields[i]
+            // const existing = this.shields[newShield.id]
+            // existing.power = newShield.power
+            // existing.totalPowerCapacity = newShield.totalPowerCapacity
+            // existing.radius = newShield.radius
+            // this.shields[newShield.id] = existing
+            console.log(this.shields[newShield.id])
+
+            // this.shields[i] = shields[i]
           }
-          this.shields.length = shields.length
         }
       }
     })
   }
 
   ngOnInit(): void {
+  }
+
+  refreshShields() {
+    this.shieldService.getShieldControls().toPromise().then(data => {
+      this.shields = data as Array<any>;
+      // (data as Array<any>).forEach(it => {
+      //   this.shields[it.id] = it
+      // });
+      console.log(this.shields)
+    })
+
+  }
+
+  shieldUpdated(shieldControls): void {
+    this.shieldService.setShieldControls(shieldControls.id, shieldControls.frequency, shieldControls.currentDesiredPower).toPromise()
   }
 
 }
