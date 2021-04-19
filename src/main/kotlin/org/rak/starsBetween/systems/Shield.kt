@@ -25,7 +25,7 @@ class Shield(
     override var power = totalPowerCapacity
     override var lastReceivedPowerFrom: Tile? = null
     //Current amount of power to pull each tick
-    var currentDesiredPower = 1
+    var currentDesiredPower = 0
     //Strength of shield; based on amount of power pulled last tick * shield strength factor
     var shieldStrength = 0f
 

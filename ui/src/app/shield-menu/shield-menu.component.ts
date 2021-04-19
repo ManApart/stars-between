@@ -9,8 +9,6 @@ import { WebsocketService } from '../websocket.service';
 })
 export class ShieldMenuComponent implements OnInit {
   public shields: {}
-  // public shields: Array<any>
-  // public shieldUpdates: {}
 
   constructor(private websocketService: WebsocketService, private shieldService: ShieldService) {
     this.refreshShields()
@@ -22,13 +20,9 @@ export class ShieldMenuComponent implements OnInit {
         } else {
           for (let i = 0; i < shields.length; i++) {
             const newShield = shields[i]
-            // this.shieldUpdates[newShield.id] = shields[i]
             const existing = this.shields[newShield.id]
             existing.power = newShield.power
             existing.radius = newShield.radius
-            this.shields[newShield.id] = existing
-
-            // this.shields[i] = shields[i]
           }
         }
       }
@@ -39,18 +33,18 @@ export class ShieldMenuComponent implements OnInit {
   }
 
   refreshShields() {
-    this.shieldService.getShieldControls().toPromise().then(data => {
-      this.shields = {};
-      (data as Array<any>).forEach(it => {
-        this.shields[it.id] = it
-      });
-      console.log(this.shields)
-    })
-
+    this.shieldService.getShieldControls().toPromise().then(data => this.updateShields(data))
   }
 
-  shieldUpdated(shieldControls): void {
-    this.shieldService.setShieldControls(shieldControls.id, shieldControls.frequency, shieldControls.currentDesiredPower).toPromise()
+  shieldUpdated(shield): void {
+    this.shieldService.setShieldControls(shield.id, shield.frequency, shield.currentDesiredPower).toPromise().then(data => this.updateShields(data))
+  }
+
+  updateShields(data) {
+    this.shields = {};
+    (data as Array<any>).forEach(it => {
+      this.shields[it.id] = it
+    });
   }
 
 }
