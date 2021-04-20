@@ -1,0 +1,19 @@
+.option {
+  
+}
+
+.image-wrapper {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.button-image{
+  width: 120px;
+  height: 80px;
+  margin-left: -80px;
+  margin-top: -40px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}

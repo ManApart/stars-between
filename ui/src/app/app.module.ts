@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { GameViewComponent } from './game-view/game-view.component'
-import { MainPageComponent } from './main-page/main-page.component'
-import { TileComponent } from './tile/tile.component'
-import { BuildToolkitComponent } from './build-toolkit/build-toolkit.component'
-import { FloorPlanService } from './floorPlanService'
-import { ShieldService } from './shieldService'
+import { GameViewComponent } from './ship-view/game-view/game-view.component'
+import { MainPageComponent } from './ship-view/main-page/main-page.component'
+import { TileComponent } from './ship-view/tile/tile.component'
+import { BuildToolkitComponent } from './ship-view/build-toolkit/build-toolkit.component'
+import { FloorPlanService } from './ship-view/floorPlanService'
+import { ShieldService } from './ship-view/shieldService'
 import { GameService } from './gameService'
 import { HttpClientModule } from '@angular/common/http';
-import { SystemMenuComponent } from './system-menu/system-menu.component';
-import { ModeSelectComponent } from './mode-select/mode-select.component';
-import { ShieldMenuComponent } from './shield-menu/shield-menu.component';
-import { ShieldPanelComponent } from './shield-panel/shield-panel.component'
+import { SystemMenuComponent } from './ship-view/system-menu/system-menu.component';
+import { ModeSelectComponent } from './ship-view/mode-select/mode-select.component';
+import { ShieldMenuComponent } from './ship-view/shield-menu/shield-menu.component';
+import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.component'
 
 @NgModule({
   declarations: [

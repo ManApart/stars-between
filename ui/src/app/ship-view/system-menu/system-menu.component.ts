@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { GameService } from '../gameService'
+import { GameService } from '../../gameService'
 
 @Component({
   selector: 'system-menu',

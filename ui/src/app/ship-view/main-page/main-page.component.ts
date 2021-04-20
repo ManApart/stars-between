@@ -11,8 +11,7 @@ export class MainPageComponent implements OnInit {
   constructor(private floorPlanService: FloorPlanService) { }
 
   selectedTilePalette = 'space'
-  selectedMode = 'SHIELDS'
-  // selectedMode = 'OVERVIEW'
+  selectedMode = 'OVERVIEW'
 
   ngOnInit(): void {
   }

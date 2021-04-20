@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'
-import { GameService } from '../gameService'
+import { GameService } from '../../gameService'
 
 @Component({
   selector: 'mode-select',

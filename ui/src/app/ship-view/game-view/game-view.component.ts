@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
-import { WebsocketService } from '../websocket.service'
+import { WebsocketService } from '../../websocket.service'
 
 @Component({
   selector: 'game-view',

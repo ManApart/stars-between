@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core'
-import { GameService } from '../gameService'
+import { GameService } from '../../gameService'
 
 @Component({
   selector: 'build-toolkit',

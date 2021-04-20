@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShieldService } from '../shieldService';
-import { WebsocketService } from '../websocket.service';
+import { WebsocketService } from '../../websocket.service';
 
 @Component({
   selector: 'shield-menu',
