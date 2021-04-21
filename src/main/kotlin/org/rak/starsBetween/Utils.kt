@@ -1,5 +1,6 @@
 package org.rak.starsBetween
 
+import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
@@ -23,4 +24,29 @@ fun <T> Map<Int, Map<Int, T>>.transpose(): Map<Int, Map<Int, T>> {
 
 fun clamp(value: Int, min: Int, max: Int): Int {
     return min(max, max(min, value))
+}
+
+fun clamp(value: Float, min: Float, max: Float): Float {
+    return min(max, max(min, value))
+}
+
+fun randRange(min: Int, max: Int): Int {
+    return min + (Math.random() * (max - min + 1)).toInt()
+}
+
+fun randRange(seed: Long, min: Int, max: Int): Int {
+    return min + (rand(seed) / 100.toDouble() * (max - min + 1)).toInt()
+}
+
+fun rand(seed: Long): Int {
+    val rand = Random(100 + seed * 1000)
+    return (rand.nextDouble() * 100).toInt()
+}
+
+/**
+ * @return a float between -1 and 1
+ */
+fun getPercent(amount: Int, total: Int): Float {
+    val center = (total / 2).toFloat()
+    return (amount - center) / center
 }

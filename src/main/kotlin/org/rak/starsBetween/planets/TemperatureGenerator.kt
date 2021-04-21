@@ -1,6 +1,7 @@
 package org.rak.starsBetween.planets
 
 import org.rak.starsBetween.clamp
+import org.rak.starsBetween.getPercent
 import kotlin.math.abs
 
 class TemperatureGenerator(
@@ -57,11 +58,6 @@ class TemperatureGenerator(
         return if (altitude > 0) {
             temperatureVariance * altitude / 100
         } else 0
-    }
-
-    private fun getPercent(amount: Int, total: Int): Float {
-        val center = (total / 2).toFloat()
-        return (amount - center) / center
     }
 
 }
