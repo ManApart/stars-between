@@ -10,11 +10,13 @@ import { BuildToolkitComponent } from './ship-view/build-toolkit/build-toolkit.c
 import { FloorPlanService } from './ship-view/floorPlanService'
 import { ShieldService } from './ship-view/shieldService'
 import { GameService } from './gameService'
+import { PlanetService } from './planetService'
 import { HttpClientModule } from '@angular/common/http';
 import { SystemMenuComponent } from './ship-view/system-menu/system-menu.component';
 import { ModeSelectComponent } from './ship-view/mode-select/mode-select.component';
 import { ShieldMenuComponent } from './ship-view/shield-menu/shield-menu.component';
-import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.component'
+import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.component';
+import { PlanetMainComponent } from './planet-view/planet-main/planet-main.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.comp
     SystemMenuComponent,
     ModeSelectComponent,
     ShieldMenuComponent,
-    ShieldPanelComponent
+    ShieldPanelComponent,
+    PlanetMainComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.comp
   providers: [
     FloorPlanService,
     GameService,
+    PlanetService,
     ShieldService
   ],
   bootstrap: [AppComponent]
