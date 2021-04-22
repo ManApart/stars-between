@@ -5,6 +5,7 @@ class PlanetGenerator(private val density: Int = 500, private val scale: Float =
     private val temperatureGen = TemperatureGenerator()
     private val precipitationGen = PrecipitationGenerator()
     private val biomeGen = BiomeGenerator()
+    private val regionGen = RegionGenerator()
     private val mapTiler = MapTiler()
     private val debugTimer = DebugTimer()
     private val scaledDensity = (density / scale).toInt()
@@ -22,15 +23,13 @@ class PlanetGenerator(private val density: Int = 500, private val scale: Float =
         val precipitationMap: Array<IntArray> = precipitationGen.generatePrecipitationMap(seed, heightMap, temperatureMap)
         debugTimer.interval("Precipitation Generation")
 
-//        val biomes: BiomeCollection = biomeGenerator.generateBiomes()
-//        debugTimer.interval("Biome Generation")
+        val biomes = biomeGen.getBiomes("EarthlikeBiomes")
+        debugTimer.interval("Biome Generation")
 
-//        val regionGenerator = RegionGenerator(heightMap, temperatureMap, percipitationMap, biomes)
-//        val regions: Grid<Region> = regionGenerator.generateRegions()
-//        debugTimer.interval("Region Generation")
+        val regions = regionGen.generateRegions(heightMap, temperatureMap, precipitationMap, biomes)
+        debugTimer.interval("Region Generation")
 
-        val planet = Planet()
-//        planet.setRegionGrid(regions)
+        val planet = Planet(regions)
         debugTimer.interval("Planet Generation")
         debugTimer.elapsed("Planet Generation")
         return planet

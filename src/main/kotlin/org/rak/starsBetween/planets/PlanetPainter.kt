@@ -1,6 +1,5 @@
 package org.rak.starsBetween.planets
 
-import java.awt.Color
 import java.awt.image.BufferedImage
 import java.awt.image.BufferedImage.TYPE_INT_RGB
 
@@ -11,7 +10,7 @@ class PlanetPainter {
 
         for (x in 0 until 100) {
             for (y in 0 until 100) {
-                g.color = Color.CYAN
+                g.color = planet.regions[x][y].biome.color
                 g.fillRect(x, y, 1, 1)
             }
         }

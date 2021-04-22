@@ -5,15 +5,19 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.rak.starsBetween.wiring.ResourceHelper
 
 class BiomeGenerator {
-    val biomes = parseBiomes()
+    private val biomes = parseBiomes()
     private fun parseFile(path: String): List<Biome> = jacksonObjectMapper().readValue(this::class.java.getResourceAsStream(path))
 
-
-    private fun parseBiomes(): Map<String, Map<String, Biome>> {
+    private fun parseBiomes(): Map<String, List<Biome>> {
         val biomePath = "/biomes"
         return ResourceHelper().getResourceFiles(biomePath, true)
-            .associateWith { fileName ->
-                parseFile(fileName).associateBy { it.id }
+            .associate { fileName ->
+                fileName.replace("/biomes/", "").replace(".json", "") to parseFile(fileName)
             }
     }
+
+    fun getBiomes(type: String) : List<Biome> {
+        return biomes[type] ?: listOf()
+    }
+
 }

@@ -10,16 +10,16 @@ import javax.imageio.ImageIO
 @RestController
 @RequestMapping("/planet")
 class PlanetController {
-    val generator = PlanetGenerator()
 
-    fun generatePlanet(seed: Long = 1234, density: Int = 100, scale: Float = 1f, id: Int? = null) {
-        generator.generatePlanet(seed)
+    @PostMapping
+    fun generatePlanet(id: Int? = null) {
+        PlanetManager.generatePlanet(id ?: 0)
     }
 
     @GetMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
     @ResponseBody
-    fun getPlanetImage(): ByteArray {
-        val image = PlanetManager.painter.paint(PlanetManager.planet)
+    fun getPlanetImage(id: Int? = null): ByteArray {
+        val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id ?: 0))
         val baos = ByteArrayOutputStream()
         ImageIO.write(image, "jpg", baos)
         return baos.toByteArray()
