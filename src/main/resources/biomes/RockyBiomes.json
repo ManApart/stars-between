@@ -1,0 +1,134 @@
+[
+	{
+		"id": "superMolten",
+		"name": "Super Molten",
+		"color": "#e9630c",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 500,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "molten",
+		"name": "Molten",
+		"color": "#40220a",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "moltenCore",
+		"name": "Molten Core",
+		"color": "#ff8c22",
+		"altitude": 0,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 200,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "nearMolten",
+		"name": "Molten Peak",
+		"color": "#1e0d03",
+		"altitude": 100,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "rock",
+		"name": "Rock",
+		"color": "#4e4138",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 0,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "rustyRock",
+		"name": "Iron Rich Rock",
+		"color": "#755838",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 50,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 30
+	},
+	{
+		"id": "rockPeak",
+		"name": "Rock Peak",
+		"color": "#a9a6a1",
+		"altitude": 100,
+		"altitudeMaxVariance": 50,
+		"temperature": 0,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "rockValley",
+		"name": "Rock Valley",
+		"color": "#333331",
+		"altitude": 0,
+		"altitudeMaxVariance": 50,
+		"temperature": 0,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "primordialocean",
+		"name": "Primordial Ocean",
+		"color": "#1e7182",
+		"altitude": 0,
+		"altitudeMaxVariance": 0,
+		"temperature": 50,
+		"temperatureMaxVariance": 0,
+		"precipitation": 100,
+		"precipitationMaxVariance": 1
+	},
+{
+		"id": "primordialBeach",
+		"name": "Primordial Sands",
+		"color": "#d2aa5b",
+		"altitude": 10,
+		"altitudeMaxVariance": 10,
+		"temperature": 50,
+		"temperatureMaxVariance": 0,
+		"precipitation": 90,
+		"precipitationMaxVariance": 10
+	},
+	{
+		"id": "primordialDesert",
+		"name": "Desert",
+		"color": "#b69550",
+		"altitude": 30,
+		"altitudeMaxVariance": 30,
+		"temperature": 100,
+		"temperatureMaxVariance": 20,
+		"precipitation": 0,
+		"precipitationMaxVariance": 20
+	},
+	{
+		"id": "lichen",
+		"name": "Lichen",
+		"color": "#585b19",
+		"altitude": 30,
+		"altitudeMaxVariance": 30,
+		"temperature": 60,
+		"temperatureMaxVariance": 40,
+		"precipitation": 50,
+		"precipitationMaxVariance": 50
+	}
+]

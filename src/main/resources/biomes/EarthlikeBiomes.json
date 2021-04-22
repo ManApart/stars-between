@@ -1,0 +1,69 @@
+[
+	{
+		"id": "ocean",
+		"name": "Ocean",
+		"color": "#274fa7",
+		"altitude": 0,
+		"altitudeMaxVariance": 0,
+		"temperature": 50,
+		"temperatureMaxVariance": 0,
+		"precipitation": 100,
+		"precipitationMaxVariance": 1
+	},
+	{
+		"id": "beach",
+		"name": "Shoreline",
+		"color": "#e0d4a7",
+		"altitude": 10,
+		"altitudeMaxVariance": 10,
+		"temperature": 50,
+		"temperatureMaxVariance": 0,
+		"precipitation": 90,
+		"precipitationMaxVariance": 10
+	},
+	{
+		"id": "desert",
+		"name": "Desert",
+		"color": "#d6be66",
+		"altitude": 30,
+		"altitudeMaxVariance": 30,
+		"temperature": 100,
+		"temperatureMaxVariance": 20,
+		"precipitation": 0,
+		"precipitationMaxVariance": 20
+	},
+	{
+		"id": "grasslands",
+		"name": "Grasslands",
+		"color": "#caffa9",
+		"altitude": 30,
+		"altitudeMaxVariance": 30,
+		"temperature": 60,
+		"temperatureMaxVariance": 40,
+		"precipitation": 50,
+		"precipitationMaxVariance": 50
+	},
+	{
+		"id": "forest",
+		"name": "Forest",
+		"color": "#5e9900",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 60,
+		"temperatureMaxVariance": 40,
+		"precipitation": 50,
+		"precipitationMaxVariance": 30
+	},
+	{
+		"id": "alpine",
+		"name": "Alpine",
+		"color": "#fff",
+		"altitude": 100,
+		"altitudeMaxVariance": 30,
+		"temperature": 0,
+		"temperatureMaxVariance": 0,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	}
+
+]

@@ -1,0 +1,57 @@
+[
+	{
+		"id": "blue",
+		"name": "Super Molten",
+		"color": "#80a4d8",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 500,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "green",
+		"name": "Super Molten",
+		"color": "#72ac86",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 500,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "red",
+		"name": "Molten",
+		"color": "#ff1700",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "purple",
+		"name": "Molten Core",
+		"color": "#bc82bf",
+		"altitude": 0,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 200,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "yellow",
+		"name": "Molten Peak",
+		"color": "#eec63e",
+		"altitude": 100,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	}
+]

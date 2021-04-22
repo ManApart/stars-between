@@ -4,6 +4,7 @@ class PlanetGenerator(private val density: Int = 500, private val scale: Float =
     private val heightmapGen = HeightmapGenerator()
     private val temperatureGen = TemperatureGenerator()
     private val precipitationGen = PrecipitationGenerator()
+    private val biomeGen = BiomeGenerator()
     private val mapTiler = MapTiler()
     private val debugTimer = DebugTimer()
     private val scaledDensity = (density / scale).toInt()

@@ -1,0 +1,68 @@
+[
+	{
+		"id": "blue",
+		"name": "O Class",
+		"color": "#dde7f3",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 500,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "lightBlue",
+		"name": "Molten",
+		"color": "#dde5f0",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "red",
+		"name": "Molten Core",
+		"color": "#ff4723",
+		"altitude": 0,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 200,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "lightYellow",
+		"name": "Molten Peak",
+		"color": "#fefeb6",
+		"altitude": 100,
+		"altitudeMaxVariance": 50,
+		"temperature": 400,
+		"temperatureMaxVariance": 100,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "yellow",
+		"name": "Rock",
+		"color": "#fdf16b",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 0,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 0
+	},
+	{
+		"id": "orange",
+		"name": "Iron Rich Rock",
+		"color": "#ffb24f",
+		"altitude": 50,
+		"altitudeMaxVariance": 0,
+		"temperature": 50,
+		"temperatureMaxVariance": 300,
+		"precipitation": 0,
+		"precipitationMaxVariance": 30
+	}
+]

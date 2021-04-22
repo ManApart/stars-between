@@ -1,14 +1,7 @@
 package org.rak.starsBetween.planets
 
-import org.apache.tomcat.util.http.fileupload.IOUtils
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import java.io.IOException
-
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
@@ -17,9 +10,10 @@ import javax.imageio.ImageIO
 @RestController
 @RequestMapping("/planet")
 class PlanetController {
+    val generator = PlanetGenerator()
 
-    fun generatePlanet(seed: Long, density: Int, scale: Float, id: Int?) {
-
+    fun generatePlanet(seed: Long = 1234, density: Int = 100, scale: Float = 1f, id: Int? = null) {
+        generator.generatePlanet(seed)
     }
 
     @GetMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
