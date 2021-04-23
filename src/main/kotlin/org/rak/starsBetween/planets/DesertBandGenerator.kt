@@ -2,14 +2,13 @@ package org.rak.starsBetween.planets
 
 import org.rak.starsBetween.randRange
 
+private const val WIDTH_MINIMUM = 10
+private const val WIDTH_MAXIMUM = 40
+private const val LATITUDE_MINIMUM = -100
+private const val LATITUDE_MAXIMUM = 100
+
 class DesertBandGenerator {
 
-    companion object {
-        private const val WIDTH_MINIMUM = 10
-        private const val WIDTH_MAXIMUM = 40
-        private const val LATITUDE_MINIMUM = -100
-        private const val LATITUDE_MAXIMUM = 100
-    }
 
     fun generateDesertBands(seed: Long): List<DesertBand> {
         val numberOfBands = randRange(seed, 0, 3)

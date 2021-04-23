@@ -2,14 +2,11 @@ package org.rak.starsBetween.planets
 
 import org.rak.starsBetween.planets.noise.NoiseGen
 
-class HeightmapGenerator(
-    private val octaves: Int = 7,
-    private val roughness: Float = 0.5f,
-    private val noiseScale: Float = 1f
-) {
+class HeightmapGenerator() {
 
-    fun generateHeightMap(seed: Long, density: Int, planetScale: Float): Array<IntArray> {
-        val noiseGen = createNoiseGen(seed, planetScale)
+    fun generateHeightMap(options: PlanetOptions): Array<IntArray> {
+        val density = (options.density / options.scale).toInt()
+        val noiseGen = createNoiseGen(options)
         val heightMap = Array(density) { IntArray(density) }
         for (x in 0 until density) {
             for (y in 0 until density) {
@@ -19,9 +16,9 @@ class HeightmapGenerator(
         return heightMap
     }
 
-    private fun createNoiseGen(seed: Long, scale: Float): NoiseGen {
-        val adjustedScale = scale * noiseScale
-        return NoiseGen(seed, octaves, roughness, adjustedScale)
+    private fun createNoiseGen(options: PlanetOptions): NoiseGen {
+        val adjustedScale = options.scale * options.noiseScale
+        return NoiseGen(options.seed, options.octaves, options.roughness, adjustedScale)
     }
 
 }

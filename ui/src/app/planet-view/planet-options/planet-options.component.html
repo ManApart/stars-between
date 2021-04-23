@@ -1,0 +1,21 @@
+<div>
+  Seed: <input type="number" [(ngModel)]="seed"><br />
+  Density: <input type="number" [(ngModel)]="density"><br />
+  Scale: <input type="number" [(ngModel)]="scale"><br />
+  <br />
+  Octaves: <input type="number" [(ngModel)]="octaves"><br />
+  Roughness: <input type="number" [(ngModel)]="roughness"><br />
+  Noise Scale: <input type="number" [(ngModel)]="noiseScale"><br />
+  <br />
+  Temperature: <input type="number" [(ngModel)]="temperature"><br />
+  Temperature Variance: <input type="number" [(ngModel)]="temperatureVariance"><br />
+  Temperature Factor: <input type="number" [(ngModel)]="temperatureFactor"><br />
+  <br />
+  Default Precipitation: <input type="number" [(ngModel)]="precipitation"><br />
+  Water Threshold: <input type="number" [(ngModel)]="waterThreshold"><br />
+  Biome Types: <input type="text" [(ngModel)]="biomeTypes"><br />
+  <br />
+  <br />
+
+  <button type="button" (click)="generate()">Generate</button>
+</div>

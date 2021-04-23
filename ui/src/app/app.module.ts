@@ -16,7 +16,9 @@ import { SystemMenuComponent } from './ship-view/system-menu/system-menu.compone
 import { ModeSelectComponent } from './ship-view/mode-select/mode-select.component';
 import { ShieldMenuComponent } from './ship-view/shield-menu/shield-menu.component';
 import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.component';
-import { PlanetMainComponent } from './planet-view/planet-main/planet-main.component'
+import { PlanetMainComponent } from './planet-view/planet-main/planet-main.component';
+import { PlanetOptionsComponent } from './planet-view/planet-options/planet-options.component'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import { PlanetMainComponent } from './planet-view/planet-main/planet-main.compo
     ModeSelectComponent,
     ShieldMenuComponent,
     ShieldPanelComponent,
-    PlanetMainComponent
+    PlanetMainComponent,
+    PlanetOptionsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     FloorPlanService,

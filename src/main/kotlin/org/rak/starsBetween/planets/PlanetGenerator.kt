@@ -1,6 +1,6 @@
 package org.rak.starsBetween.planets
 
-class PlanetGenerator(private val density: Int = 500, private val scale: Float = 1f) {
+class PlanetGenerator() {
     private val heightmapGen = HeightmapGenerator()
     private val temperatureGen = TemperatureGenerator()
     private val precipitationGen = PrecipitationGenerator()
@@ -8,22 +8,21 @@ class PlanetGenerator(private val density: Int = 500, private val scale: Float =
     private val regionGen = RegionGenerator()
     private val mapTiler = MapTiler()
     private val debugTimer = DebugTimer()
-    private val scaledDensity = (density / scale).toInt()
 
-    fun generatePlanet(seed: Long): Planet {
+    fun generatePlanet(options: PlanetOptions): Planet {
         debugTimer.start("Planet Generation")
 
-        val heightMap: Array<IntArray> = heightmapGen.generateHeightMap(seed, scaledDensity, scale)
+        val heightMap: Array<IntArray> = heightmapGen.generateHeightMap(options)
         debugTimer.interval("Height Generation")
 
         mapTiler.makeImageTilable(heightMap)
-        val temperatureMap = temperatureGen.generateTemperatureMap(heightMap)
+        val temperatureMap = temperatureGen.generateTemperatureMap(options, heightMap)
         debugTimer.interval("Temperature Generation")
 
-        val precipitationMap: Array<IntArray> = precipitationGen.generatePrecipitationMap(seed, heightMap, temperatureMap)
+        val precipitationMap: Array<IntArray> = precipitationGen.generatePrecipitationMap(options.seed, heightMap, temperatureMap)
         debugTimer.interval("Precipitation Generation")
 
-        val biomes = biomeGen.getBiomes("EarthlikeBiomes")
+        val biomes = biomeGen.getBiomes(options.biomeTypes)
         debugTimer.interval("Biome Generation")
 
         val regions = regionGen.generateRegions(heightMap, temperatureMap, precipitationMap, biomes)
