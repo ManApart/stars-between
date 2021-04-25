@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets.noise;
+package org.rak.starsBetween.planets.generation.noise;
 /*
  * A speed-improved simplex noise algorithm for 2D, 3D and 4D in Java.
  *

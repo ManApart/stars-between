@@ -1,5 +1,6 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
 
+import org.rak.starsBetween.planets.DesertBand
 import org.rak.starsBetween.randRange
 
 private const val WIDTH_MINIMUM = 10

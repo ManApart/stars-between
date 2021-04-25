@@ -1,7 +1,9 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import org.rak.starsBetween.planets.Biome
+import org.rak.starsBetween.planets.BiomeType
 import org.rak.starsBetween.wiring.ResourceHelper
 
 class BiomeGenerator {

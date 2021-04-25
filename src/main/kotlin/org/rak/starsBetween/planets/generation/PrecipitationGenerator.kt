@@ -1,7 +1,8 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
 
 import org.rak.starsBetween.clamp
 import org.rak.starsBetween.getPercent
+import org.rak.starsBetween.planets.DesertBand
 import kotlin.math.abs
 
 private const val ALTITUDE_FACTOR = 0.9f

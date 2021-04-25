@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
 
 import kotlin.math.max
 import kotlin.math.min

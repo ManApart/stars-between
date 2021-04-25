@@ -1,5 +1,6 @@
 package org.rak.starsBetween.planets
 
+import org.rak.starsBetween.planets.generation.PlanetOptions
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import java.io.ByteArrayOutputStream

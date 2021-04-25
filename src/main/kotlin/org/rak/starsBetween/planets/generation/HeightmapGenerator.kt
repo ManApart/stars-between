@@ -1,6 +1,6 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
 
-import org.rak.starsBetween.planets.noise.NoiseGen
+import org.rak.starsBetween.planets.generation.noise.NoiseGen
 
 class HeightmapGenerator() {
 

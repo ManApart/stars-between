@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets.noise
+package org.rak.starsBetween.planets.generation.noise
 
 private const val BASE_SCALE = .004f
 

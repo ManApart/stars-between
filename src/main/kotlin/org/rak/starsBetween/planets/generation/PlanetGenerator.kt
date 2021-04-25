@@ -1,4 +1,6 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planets.generation
+
+import org.rak.starsBetween.planets.Planet
 
 class PlanetGenerator() {
     private val heightmapGen = HeightmapGenerator()
