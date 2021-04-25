@@ -22,7 +22,7 @@ class PlanetGenerator() {
         val precipitationMap: Array<IntArray> = precipitationGen.generatePrecipitationMap(options.seed, heightMap, temperatureMap, options)
         debugTimer.interval("Precipitation Generation")
 
-        val biomes = biomeGen.getBiomes(options.biomeTypes)
+        val biomes = biomeGen.getBiomes(options.biomeType)
         debugTimer.interval("Biome Generation")
 
         val regions = regionGen.generateRegions(heightMap, temperatureMap, precipitationMap, biomes)

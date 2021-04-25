@@ -21,7 +21,7 @@ class PlanetController {
     @GetMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
     @ResponseBody
     fun getPlanetImage(id: Int? = null): ByteArray {
-        val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id ?: 0))
+        val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id ?: 0), PlanetManager.viewType)
         val baos = ByteArrayOutputStream()
         ImageIO.write(image, "png", baos)
         return baos.toByteArray()

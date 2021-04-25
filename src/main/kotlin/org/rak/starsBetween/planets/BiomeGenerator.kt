@@ -16,8 +16,8 @@ class BiomeGenerator {
             }
     }
 
-    fun getBiomes(type: String) : List<Biome> {
-        return biomes[type] ?: listOf()
+    fun getBiomes(type: BiomeType) : List<Biome> {
+        return biomes[type.fileName] ?: listOf()
     }
 
 }

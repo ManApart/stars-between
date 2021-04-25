@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage
 import java.awt.image.BufferedImage.TYPE_INT_RGB
 
 class PlanetPainter {
-    fun paint(planet: Planet): BufferedImage {
+    fun paint(planet: Planet, type: PlanetViewType): BufferedImage {
         val img = BufferedImage(100, 100, TYPE_INT_RGB)
         val g = img.createGraphics()
 

@@ -13,7 +13,6 @@ export class PlanetService {
   }
 
   generatePlanet(options) {
-    console.log(options)
     return this.http.post(`http://localhost:8080/planet`, options, {
       headers: new HttpHeaders({}),
       responseType: 'blob'

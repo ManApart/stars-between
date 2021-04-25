@@ -1,6 +1,7 @@
 package org.rak.starsBetween.planets
 
 object PlanetManager {
+    val viewType = PlanetViewType.BIOME
     val painter = PlanetPainter()
     private val generator = PlanetGenerator()
     private val planets = mutableMapOf<Int, Planet>()

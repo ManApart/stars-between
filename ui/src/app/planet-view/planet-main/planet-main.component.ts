@@ -32,7 +32,6 @@ export class PlanetMainComponent implements OnInit {
   }
 
   planetGenerated(options) {
-    // console.log("Generating:", options)
     this.planetService.generatePlanet(options).toPromise().then(data => {
       this.createImageFromBlob(data);
     }, error => {

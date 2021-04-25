@@ -20,7 +20,7 @@ class PlanetOptions(
     //precipitation
     defaultPrecipitation: Int? = null,
     waterThreshold: Int? = null,
-    biomeTypes: String? = null,
+    biomeType: BiomeType? = null,
 
     ) {
     val seed = seed ?: 1234L
@@ -34,6 +34,6 @@ class PlanetOptions(
     val temperatureFactor = temperatureFactor ?: 1.4f
     val defaultPrecipitation = defaultPrecipitation ?: 100
     val waterThreshold = waterThreshold ?: 0
-    val biomeTypes = biomeTypes ?: "EarthlikeBiomes"
+    val biomeType = biomeType ?: BiomeType.EARTH_LIKE
 
 }
