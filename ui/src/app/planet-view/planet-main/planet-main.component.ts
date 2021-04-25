@@ -12,12 +12,12 @@ export class PlanetMainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(planetService: PlanetService) {
+  constructor(private planetService: PlanetService) {
     planetService.getPlanetImage().subscribe(data => {
       this.createImageFromBlob(data);
     }, error => {
       console.log(error);
-    });
+    })
   }
 
   createImageFromBlob(image: Blob) {
@@ -29,6 +29,15 @@ export class PlanetMainComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+
+  planetGenerated(options) {
+    console.log("Generating:", options)
+    this.planetService.generatePlanet(options).toPromise().then(data => {
+      this.createImageFromBlob(data);
+    }, error => {
+      console.log(error);
+    })
   }
 
 }

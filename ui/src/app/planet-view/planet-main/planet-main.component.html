@@ -1,6 +1,6 @@
 <div class="container">
   <div class="section">
-    <planet-options></planet-options>
+    <planet-options (generatePlanet)="planetGenerated($event)"></planet-options>
   </div>
   <div class="section">
     <img [src]="planetImage" class="planet-pic" width="500">

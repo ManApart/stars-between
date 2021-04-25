@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PlanetService } from 'src/app/planetService';
 
 @Component({
   selector: 'planet-options',
@@ -23,13 +24,16 @@ export class PlanetOptionsComponent implements OnInit {
 
   biomeTypes: string
 
+  @Output() generatePlanet: EventEmitter<any> = new EventEmitter()
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   generate() {
-    console.log("generate")
+    const options = { seed: this.seed }
+    this.generatePlanet.emit(options)
   }
 
 }

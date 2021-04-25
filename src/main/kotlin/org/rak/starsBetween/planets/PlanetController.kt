@@ -13,7 +13,7 @@ class PlanetController {
 
     @PostMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
     @ResponseBody
-    fun generatePlanet(id: Int? = null, options: PlanetOptions? = null) : ByteArray{
+    fun generatePlanet(@RequestParam id: Int? = null, @RequestBody options: PlanetOptions? = null) : ByteArray{
         PlanetManager.generatePlanet(id ?: 0, options ?: PlanetOptions())
         return getPlanetImage(id)
     }
