@@ -1,5 +1,7 @@
 package org.rak.starsBetween.planets
 
+import kotlin.math.min
+
 class PlanetOptions(
     seed: Long? = null,
     density: Int? = null,
@@ -22,16 +24,16 @@ class PlanetOptions(
 
     ) {
     val seed = seed ?: 1234L
-    val density = density ?: 500
+    val density = min(density ?: 500, 1000)
     val scale = scale ?: 1f
     val octaves = octaves ?: 7
     val roughness = roughness ?: 0.5f
-    val noiseScale = noiseScale ?: 1f
+    val noiseScale = noiseScale ?: 4f
     val temperature = temperature ?: 50
     val temperatureVariance = temperatureVariance ?: 50
     val temperatureFactor = temperatureFactor ?: 1.4f
     val defaultPrecipitation = defaultPrecipitation ?: 100
-    val waterThreshold = waterThreshold ?: 100
+    val waterThreshold = waterThreshold ?: 0
     val biomeTypes = biomeTypes ?: "EarthlikeBiomes"
 
 }

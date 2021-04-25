@@ -6,16 +6,13 @@ import kotlin.math.abs
 
 private const val ALTITUDE_FACTOR = 0.9f
 
-class PrecipitationGenerator(
-    private val defaultPrecipitationLevel: Int = 100,
-    private val waterThreshold: Int = 0
-) {
+class PrecipitationGenerator() {
     private val desertBandGenerator = DesertBandGenerator()
 
-    fun generatePrecipitationMap(seed: Long, heightMap: Array<IntArray>, temperatureMap: Array<IntArray>): Array<IntArray> {
+    fun generatePrecipitationMap(seed: Long, heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, options: PlanetOptions): Array<IntArray> {
         val bands = desertBandGenerator.generateDesertBands(seed)
         val precipitationMap = initializePrecipitationMap(heightMap)
-        return populatePrecipitation(heightMap, temperatureMap, precipitationMap, bands)
+        return populatePrecipitation(heightMap, temperatureMap, precipitationMap, bands, options)
     }
 
     private fun initializePrecipitationMap(heightMap: Array<IntArray>): Array<IntArray> {
@@ -23,7 +20,7 @@ class PrecipitationGenerator(
         return Array(density) { IntArray(density) }
     }
 
-    private fun populatePrecipitation(heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, precipitationMap: Array<IntArray>, bands: List<DesertBand>, ): Array<IntArray> {
+    private fun populatePrecipitation(heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, precipitationMap: Array<IntArray>, bands: List<DesertBand>, options: PlanetOptions): Array<IntArray> {
         for (y in precipitationMap.indices) {
             val latitude = getPercent(y, precipitationMap.size)
 
@@ -31,18 +28,18 @@ class PrecipitationGenerator(
                 val altitude = heightMap[x][y]
                 val temperature = temperatureMap[x][y]
 
-                precipitationMap[x][y] = generatePrecipitation(bands, altitude, temperature, latitude)
+                precipitationMap[x][y] = generatePrecipitation(options, bands, altitude, temperature, latitude)
             }
         }
         return precipitationMap
     }
 
-    private fun generatePrecipitation(bands: List<DesertBand>, altitude: Int, temperature: Int, latitude: Float): Int {
-        if (altitude < waterThreshold) {
-            return defaultPrecipitationLevel
+    private fun generatePrecipitation(options: PlanetOptions, bands: List<DesertBand>, altitude: Int, temperature: Int, latitude: Float): Int {
+        if (altitude < options.waterThreshold) {
+            return options.defaultPrecipitation
         }
-        var precipitation = defaultPrecipitationLevel
-        precipitation -= getAmountLessPrecipitationDueToAltitude(altitude)
+        var precipitation = options.defaultPrecipitation
+        precipitation -= getAmountLessPrecipitationDueToAltitude(options, altitude)
         precipitation -= getAmountLessPrecipitationDueToDeserts(bands, latitude, precipitation).toInt()
 
         precipitation = clamp(precipitation, 0, 100)
@@ -50,8 +47,8 @@ class PrecipitationGenerator(
         return precipitation
     }
 
-    private fun getAmountLessPrecipitationDueToAltitude(altitude: Int): Int {
-        val adjustedAltitude = altitude - waterThreshold
+    private fun getAmountLessPrecipitationDueToAltitude(options: PlanetOptions, altitude: Int): Int {
+        val adjustedAltitude = altitude - options.waterThreshold
         return (adjustedAltitude * ALTITUDE_FACTOR).toInt()
     }
 

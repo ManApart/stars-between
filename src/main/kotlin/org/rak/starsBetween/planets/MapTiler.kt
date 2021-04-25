@@ -8,7 +8,7 @@ class MapTiler(private val percent: Float = .1f) {
     fun makeImageTilable(ogMap: Array<IntArray>): Array<IntArray> {
         val size = ogMap.size
         val overlapAmount = (size * percent).toInt()
-        if (overlapAmount >= size) {
+        if (overlapAmount >= size || overlapAmount == 0) {
             return ogMap
         }
 
