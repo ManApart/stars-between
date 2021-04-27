@@ -6,7 +6,7 @@ import org.rak.starsBetween.views.planetView.PlanetPainter
 import org.rak.starsBetween.views.planetView.PlanetViewType
 
 object PlanetManager {
-    val viewType = PlanetViewType.ALTITUDE
+    var viewType = PlanetViewType.ALTITUDE
     val painter = PlanetPainter()
     private val generator = PlanetGenerator()
     private val planets = mutableMapOf<Int, Planet>()

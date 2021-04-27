@@ -1,8 +1,20 @@
 <div class="container">
   <div class="section">
+    <select>
+      <option value="ALTITUDE">Altitude</option>
+      <option value="BIOME">Biome</option>
+    </select>
+    <button type="button" (click)="changeView()">View</button>
     <planet-options (generatePlanet)="planetGenerated($event)"></planet-options>
   </div>
-  <div class="section">
-    <img [src]="planetImage" class="planet-pic" width="500">
+  <div class="section" style="width: 500px">
+    <img [src]="planetImage" id="planet-pic" (click)="imageClicked($event)" class="planet-pic" width="500">
+  </div>
+  <div class="section" *ngIf="region">
+    X: {{selectedX}} Y: {{selectedY}} <br />
+    Altitude: {{region.altitude}}<br />
+    Temperature: {{region.temperature}}<br />
+    Precipitation: {{region.precipitation}}<br />
+    Biome: {{region.biome.id}}<br />
   </div>
 </div>
