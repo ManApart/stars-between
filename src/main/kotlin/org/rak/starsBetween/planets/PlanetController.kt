@@ -14,23 +14,23 @@ import javax.imageio.ImageIO
 @RequestMapping("/planet/{id}")
 class PlanetController {
 
-    @PostMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
+    @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun generatePlanet(@PathVariable id: Int, @RequestBody options: PlanetOptions? = null) : ByteArray{
         PlanetManager.generatePlanet(id, options ?: PlanetOptions())
         return getPlanetImage(id)
     }
 
-    @GetMapping(produces = [MediaType.IMAGE_JPEG_VALUE])
+    @GetMapping(produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun getPlanetImage(@PathVariable id: Int): ByteArray {
-        val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id ?: 0), PlanetManager.viewType)
+        val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id), PlanetManager.viewType)
         val baos = ByteArrayOutputStream()
         ImageIO.write(image, "png", baos)
         return baos.toByteArray()
     }
 
-    @GetMapping(path= ["/view"], produces = [MediaType.IMAGE_JPEG_VALUE])
+    @GetMapping(path= ["/view"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun changeView(@PathVariable id: Int, @RequestParam view: PlanetViewType): ByteArray {
         PlanetManager.viewType = view
@@ -41,8 +41,8 @@ class PlanetController {
     @ResponseBody
     fun getRegion(@PathVariable id: Int, @PathVariable x: Int, @PathVariable y: Int): Region {
         val planet = PlanetManager.getPlanet(id)
-        val adjustedX = clamp(x, 0, planet.regions.size)
-        val adjustedY = clamp(y, 0, planet.regions.size)
+        val adjustedX = clamp(x, 0, planet.regions.size-1)
+        val adjustedY = clamp(y, 0, planet.regions.size-1)
         return planet.regions[adjustedX][adjustedY]
     }
 

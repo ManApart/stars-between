@@ -11,6 +11,7 @@ export class PlanetMainComponent implements OnInit {
   selectedX: number
   selectedY: number
   region: any
+  imageDisplaySize = 500
 
   ngOnInit(): void {
   }
@@ -48,9 +49,11 @@ export class PlanetMainComponent implements OnInit {
   }
 
   imageClicked(event) {
+    const actualSize = (document.querySelector('#planet-pic') as any).naturalWidth
+    const scale = this.imageDisplaySize / actualSize
     const rect = document.querySelector('#planet-pic').getBoundingClientRect()
-    const x = Math.round(event.x - rect.left)
-    const y = Math.round(event.y - rect.top)
+    const x = Math.floor((event.x - rect.left) / scale)
+    const y = Math.floor((event.y - rect.top) / scale)
 
     this.planetService.getRegion(x, y).toPromise().then(data => {
       this.selectedX = x

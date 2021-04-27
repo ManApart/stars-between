@@ -8,7 +8,7 @@
     <planet-options (generatePlanet)="planetGenerated($event)"></planet-options>
   </div>
   <div class="section" style="width: 500px">
-    <img [src]="planetImage" id="planet-pic" (click)="imageClicked($event)" class="planet-pic" width="500">
+    <img [src]="planetImage" id="planet-pic" (click)="imageClicked($event)" class="planet-pic">
   </div>
   <div class="section" *ngIf="region">
     X: {{selectedX}} Y: {{selectedY}} <br />

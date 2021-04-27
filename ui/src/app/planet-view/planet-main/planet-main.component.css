@@ -10,4 +10,5 @@
 
 .planet-pic {
   image-rendering: pixelated;
+  width: 500px;
 }
