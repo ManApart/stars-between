@@ -4,5 +4,6 @@ enum class PlanetViewType {
     ALTITUDE,
     BIOME,
     PRECIPITATION,
-    TEMPERATURE
+    TEMPERATURE,
+    SATELLITE
 }

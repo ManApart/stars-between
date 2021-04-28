@@ -57,7 +57,7 @@
 	{
 		"id": "alpine",
 		"name": "Alpine",
-		"color": "#fff",
+		"color": "#ffffff",
 		"altitude": 100,
 		"altitudeMaxVariance": 30,
 		"temperature": 0,

@@ -44,7 +44,6 @@ export class PlanetMainComponent implements OnInit {
 
 
   selectView() {
-    console.log(this.selectView)
     this.planetService.changeViewType(this.selectedView).toPromise().then(data => {
       this.createImageFromBlob(data);
     }, error => {

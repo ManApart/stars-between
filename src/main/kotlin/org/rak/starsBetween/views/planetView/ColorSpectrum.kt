@@ -2,6 +2,7 @@ package org.rak.starsBetween.views.planetView
 
 import org.rak.starsBetween.clamp
 import java.awt.Color
+import kotlin.math.roundToInt
 
 class ColorSpectrum(private val keyFrames: Map<Int, Color>) {
     private val positions = keyFrames.keys.sorted()
@@ -10,13 +11,17 @@ class ColorSpectrum(private val keyFrames: Map<Int, Color>) {
         val before = getPrevious(position)
         val after = getNext(position)
 
-        //If we're already out of range, return the last on the list
-        if (before == after) {
-            return keyFrames[before]!!
+        return when {
+            before == after -> keyFrames[before]!! //If we're already out of range, return the last on the list
+            position == before -> keyFrames[before]!!
+            position == after -> keyFrames[after]!!
+            else -> {
+                val blendPercent = getBlendRelativeToLowerBound(before, after, position)
+                blendColor(keyFrames[before]!!, keyFrames[after]!!, blendPercent)
+            }
         }
-        val blendPercent = getBlendRelativeToLowerBound(before, after, position)
 
-        return blendColor(keyFrames[before]!!, keyFrames[after]!!, blendPercent)
+
     }
 
     fun getNext(position: Int): Int {
@@ -49,9 +54,9 @@ class ColorSpectrum(private val keyFrames: Map<Int, Color>) {
     }
 
     private fun createValidColor(r: Float, g: Float, b: Float): Color {
-        val validR = clamp(r.toInt(), 0, 255)
-        val validG = clamp(g.toInt(), 0, 255)
-        val validB = clamp(b.toInt(), 0, 255)
+        val validR = clamp(r.roundToInt(), 0, 255)
+        val validG = clamp(g.roundToInt(), 0, 255)
+        val validB = clamp(b.roundToInt(), 0, 255)
         return Color(validR, validG, validB)
     }
 
@@ -60,6 +65,41 @@ class ColorSpectrum(private val keyFrames: Map<Int, Color>) {
 val altitudeSpectrum = ColorSpectrum(
     mapOf(
         -120 to Color.black,
+        120 to Color.white
+    )
+)
+
+val precipitationSpectrum = ColorSpectrum(
+    mapOf(
+        0 to Color(1f, 1f, .99f),
+        20 to Color(1f, 1f, .6f),
+        50 to Color(.2f, .8f, 0f),
+        100 to Color(.1f, 0f, .5f)
+    )
+)
+
+val temperatureSpectrum = ColorSpectrum(
+    mapOf(
+        -100 to Color.black,
+        0 to Color(0f, 0f, 1f),
+        0 to Color(0, 0, 255),
+        20 to Color(54, 120, 204),
+        50 to Color(105, 255, 14),
+        100 to Color(236, 230, 168),
+        200 to Color(231, 37, 1),
+        500 to Color(255, 255, 219)
+    )
+)
+
+val satelliteSpectrum = ColorSpectrum(
+    mapOf(
+        -120 to Color(0.0f, 0.19607843458652496f, 0.5882353186607361f),
+        0 to Color(0.0f, 0.3921568691730499f, 0.7843137383460999f),
+        5 to Color(0.0784313753247261f, 0.3921568691730499f, 0.19607843458652496f),
+        10 to Color(0.0784313753247261f, 0.3921568691730499f, 0f),
+        20 to Color(0.19607843458652496f, 0.5882353186607361f, 0f),
+        60 to Color(0.19607843458652496f, 0.7843137383460999f, 0f),
+        80 to Color.gray,
         120 to Color.white
     )
 )
