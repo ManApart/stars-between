@@ -1,6 +1,7 @@
 package org.rak.starsBetween.planets
 
 import org.rak.starsBetween.clamp
+import org.rak.starsBetween.game.ViewType
 import org.rak.starsBetween.planets.generation.PlanetOptions
 import org.rak.starsBetween.views.planetView.PlanetViewType
 import org.springframework.http.MediaType
@@ -11,17 +12,17 @@ import javax.imageio.ImageIO
 
 @CrossOrigin(origins = ["*"])
 @RestController
-@RequestMapping("/planet/{id}")
+@RequestMapping("/planet")
 class PlanetController {
 
-    @PostMapping(produces = [MediaType.IMAGE_PNG_VALUE])
+    @PostMapping(path = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun generatePlanet(@PathVariable id: Int, @RequestBody options: PlanetOptions? = null) : ByteArray{
         PlanetManager.generatePlanet(id, options ?: PlanetOptions())
         return getPlanetImage(id)
     }
 
-    @GetMapping(produces = [MediaType.IMAGE_PNG_VALUE])
+    @GetMapping(path = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun getPlanetImage(@PathVariable id: Int): ByteArray {
         val image = PlanetManager.painter.paint(PlanetManager.getPlanet(id), PlanetManager.viewType)
@@ -30,14 +31,19 @@ class PlanetController {
         return baos.toByteArray()
     }
 
-    @GetMapping(path= ["/view"], produces = [MediaType.IMAGE_PNG_VALUE])
+    @GetMapping("/views")
+    fun getViews() : List<PlanetViewType> {
+        return PlanetViewType.values().toList()
+    }
+
+    @GetMapping(path= ["/{id}/view"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun changeView(@PathVariable id: Int, @RequestParam view: PlanetViewType): ByteArray {
         PlanetManager.viewType = view
         return getPlanetImage(id)
     }
 
-    @GetMapping(path= ["/region/{x}/{y}"])
+    @GetMapping(path= ["{id}/region/{x}/{y}"])
     @ResponseBody
     fun getRegion(@PathVariable id: Int, @PathVariable x: Int, @PathVariable y: Int): Region {
         val planet = PlanetManager.getPlanet(id)

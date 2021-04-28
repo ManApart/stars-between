@@ -1,10 +1,10 @@
 <div class="container">
   <div class="section">
-    <select>
-      <option value="ALTITUDE">Altitude</option>
-      <option value="BIOME">Biome</option>
+    <select [(ngModel)]="selectedView" (change)="selectView();">
+      <option [ngValue]="view" *ngFor="let view of views">
+        {{view}}
+      </option>
     </select>
-    <button type="button" (click)="changeView()">View</button>
     <planet-options (generatePlanet)="planetGenerated($event)"></planet-options>
   </div>
   <div class="section" style="width: 500px">

@@ -12,6 +12,20 @@ export class PlanetService {
     })
   }
 
+  getViewTypes() {
+    return this.http.get(`http://localhost:8080/planet/views`, {
+      headers: new HttpHeaders({}),
+      responseType: 'json'
+    })
+  }
+
+  changeViewType(viewType) {
+    return this.http.get(`http://localhost:8080/planet/0/view?view=${viewType}`, {
+      headers: new HttpHeaders({}),
+      responseType: 'blob'
+    })
+  }
+
   generatePlanet(options) {
     return this.http.post(`http://localhost:8080/planet/0`, options, {
       headers: new HttpHeaders({}),

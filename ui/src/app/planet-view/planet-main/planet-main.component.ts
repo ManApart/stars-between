@@ -7,16 +7,23 @@ import { PlanetService } from 'src/app/planetService';
   styleUrls: ['./planet-main.component.css']
 })
 export class PlanetMainComponent implements OnInit {
+  selectedView
   planetImage: any
   selectedX: number
   selectedY: number
   region: any
   imageDisplaySize = 500
 
+  views = []
+
   ngOnInit(): void {
   }
 
   constructor(private elRef: ElementRef, private planetService: PlanetService) {
+    planetService.getViewTypes().toPromise().then(data => {
+      this.views = data as Array<string>
+      this.selectedView = data[0]
+    })
     planetService.getPlanetImage().subscribe(data => {
       this.createImageFromBlob(data);
     }, error => {
@@ -36,7 +43,13 @@ export class PlanetMainComponent implements OnInit {
   }
 
 
-  changeView() {
+  selectView() {
+    console.log(this.selectView)
+    this.planetService.changeViewType(this.selectedView).toPromise().then(data => {
+      this.createImageFromBlob(data);
+    }, error => {
+      console.log(error);
+    })
   }
 
 
