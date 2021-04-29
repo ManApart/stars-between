@@ -7,18 +7,13 @@ import kotlin.math.abs
 
 private const val ALTITUDE_FACTOR = 0.9f
 
-class PrecipitationGenerator() {
+class PrecipitationGenerator {
     private val desertBandGenerator = DesertBandGenerator()
 
     fun generatePrecipitationMap(seed: Long, heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, options: PlanetOptions): Array<IntArray> {
         val bands = desertBandGenerator.generateDesertBands(seed)
-        val precipitationMap = initializePrecipitationMap(heightMap)
+        val precipitationMap = Array(heightMap.size) { IntArray(heightMap.size) }
         return populatePrecipitation(heightMap, temperatureMap, precipitationMap, bands, options)
-    }
-
-    private fun initializePrecipitationMap(heightMap: Array<IntArray>): Array<IntArray> {
-        val density = heightMap.size
-        return Array(density) { IntArray(density) }
     }
 
     private fun populatePrecipitation(heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, precipitationMap: Array<IntArray>, bands: List<DesertBand>, options: PlanetOptions): Array<IntArray> {
@@ -27,15 +22,13 @@ class PrecipitationGenerator() {
 
             for (x in precipitationMap.indices) {
                 val altitude = heightMap[x][y]
-                val temperature = temperatureMap[x][y]
-
-                precipitationMap[x][y] = generatePrecipitation(options, bands, altitude, temperature, latitude)
+                precipitationMap[x][y] = generatePrecipitation(options, bands, altitude, latitude)
             }
         }
         return precipitationMap
     }
 
-    private fun generatePrecipitation(options: PlanetOptions, bands: List<DesertBand>, altitude: Int, temperature: Int, latitude: Float): Int {
+    private fun generatePrecipitation(options: PlanetOptions, bands: List<DesertBand>, altitude: Int, latitude: Float): Int {
         if (altitude < options.waterThreshold) {
             return options.defaultPrecipitation
         }

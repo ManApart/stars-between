@@ -25,11 +25,11 @@ class ColorSpectrum(private val keyFrames: Map<Int, Color>) {
     }
 
     fun getNext(position: Int): Int {
-        return positions.firstOrNull { it > position } ?: positions.last()
+        return positions.firstOrNull { it >= position } ?: positions.last()
     }
 
     fun getPrevious(position: Int): Int {
-        return positions.sortedDescending().firstOrNull { it < position } ?: positions.first()
+        return positions.sortedDescending().firstOrNull { it <= position } ?: positions.first()
     }
 
     fun getBlendRelativeToLowerBound(lowerBound: Int, upperBound: Int, position: Int): Float {

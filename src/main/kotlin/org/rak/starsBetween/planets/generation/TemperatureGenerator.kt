@@ -6,17 +6,12 @@ import kotlin.math.abs
 
 class TemperatureGenerator() {
     fun generateTemperatureMap(options: PlanetOptions, heightMap: Array<IntArray>): Array<IntArray> {
-        val temperatureMap = initializeTemperatureMap(heightMap)
+        val temperatureMap = Array(heightMap.size) { IntArray(heightMap.size) }
         val minTemperature = options.temperature - options.temperatureVariance
         val maxTemperature = options.temperature + options.temperatureVariance
         populateTemperatures(options, heightMap, temperatureMap, minTemperature, maxTemperature)
 
         return temperatureMap
-    }
-
-    private fun initializeTemperatureMap(heightMap: Array<IntArray>): Array<IntArray> {
-        val density = heightMap.size
-        return Array(density) { IntArray(density) }
     }
 
     private fun populateTemperatures(options: PlanetOptions, heightMap: Array<IntArray>, temperatureMap: Array<IntArray>, minTemperature: Int, maxTemperature: Int) {
