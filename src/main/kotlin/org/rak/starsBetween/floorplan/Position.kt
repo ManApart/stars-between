@@ -33,6 +33,10 @@ class Position(val x: Int = 0, val y: Int = 0) {
         return listOf(up(), down(), left(), right())
     }
 
+    fun offset(x: Int = 0, y: Int = 0): Position {
+        return Position(this.x + x, this.y + y)
+    }
+
     override fun hashCode(): Int {
         var result = x
         result = 31 * result + y

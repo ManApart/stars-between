@@ -7,6 +7,7 @@ import org.rak.starsBetween.tile.DEFAULT_TILE
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
 import org.rak.starsBetween.tile.orient
+import kotlin.math.abs
 
 class FloorPlan(val size: Int = 5) {
     private val tiles = (0 until size).associate { y ->
@@ -69,7 +70,7 @@ class FloorPlan(val size: Int = 5) {
         }
     }
 
-    fun getId(system: ShipSystem) : Int {
+    fun getId(system: ShipSystem): Int {
         return systemsById[system.type]!!.entries.firstOrNull { it.value.system == system }?.key ?: 0
     }
 
@@ -89,9 +90,16 @@ class FloorPlan(val size: Int = 5) {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
     }
 
-    //TODO
-    fun getNeighbors(tile: Tile, radius: Int = 1): List<Tile> {
-        return getNeighbors(tile)
+    fun getNeighbors(source: Tile, radius: Int = 1): List<Tile> {
+        val neighbors = mutableSetOf<Tile>()
+        for (xOffset in -radius..radius) {
+            val diag = radius - abs(xOffset)
+            for (yOffset in -diag..diag) {
+                val tile = getTile(source.position.offset(xOffset, yOffset))
+                neighbors.add(tile)
+            }
+        }
+        return neighbors.filterNot { it == DEFAULT_TILE || it == source }.toList()
     }
 
     fun updateAreas() {
