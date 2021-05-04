@@ -9,6 +9,7 @@ class ShieldView(val tiles: List<List<SimpleTile>>, val shields: List<ShieldUpda
 }
 
 fun FloorPlan.toShieldView(): ShieldView {
+    val shieldedTiles = getSystems(SystemType.SHIELD).values.flatMap { (it.system as Shield).getProtectedTiles() }.toSet()
     val tiles = (0 until size).map { y ->
         (0 until size).map { x ->
             val tile = getTile(x, y)
@@ -18,7 +19,10 @@ fun FloorPlan.toShieldView(): ShieldView {
             } else {
                 0
             }
-            SimpleTile(tile, idToUse)
+
+            val shielded = shieldedTiles.contains(tile)
+
+            SimpleTile(tile, idToUse, shielded)
         }
     }
     val shields = getSystems(SystemType.SHIELD).entries.map { (id, shield) -> simpleShield(shield, id) }

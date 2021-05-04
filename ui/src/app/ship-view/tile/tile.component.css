@@ -33,3 +33,12 @@
   left: 0%;
   text-shadow: 0px 0px 2px #fff;
 }
+
+.shielded {
+  position: absolute;
+  top: 0px;
+  opacity: 0.4;
+  width: 40px;
+  height: 40px;
+  background-color: aqua;
+}

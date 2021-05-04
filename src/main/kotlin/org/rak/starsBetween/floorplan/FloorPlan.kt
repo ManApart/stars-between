@@ -54,6 +54,7 @@ class FloorPlan(val size: Int = 5) {
             getNeighbors(newTile).forEach { orient(it, this) }
             updateAreas()
             updateSystemsById()
+            notifySystemsThatFloorplanChanged()
         }
     }
 
@@ -88,6 +89,11 @@ class FloorPlan(val size: Int = 5) {
         return tile.position.neighbors().map { getTile(it) }.filter { it != DEFAULT_TILE }
     }
 
+    //TODO
+    fun getNeighbors(tile: Tile, radius: Int = 1): List<Tile> {
+        return getNeighbors(tile)
+    }
+
     fun updateAreas() {
         airAreas = AreaGroup(this) { !it.system.isSolid() }
         powerAreas = AreaGroup(this) { it.system.type.isPowerType() || it.system is Powerable }
@@ -109,6 +115,10 @@ class FloorPlan(val size: Int = 5) {
             systemMap[id] = it
         }
         systemsById = map
+    }
+
+    private fun notifySystemsThatFloorplanChanged() {
+        getAllTiles().forEach { it.system.floorPlanUpdated(this, it) }
     }
 
 }

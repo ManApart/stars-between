@@ -10,15 +10,17 @@ class SimpleTile(
     val y: Int,
     val adjacency: Adjacency,
     val rotation: Int,
-    val id: Int
+    val id: Int,
+    val shielded: Boolean
 ) {
-    constructor(tile: Tile, id: Int) : this(
+    constructor(tile: Tile, id: Int, shielded: Boolean) : this(
         tile.system.type,
         tile.position.x,
         tile.position.y,
         tile.adjacency,
         tile.rotation,
-        id
+        id,
+        shielded
     )
 
 }

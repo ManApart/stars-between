@@ -1,5 +1,6 @@
 package org.rak.starsBetween.systems
 
+import org.rak.starsBetween.floorplan.FloorPlan
 import org.rak.starsBetween.power.Powerable
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
@@ -24,10 +25,14 @@ class Shield(
     //Current 'banked' power
     override var power = totalPowerCapacity
     override var lastReceivedPowerFrom: Tile? = null
+
     //Current amount of power to pull each tick
     var currentDesiredPower = 0
+
     //Strength of shield; based on amount of power pulled last tick * shield strength factor
     var shieldStrength = 0f
+
+    private var tilesToShield = listOf<Tile>()
 
     override val powerConsumedPerTick: Int; get() = currentDesiredPower
 
@@ -37,7 +42,23 @@ class Shield(
 
     override fun tick(parent: Tile) {
         val powerPulled = min(currentDesiredPower, power)
-        shieldStrength = powerToStrength * powerPulled
-        power-= powerPulled
+        if (powerPulled < minPowerConsumedPerTick) {
+            shieldStrength = 0f
+        } else {
+            shieldStrength = powerToStrength * powerPulled
+            power -= powerPulled
+        }
+    }
+
+    override fun floorPlanUpdated(floorPlan: FloorPlan, parent: Tile) {
+        tilesToShield = floorPlan.getNeighbors(parent, radius)
+    }
+
+    fun getProtectedTiles(): List<Tile> {
+        return if (shieldStrength > 0) {
+            listOf()
+        } else {
+            tilesToShield
+        }
     }
 }
