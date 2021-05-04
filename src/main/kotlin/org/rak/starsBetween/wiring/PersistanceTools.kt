@@ -21,9 +21,9 @@ fun saveGame() {
 }
 
 fun loadGame() {
-    val stream = File(saveName)
-    if (stream.exists()) {
-        val simpleFloorPlan: PersistedFloorPlan = jacksonObjectMapper().readValue(stream)
+    val saveFile = File(saveName)
+    if (saveFile.exists()) {
+        val simpleFloorPlan: PersistedFloorPlan = jacksonObjectMapper().readValue(saveFile)
         Game.floorPlan = simpleFloorPlan.toFloorPlan()
     } else {
         println("Could not find save $saveName")

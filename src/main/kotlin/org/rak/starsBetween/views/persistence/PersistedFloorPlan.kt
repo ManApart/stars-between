@@ -20,6 +20,7 @@ class PersistedFloorPlan(val tiles: List<List<PersistedTile>>) {
         floorPlan.getAllTiles().forEach { orient(it, floorPlan) }
         floorPlan.updateAreas()
         floorPlan.updateSystemsById()
+        floorPlan.notifySystemsThatFloorplanChanged()
 
         return floorPlan
     }

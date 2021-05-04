@@ -117,7 +117,7 @@ class FloorPlan(val size: Int = 5) {
         systemsById = map
     }
 
-    private fun notifySystemsThatFloorplanChanged() {
+    fun notifySystemsThatFloorplanChanged() {
         getAllTiles().forEach { it.system.floorPlanUpdated(this, it) }
     }
 

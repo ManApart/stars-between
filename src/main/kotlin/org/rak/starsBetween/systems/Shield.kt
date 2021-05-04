@@ -56,9 +56,9 @@ class Shield(
 
     fun getProtectedTiles(): List<Tile> {
         return if (shieldStrength > 0) {
-            listOf()
-        } else {
             tilesToShield
+        } else {
+            listOf()
         }
     }
 }
