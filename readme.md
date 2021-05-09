@@ -1,3 +1,7 @@
+# Stars Between
+
+[![Build and Test](https://github.com/ManApart/stars_between/actions/workflows/runTests.yml/badge.svg?branch=master)](https://github.com/ManApart/stars_between/actions/workflows/runTests.yml)
+
 ### Websockets
 `brew install websocat` (or download windows and add to path) and then `websocat -s 1234` to host a websocket server on port 1234. Type a message to see the server properly listens
 
