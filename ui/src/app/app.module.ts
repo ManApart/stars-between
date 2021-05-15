@@ -18,7 +18,9 @@ import { ShieldMenuComponent } from './ship-view/shield-menu/shield-menu.compone
 import { ShieldPanelComponent } from './ship-view/shield-panel/shield-panel.component';
 import { PlanetMainComponent } from './planet-view/planet-main/planet-main.component';
 import { PlanetOptionsComponent } from './planet-view/planet-options/planet-options.component'
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { CrewMenuComponent } from './ship-view/crew-menu/crew-menu.component'
+import { CrewService } from './ship-view/crewService'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { FormsModule } from '@angular/forms'
     ShieldMenuComponent,
     ShieldPanelComponent,
     PlanetMainComponent,
-    PlanetOptionsComponent
+    PlanetOptionsComponent,
+    CrewMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { FormsModule } from '@angular/forms'
     FormsModule
   ],
   providers: [
+    CrewService,
     FloorPlanService,
     GameService,
     PlanetService,

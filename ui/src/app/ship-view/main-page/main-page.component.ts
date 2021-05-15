@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FloorPlanService } from '../floorPlanService'
+import { CrewService } from '../crewService'
 
 @Component({
   selector: 'main-page',
@@ -8,7 +9,7 @@ import { FloorPlanService } from '../floorPlanService'
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(private floorPlanService: FloorPlanService) { }
+  constructor(private floorPlanService: FloorPlanService, private crewService: CrewService) { }
 
   selectedTilePalette = 'space'
   selectedMode = 'OVERVIEW'
@@ -30,6 +31,8 @@ export class MainPageComponent implements OnInit {
       this.floorPlanService.setTile(this.selectedTilePalette, newTile.x, newTile.y).toPromise()
     } else if (this.selectedMode === 'DISTANCE') {
       this.floorPlanService.selectTile(newTile.x, newTile.y).toPromise()
+    } else if (this.selectedMode === 'CREW') {
+      this.crewService.addCrewman(newTile.x, newTile.y).toPromise()
     } else {
       console.log('Unknown mode:', this.selectedMode)
     }

@@ -10,6 +10,7 @@ import org.rak.starsBetween.views.shieldView.toShieldView
 enum class ViewType(val getView: () -> View) {
     OVERVIEW({ OverView(Game.floorPlan) }),
     AIR({ Airview(Game.floorPlan) }),
+    CREW({ OverView(Game.floorPlan) }),
     POWER({ PowerView(Game.floorPlan) }),
     SHIELDS({ Game.floorPlan.toShieldView() });
 
