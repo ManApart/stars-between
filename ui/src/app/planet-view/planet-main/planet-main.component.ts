@@ -22,7 +22,7 @@ export class PlanetMainComponent implements OnInit {
   constructor(private elRef: ElementRef, private planetService: PlanetService) {
     planetService.getViewTypes().toPromise().then(data => {
       this.views = data as Array<string>
-      this.selectedView = data[0]
+      this.selectedView = data[1]
     })
     planetService.getPlanetImage().subscribe(data => {
       this.createImageFromBlob(data);

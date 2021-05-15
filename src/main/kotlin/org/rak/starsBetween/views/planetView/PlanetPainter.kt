@@ -1,8 +1,10 @@
 package org.rak.starsBetween.views.planetView
 
 import org.rak.starsBetween.planets.Planet
+import java.awt.AlphaComposite
 import java.awt.Color
 import java.awt.Graphics2D
+import java.awt.geom.Area
 import java.awt.geom.Ellipse2D
 import java.awt.image.BufferedImage
 import java.awt.image.BufferedImage.TYPE_INT_RGB
@@ -25,8 +27,6 @@ class PlanetPainter {
             else -> paintBiomes(planet, g)
         }
 
-
-
         g.dispose()
         return img
     }
@@ -48,6 +48,17 @@ class PlanetPainter {
                 g.fillRect(x, y, 1, 1)
             }
         }
+
+        val size = planet.regions.size
+        val offset = -size/10f
+        g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)
+        g.color = Color.BLACK
+        val shadow = Area(Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat()))
+        val cutOut = Area(Ellipse2D.Float(offset, offset, size.toFloat(), size.toFloat()))
+
+        shadow.subtract(cutOut)
+
+        g.fill(shadow)
     }
 
     private fun paintPrecipitation(planet: Planet, g: Graphics2D) {
