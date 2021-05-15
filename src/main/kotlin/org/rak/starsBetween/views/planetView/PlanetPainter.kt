@@ -1,22 +1,31 @@
 package org.rak.starsBetween.views.planetView
 
 import org.rak.starsBetween.planets.Planet
+import java.awt.Color
 import java.awt.Graphics2D
+import java.awt.geom.Ellipse2D
 import java.awt.image.BufferedImage
 import java.awt.image.BufferedImage.TYPE_INT_RGB
 
+
 class PlanetPainter {
-    fun paint(planet: Planet, type: PlanetViewType): BufferedImage {
+    fun paint(planet: Planet, type: PlanetViewType, sphere: Boolean = true): BufferedImage {
         val img = BufferedImage(planet.regions.size, planet.regions.size, TYPE_INT_RGB)
         val g = img.createGraphics()!!
 
-        when (type){
+        if (sphere) {
+            paintSphereOverlay(planet.regions.size, g)
+        }
+
+        when (type) {
             PlanetViewType.ALTITUDE -> paintAltitude(planet, g)
             PlanetViewType.PRECIPITATION -> paintPrecipitation(planet, g)
             PlanetViewType.TEMPERATURE -> paintTemperature(planet, g)
             PlanetViewType.SATELLITE -> paintSatellite(planet, g)
             else -> paintBiomes(planet, g)
         }
+
+
 
         g.dispose()
         return img
@@ -70,4 +79,10 @@ class PlanetPainter {
             }
         }
     }
+
+    private fun paintSphereOverlay(size: Int, g: Graphics2D) {
+        val ellipse = Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat())
+        g.clip(ellipse)
+    }
+
 }
