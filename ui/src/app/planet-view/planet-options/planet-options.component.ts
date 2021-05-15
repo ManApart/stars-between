@@ -8,20 +8,19 @@ import { PlanetService } from 'src/app/planetService';
 })
 export class PlanetOptionsComponent implements OnInit {
   seed: number
-  randomSeed: boolean
-  density: number
-  scale: number
+  randomSeed: boolean = true
+  density: number = 100
 
-  octaves: number
-  roughness: number
-  noiseScale: number
+  octaves: number = 7
+  roughness: number = 0.5
+  noiseScale: number = 7
 
-  temperature: number
-  temperatureVariance: number
-  temperatureFactor: number
+  temperature: number = 50
+  temperatureVariance: number = 50
+  temperatureFactor: number = 1.4
 
-  precipitation: number
-  waterThreshold: number
+  precipitation: number = 100
+  waterThreshold: number = 0
 
   biomeTypes: string
 
@@ -39,7 +38,6 @@ export class PlanetOptionsComponent implements OnInit {
     const options = {
       seed: seed,
       density: this.density,
-      scale: this.scale,
 
       octaves: this.octaves,
       roughness: this.roughness,

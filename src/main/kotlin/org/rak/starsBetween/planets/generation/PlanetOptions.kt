@@ -6,7 +6,6 @@ import kotlin.math.min
 class PlanetOptions(
     seed: Long? = null,
     density: Int? = null,
-    scale: Float? = null,
 
     //heightmap
     octaves: Int? = null,
@@ -26,7 +25,6 @@ class PlanetOptions(
     ) {
     val seed = seed ?: 1234L
     val density = min(density ?: 500, 1000)
-    val scale = scale ?: 1f
     val octaves = octaves ?: 7
     val roughness = roughness ?: 0.5f
     val noiseScale = noiseScale ?: 4f

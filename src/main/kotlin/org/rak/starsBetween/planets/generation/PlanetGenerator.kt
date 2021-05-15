@@ -12,7 +12,7 @@ class PlanetGenerator() {
     private val debugTimer = DebugTimer()
 
     fun generatePlanet(options: PlanetOptions): Planet {
-        debugTimer.start("Planet Generation")
+        debugTimer.start("Planet Generation with seed ${options.seed}")
 
         val heightMap: Array<IntArray> = heightmapGen.generateHeightMap(options)
         debugTimer.interval("Height Generation")
