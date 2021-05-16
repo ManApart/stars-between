@@ -21,7 +21,7 @@ export class TileComponent implements OnInit {
   }
 
   getCrewmanClass(): string {
-    return "engineering"
+    return this.tile.crewManDivision.toLowerCase()
   }
 
   getXOffset(): number {

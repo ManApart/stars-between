@@ -52,7 +52,15 @@
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
+  background: gray;
+}
+
+.combat {
   background: red;
+}
+
+.command {
+  background: yellow;
 }
 
 .science {
@@ -60,5 +68,5 @@
 }
 
 .engineering {
-  background: yellow;
+  background: green;
 }
