@@ -52,6 +52,10 @@ export class PlanetMainComponent implements OnInit {
   }
 
 
+  setViewOptions(options) {
+    this.planetService.updateViewOptions(options).toPromise()
+  }
+
   planetGenerated(options) {
     this.planetService.generatePlanet(options).toPromise().then(data => {
       this.createImageFromBlob(data);

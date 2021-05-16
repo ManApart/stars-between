@@ -1,6 +1,8 @@
 package org.rak.starsBetween.views.planetView
 
 import org.rak.starsBetween.planets.Planet
+import org.rak.starsBetween.planets.PlanetManager
+import org.rak.starsBetween.planets.generation.PlanetViewOptions
 import java.awt.AlphaComposite
 import java.awt.Color
 import java.awt.Graphics2D
@@ -11,11 +13,11 @@ import java.awt.image.BufferedImage.TYPE_INT_RGB
 
 
 class PlanetPainter {
-    fun paint(planet: Planet, type: PlanetViewType, sphere: Boolean = true): BufferedImage {
+    fun paint(planet: Planet, type: PlanetViewType): BufferedImage {
         val img = BufferedImage(planet.regions.size, planet.regions.size, TYPE_INT_RGB)
         val g = img.createGraphics()!!
 
-        if (sphere) {
+        if (PlanetManager.viewOptions.sphere) {
             paintSphereOverlay(planet.regions.size, g)
         }
 
@@ -24,7 +26,7 @@ class PlanetPainter {
             PlanetViewType.PRECIPITATION -> paintPrecipitation(planet, g)
             PlanetViewType.TEMPERATURE -> paintTemperature(planet, g)
             PlanetViewType.SATELLITE -> paintSatellite(planet, g)
-            else -> paintBiomes(planet, g)
+            else -> paintBiomes(planet, g, PlanetManager.viewOptions)
         }
 
         g.dispose()
@@ -41,7 +43,7 @@ class PlanetPainter {
         }
     }
 
-    private fun paintBiomes(planet: Planet, g: Graphics2D) {
+    private fun paintBiomes(planet: Planet, g: Graphics2D, options: PlanetViewOptions) {
         for (x in planet.regions.indices) {
             for (y in planet.regions.indices) {
                 g.color = planet.regions[x][y].biome.color
@@ -49,16 +51,19 @@ class PlanetPainter {
             }
         }
 
-        val size = planet.regions.size
-        val offset = -size/10f
-        g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)
-        g.color = Color.BLACK
-        val shadow = Area(Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat()))
-        val cutOut = Area(Ellipse2D.Float(offset, offset, size.toFloat(), size.toFloat()))
+        if (options.shadow) {
+            val size = planet.regions.size
+            val offset = -size / 10f
+            g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)
+            g.color = Color.BLACK
 
-        shadow.subtract(cutOut)
+            val shadow = Area(Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat()))
+            val cutOut = Area(Ellipse2D.Float(offset, offset, size.toFloat(), size.toFloat()))
 
-        g.fill(shadow)
+            shadow.subtract(cutOut)
+
+            g.fill(shadow)
+        }
     }
 
     private fun paintPrecipitation(planet: Planet, g: Graphics2D) {

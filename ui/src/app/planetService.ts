@@ -33,6 +33,13 @@ export class PlanetService {
     })
   }
 
+  updateViewOptions(options) {
+    return this.http.put(`http://localhost:8080/planet/view`, options, {
+      headers: new HttpHeaders({}),
+      responseType: 'blob'
+    })
+  }
+
   getRegion(x, y) {
     return this.http.get(`http://localhost:8080/planet/0/region/${x}/${y}`, {
       headers: new HttpHeaders({}),

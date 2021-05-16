@@ -24,10 +24,10 @@ class PlanetOptions(
 
     ) {
     val seed = seed ?: 1234L
-    val density = min(density ?: 500, 1000)
+    val density = min(density ?: 100, 1000)
     val octaves = octaves ?: 7
     val roughness = roughness ?: 0.5f
-    val noiseScale = noiseScale ?: 4f
+    val noiseScale = noiseScale ?: 7f
     val temperature = temperature ?: 50
     val temperatureVariance = temperatureVariance ?: 50
     val temperatureFactor = temperatureFactor ?: 1.4f

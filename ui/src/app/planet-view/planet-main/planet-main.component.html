@@ -5,7 +5,8 @@
         {{view}}
       </option>
     </select>
-    <planet-options (generatePlanet)="planetGenerated($event)"></planet-options>
+    <planet-options (generatePlanet)="planetGenerated($event)" (updateViewOptions)="setViewOptions($event)">
+    </planet-options>
   </div>
   <div class="section" style="width: 500px">
     <img [src]="planetImage" id="planet-pic" (click)="imageClicked($event)" class="planet-pic">

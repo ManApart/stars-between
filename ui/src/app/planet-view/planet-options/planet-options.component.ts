@@ -22,9 +22,13 @@ export class PlanetOptionsComponent implements OnInit {
   precipitation: number = 100
   waterThreshold: number = 0
 
+  sphere: boolean = true
+  shadow: boolean = true
+
   biomeTypes: string
 
   @Output() generatePlanet: EventEmitter<any> = new EventEmitter()
+  @Output() updateViewOptions: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
@@ -34,6 +38,10 @@ export class PlanetOptionsComponent implements OnInit {
   generate() {
     const seed = (this.randomSeed) ? Math.random() * 1000 : this.seed
 
+    const viewOptions = {
+      sphere: this.sphere,
+      shadow: this.shadow
+    }
 
     const options = {
       seed: seed,
@@ -49,8 +57,10 @@ export class PlanetOptionsComponent implements OnInit {
 
       precipitation: this.precipitation,
       waterThreshold: this.waterThreshold,
-      biomeTypes: this.biomeTypes
+      biomeTypes: this.biomeTypes,
+
     }
+    this.updateViewOptions.emit(viewOptions)
     this.generatePlanet.emit(options)
   }
 

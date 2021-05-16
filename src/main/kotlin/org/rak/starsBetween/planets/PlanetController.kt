@@ -3,6 +3,7 @@ package org.rak.starsBetween.planets
 import org.rak.starsBetween.clamp
 import org.rak.starsBetween.game.ViewType
 import org.rak.starsBetween.planets.generation.PlanetOptions
+import org.rak.starsBetween.planets.generation.PlanetViewOptions
 import org.rak.starsBetween.views.planetView.PlanetViewType
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -31,9 +32,9 @@ class PlanetController {
         return baos.toByteArray()
     }
 
-    @GetMapping("/views")
-    fun getViews() : List<PlanetViewType> {
-        return PlanetViewType.values().toList()
+    @PutMapping(path=["/view"])
+    fun setViewSettings(@RequestBody options: PlanetViewOptions) {
+        PlanetManager.viewOptions = options
     }
 
     @GetMapping(path= ["/{id}/view"], produces = [MediaType.IMAGE_PNG_VALUE])
@@ -50,6 +51,11 @@ class PlanetController {
         val adjustedX = clamp(x, 0, planet.regions.size-1)
         val adjustedY = clamp(y, 0, planet.regions.size-1)
         return planet.regions[adjustedX][adjustedY]
+    }
+
+    @GetMapping("/views")
+    fun getViews() : List<PlanetViewType> {
+        return PlanetViewType.values().toList()
     }
 
 
