@@ -1,16 +1,19 @@
 package org.rak.starsBetween.game
 
 import org.rak.starsBetween.airflow.simulateAir
+import org.rak.starsBetween.crew.CrewMan
 import org.rak.starsBetween.floorplan.FloorPlan
 import org.rak.starsBetween.floorplan.Position
 import org.rak.starsBetween.power.simulatePower
 import org.rak.starsBetween.tile.FLOOR
 import org.rak.starsBetween.tile.SPACE
+import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.WALL
 
 object Game {
     var currentView = ViewType.OVERVIEW
     var floorPlan = createFloorPlan(10)
+    val crew = mutableMapOf<Int, CrewMan>()
 
     fun createFloorPlan(size: Int = 10): FloorPlan {
         val floorPlan = FloorPlan(size)
@@ -39,6 +42,18 @@ object Game {
     private fun tickSystems(floorPlan: FloorPlan) {
         floorPlan.getAllTiles().forEach {
             it.system.tick(it)
+        }
+    }
+
+    fun addCrewMan() {
+        val id = (crew.keys.maxOrNull() ?: 0) + 1
+        val tile = floorPlan.getAllTiles()
+            .firstOrNull { it.system.type == SystemType.FLOOR && it.crewMan == null }
+        if (tile != null) {
+            crew[id] = CrewMan(id, tile)
+            tile.crewMan = crew[id]
+        } else {
+            throw Exception("Could not find an open tile for the crewman")
         }
     }
 }

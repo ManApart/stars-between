@@ -32,7 +32,7 @@ export class MainPageComponent implements OnInit {
     } else if (this.selectedMode === 'DISTANCE') {
       this.floorPlanService.selectTile(newTile.x, newTile.y).toPromise()
     } else if (this.selectedMode === 'CREW') {
-      this.crewService.addCrewman(newTile.x, newTile.y).toPromise()
+      console.log('crew tile order')
     } else {
       console.log('Unknown mode:', this.selectedMode)
     }

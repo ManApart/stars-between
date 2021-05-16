@@ -1,6 +1,7 @@
 package org.rak.starsBetween.tile
 
 import org.rak.starsBetween.airflow.Vent
+import org.rak.starsBetween.crew.CrewMan
 import org.rak.starsBetween.floorplan.Position
 import org.rak.starsBetween.power.Engine
 import org.rak.starsBetween.power.Wire
@@ -30,7 +31,7 @@ data class Tile(
     val position: Position = Position(),
     val system: ShipSystem
 ) {
-
+    var crewMan: CrewMan? = null
     var air = if (system.isSolid()) {
         0
     } else {

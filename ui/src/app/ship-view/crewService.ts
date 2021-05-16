@@ -5,8 +5,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 export class CrewService {
   constructor(private http: HttpClient) { }
 
-  addCrewman(x, y) {
-    return this.http.post(`http://localhost:8080/crew?x=${x}&y=${y}`, {
+  addCrewman() {
+    return this.http.post(`http://localhost:8080/crew`, {
+      headers: new HttpHeaders({}),
+      responseType: 'json'
+    })
+  }
+
+  removeCrewman() {
+    return this.http.delete(`http://localhost:8080/`, {
       headers: new HttpHeaders({}),
       responseType: 'json'
     })

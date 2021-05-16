@@ -1,5 +1,6 @@
 package org.rak.starsBetween.floorplan
 
+import org.rak.starsBetween.game.Game
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])
@@ -8,21 +9,20 @@ import org.springframework.web.bind.annotation.*
 class CrewmanController {
 
     @PostMapping
-    fun addCrewman(@RequestParam x: Int, @RequestParam y: Int) {
-        println("Add Crewman")
+    fun addCrewman() {
+        Game.addCrewMan()
     }
 
     @DeleteMapping
-    fun removeCrewman(@RequestParam x: Int, @RequestParam y: Int) {
+    fun removeCrewman(@RequestParam crewmanId: Int) {
         println("Remove Crewman")
     }
 
 
     @PutMapping
-    fun givOrder(@RequestParam crewmanId: Int, @RequestParam x: Int, @RequestParam y: Int){
+    fun givOrder(@RequestParam crewmanId: Int, @RequestParam x: Int, @RequestParam y: Int) {
 
     }
-
 
 
 }

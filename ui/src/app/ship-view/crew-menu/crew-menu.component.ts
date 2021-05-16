@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrewService } from '../crewService';
 
 @Component({
   selector: 'crew-menu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrewMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private crewService: CrewService) { }
 
   ngOnInit(): void {
+  }
+
+  addCrewMan(): void {
+    this.crewService.addCrewman().toPromise()
   }
 
 }
