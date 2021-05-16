@@ -21,7 +21,9 @@
   </div>
 
   <div *ngIf="mode === 'AIR' && tile.air != 0" class="number">{{tile.air}}</div>
-  <div *ngIf="mode === 'CREW' && tile.crewManId" class="number">{{tile.crewManId}}</div>
+  <div *ngIf="mode === 'CREW' && tile.crewManId" class="circle" [ngClass]="getCrewmanClass()">
+    <div class="number">{{tile.crewManId}}</div>
+  </div>
   <div *ngIf="mode === 'POWER' && tile.power != 0" class="number">{{tile.power}}</div>
   <div *ngIf="mode === 'SHIELDS' && tile.id != 0" class="number">{{tile.id}}</div>
   <div *ngIf="mode === 'DISTANCE' && tile.distance != 0 && tile.distance != 2147483647" class="number">{{tile.distance}}

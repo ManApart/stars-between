@@ -42,3 +42,23 @@
   height: 40px;
   background-color: aqua;
 }
+
+.circle {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: red;
+}
+
+.science {
+  background: blue;
+}
+
+.engineering {
+  background: yellow;
+}

@@ -20,6 +20,10 @@ export class TileComponent implements OnInit {
     return '../../assets/images/tiles/' + this.tile.type.toLowerCase() + '.png'
   }
 
+  getCrewmanClass(): string {
+    return "engineering"
+  }
+
   getXOffset(): number {
     let offset = 0
 
