@@ -1,7 +1,7 @@
-package org.rak.starsBetween.planets.generation
+package org.rak.starsBetween.planet.generation
 
-import org.rak.starsBetween.planets.Biome
-import org.rak.starsBetween.planets.Region
+import org.rak.starsBetween.planet.Biome
+import org.rak.starsBetween.planet.Region
 
 class RegionGenerator {
 

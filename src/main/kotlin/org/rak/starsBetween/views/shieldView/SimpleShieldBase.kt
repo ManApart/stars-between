@@ -1,6 +1,6 @@
 package org.rak.starsBetween.views.shieldView
 
-import org.rak.starsBetween.systems.Shield
+import org.rak.starsBetween.systems.shields.Shield
 
 class SimpleShieldBase(
     val id: Int,

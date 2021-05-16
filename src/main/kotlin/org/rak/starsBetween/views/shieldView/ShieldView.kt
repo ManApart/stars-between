@@ -1,7 +1,7 @@
 package org.rak.starsBetween.views.shieldView
 
 import org.rak.starsBetween.floorplan.FloorPlan
-import org.rak.starsBetween.systems.Shield
+import org.rak.starsBetween.systems.shields.Shield
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.views.View
 

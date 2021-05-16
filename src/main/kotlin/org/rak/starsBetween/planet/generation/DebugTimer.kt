@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets.generation
+package org.rak.starsBetween.planet.generation
 
 class DebugTimer {
     private var startTime: Long = 0

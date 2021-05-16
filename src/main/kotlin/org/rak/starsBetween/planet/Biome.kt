@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.awt.Color

@@ -2,6 +2,7 @@ package org.rak.starsBetween.game
 
 import org.rak.starsBetween.airflow.simulateAir
 import org.rak.starsBetween.crew.CrewMan
+import org.rak.starsBetween.crew.Division
 import org.rak.starsBetween.floorplan.FloorPlan
 import org.rak.starsBetween.floorplan.Position
 import org.rak.starsBetween.power.simulatePower
@@ -50,7 +51,7 @@ object Game {
         val tile = floorPlan.getAllTiles()
             .firstOrNull { it.system.type == SystemType.FLOOR && it.crewMan == null }
         if (tile != null) {
-            crew[id] = CrewMan(id, tile)
+            crew[id] = CrewMan(id, Division.values().random(), tile)
             tile.crewMan = crew[id]
         } else {
             throw Exception("Could not find an open tile for the crewman")

@@ -1,4 +1,4 @@
-package org.rak.starsBetween.floorplan
+package org.rak.starsBetween.crew
 
 import org.rak.starsBetween.game.Game
 import org.springframework.web.bind.annotation.*

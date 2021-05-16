@@ -1,5 +1,6 @@
-package org.rak.starsBetween.systems
+package org.rak.starsBetween.systems.shields
 
+import org.rak.starsBetween.systems.ShipSystem
 import org.rak.starsBetween.views.persistence.PersistedSystem
 
 class PersistedShield(

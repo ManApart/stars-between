@@ -1,6 +1,6 @@
-package org.rak.starsBetween.planets.generation
+package org.rak.starsBetween.planet.generation
 
-import org.rak.starsBetween.planets.BiomeType
+import org.rak.starsBetween.planet.BiomeType
 import kotlin.math.min
 
 class PlanetOptions(

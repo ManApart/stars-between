@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
 enum class BiomeType(val fileName: String) {
     EARTH_LIKE("EarthlikeBiomes"),

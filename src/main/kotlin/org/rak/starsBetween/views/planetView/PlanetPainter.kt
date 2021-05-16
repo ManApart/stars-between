@@ -1,8 +1,8 @@
 package org.rak.starsBetween.views.planetView
 
-import org.rak.starsBetween.planets.Planet
-import org.rak.starsBetween.planets.PlanetManager
-import org.rak.starsBetween.planets.generation.PlanetViewOptions
+import org.rak.starsBetween.planet.Planet
+import org.rak.starsBetween.planet.PlanetManager
+import org.rak.starsBetween.planet.generation.PlanetViewOptions
 import java.awt.AlphaComposite
 import java.awt.Color
 import java.awt.Graphics2D

@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets.generation
+package org.rak.starsBetween.planet.generation
 
 import org.rak.starsBetween.clamp
 import org.rak.starsBetween.getPercent

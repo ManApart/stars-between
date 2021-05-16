@@ -1,8 +1,8 @@
-package org.rak.starsBetween.views.shieldView
+package org.rak.starsBetween.systems.shields
 
 import org.rak.starsBetween.game.Game
-import org.rak.starsBetween.systems.Shield
 import org.rak.starsBetween.tile.SystemType
+import org.rak.starsBetween.views.shieldView.SimpleShieldBase
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])

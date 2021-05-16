@@ -1,9 +1,8 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
 import org.rak.starsBetween.clamp
-import org.rak.starsBetween.game.ViewType
-import org.rak.starsBetween.planets.generation.PlanetOptions
-import org.rak.starsBetween.planets.generation.PlanetViewOptions
+import org.rak.starsBetween.planet.generation.PlanetOptions
+import org.rak.starsBetween.planet.generation.PlanetViewOptions
 import org.rak.starsBetween.views.planetView.PlanetViewType
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*

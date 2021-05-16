@@ -8,7 +8,7 @@ import org.rak.starsBetween.power.Wire
 import org.rak.starsBetween.shipStructor.Floor
 import org.rak.starsBetween.shipStructor.SPACE_SYSTEM
 import org.rak.starsBetween.shipStructor.Wall
-import org.rak.starsBetween.systems.Shield
+import org.rak.starsBetween.systems.shields.Shield
 import org.rak.starsBetween.systems.ShipSystem
 
 val DEFAULT_TILE = Tile(Position(), SPACE_SYSTEM)

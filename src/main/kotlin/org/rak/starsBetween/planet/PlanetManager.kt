@@ -1,8 +1,8 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
-import org.rak.starsBetween.planets.generation.PlanetGenerator
-import org.rak.starsBetween.planets.generation.PlanetOptions
-import org.rak.starsBetween.planets.generation.PlanetViewOptions
+import org.rak.starsBetween.planet.generation.PlanetGenerator
+import org.rak.starsBetween.planet.generation.PlanetOptions
+import org.rak.starsBetween.planet.generation.PlanetViewOptions
 import org.rak.starsBetween.views.planetView.PlanetPainter
 import org.rak.starsBetween.views.planetView.PlanetViewType
 

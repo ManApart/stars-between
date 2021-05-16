@@ -1,6 +1,6 @@
-package org.rak.starsBetween.views.shieldView
+package org.rak.starsBetween.systems.shields
 
-import org.rak.starsBetween.systems.Shield
+import org.rak.starsBetween.systems.shields.Shield
 
 class ShieldControlUpdate(
     val id: Int,

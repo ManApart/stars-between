@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
 class Region(
     val altitude: Int,

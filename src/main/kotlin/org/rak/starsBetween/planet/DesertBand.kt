@@ -1,4 +1,4 @@
-package org.rak.starsBetween.planets
+package org.rak.starsBetween.planet
 
 class DesertBand(val width: Float, val latitude: Float) {
     override fun toString(): String {
