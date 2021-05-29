@@ -14,5 +14,8 @@ View the swagger at `http://localhost:8080/swagger-ui.html`
 
 ### TODO
 
+### Examples
 
-![](./Example.png)
+![](./example/floorplan.png)
+![](./example/floorplan2.png)
+![](./example/planet.png)
