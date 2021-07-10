@@ -1,9 +1,6 @@
 import com.soywiz.korge.Korge
 import com.soywiz.korim.color.Colors
-import com.soywiz.korim.color.RGBA
-import com.soywiz.korim.font.readBitmapFont
-import com.soywiz.korio.file.std.resourcesVfs
-import org.rak.starsBetween.wiring.loadGame
+import wiring.loadGame
 
 const val gameTickFrequency = 200L
 const val broadcastFrequency = 200L
