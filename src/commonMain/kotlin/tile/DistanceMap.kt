@@ -11,7 +11,7 @@ class DistanceMap(val source: Tile) {
         val x = source.position.x
         val y = source.position.y
 
-        costs.putIfAbsent(x, mutableMapOf())
+        if (!costs.containsKey(x)) costs[x] = mutableMapOf()
         val current = costs[x]!![y] ?: distance
         costs[x]!![y] = min(distance, current)
     }
@@ -25,7 +25,7 @@ class DistanceMap(val source: Tile) {
     }
 
     fun getDistance(x: Int, y: Int): Int {
-        return costs[x]?.getOrDefault(y, Int.MAX_VALUE) ?: Int.MAX_VALUE
+        return costs[x]?.getOrPut(y) { Int.MAX_VALUE } ?: Int.MAX_VALUE
     }
 
     fun getNearestTileOfType(systemType: SystemType, area: Area): Tile? {

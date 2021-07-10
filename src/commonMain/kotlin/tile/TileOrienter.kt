@@ -35,7 +35,7 @@ fun orient(tile: Tile, floorPlan: FloorPlan) {
 }
 
 private fun matches(type: SystemType, other: SystemType): Boolean {
-    return siblings.getOrDefault(type, listOf()).contains(other)
+    return siblings.getOrElse(type){ listOf()}.contains(other)
 }
 
 fun isCorner(up: Boolean, down: Boolean, left: Boolean, right: Boolean): Boolean {

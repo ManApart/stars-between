@@ -12,7 +12,7 @@ class Area(val tiles: List<Tile>, private val isValidForDistance: (Tile) -> Bool
     private fun buildTileMap(tiles: List<Tile>): Map<Int, Map<Int, Tile>> {
         val map = mutableMapOf<Int, MutableMap<Int, Tile>>()
         tiles.forEach {tile ->
-            map.putIfAbsent(tile.position.y, mutableMapOf())
+            if (!map.containsKey(tile.position.y)) map[tile.position.y] = mutableMapOf()
             map[tile.position.y]!![tile.position.x] = tile
         }
         return map

@@ -10,31 +10,31 @@ class DebugTimer {
      * Display a message including the input message.
      */
     fun start(message: String) {
-        val now = System.currentTimeMillis()
-        startTime = now
-        intervalTime = now
-        println("Starting: $message")
+//        val now = System.currentTimeMillis()
+//        startTime = now
+//        intervalTime = now
+//        println("Starting: $message")
     }
 
     /**
      * Display a message that indicates the time since the last interval.
      */
     fun interval(message: String) {
-        val now = System.currentTimeMillis()
-        val elapsed = getElapsed(intervalTime, now)
-        intervalTime = now
-
-        println("$elapsed elapsed since interval: $message")
+//        val now = System.currentTimeMillis()
+//        val elapsed = getElapsed(intervalTime, now)
+//        intervalTime = now
+//
+//        println("$elapsed elapsed since interval: $message")
     }
 
     /**
      * Display a message that indicates the time since the timer started
      */
     fun elapsed(message: String) {
-        val now = System.currentTimeMillis()
-        val elapsed = getElapsed(startTime, now)
-
-        println("$elapsed elapsed since start: $message")
+//        val now = System.currentTimeMillis()
+//        val elapsed = getElapsed(startTime, now)
+//
+//        println("$elapsed elapsed since start: $message")
     }
 
     private fun getElapsed(startTime: Long, endTime: Long): Long {

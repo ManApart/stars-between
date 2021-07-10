@@ -27,7 +27,7 @@ class MapTiler(private val percent: Float = .1f) {
         var x = start
         var i = 1
         while (x < map.size) {
-            val column = map[x].clone()
+            val column = map[x].copyOf()
             //invert the overlap
             verticalOverlap[overlapAmount - i] = column
             x++
