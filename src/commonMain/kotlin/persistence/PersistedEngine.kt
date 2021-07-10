@@ -1,8 +1,8 @@
 package persistence
 
 import kotlinx.serialization.Serializable
-import systems.ShipSystem
 import power.Engine
+import systems.ShipSystem
 
 @Serializable
 data class PersistedEngine(
@@ -10,7 +10,7 @@ data class PersistedEngine(
     val powerProduced: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem {
+) : PersistedSystem() {
     constructor(engine: Engine) : this(
         engine.health,
         engine.powerProduced,

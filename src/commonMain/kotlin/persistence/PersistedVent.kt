@@ -9,7 +9,7 @@ class PersistedVent(
     val totalPowerCapacity: Int,
     val powerConsumedPerTick: Int,
     val power: Int
-) : PersistedSystem {
+) : PersistedSystem() {
 
     constructor(vent: Vent) : this(
         vent.health,

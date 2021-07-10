@@ -11,7 +11,7 @@ class PersistedShield(
     val maxPowerConsumedPerTick: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem {
+) : PersistedSystem() {
     constructor(shield: Shield): this(
         shield.health,
         shield.radius,

@@ -5,7 +5,7 @@ import shipStructor.Wall
 
 class PersistedWall(
     val health: Int
-) : PersistedSystem{
+) : PersistedSystem(){
     constructor(wall: Wall): this(
         wall.health
     )

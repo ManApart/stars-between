@@ -10,7 +10,7 @@ class PersistedWire(
     val health: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem{
+) : PersistedSystem(){
     constructor(wire: Wire) : this(
         wire.name,
         wire.type,
