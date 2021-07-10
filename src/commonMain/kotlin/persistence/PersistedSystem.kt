@@ -1,10 +1,11 @@
 package persistence
 
-//import com.fasterxml.jackson.annotation.JsonTypeInfo
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 
 //@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-interface PersistedSystem {
+@Serializable(with = PersistedSystemSerializer::class)
+sealed interface PersistedSystem {
     fun toSystem(): ShipSystem
 }
 

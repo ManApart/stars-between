@@ -1,6 +1,7 @@
 package systems.shields
 
 import floorplan.FloorPlan
+import persistence.PersistedShield
 import power.Powerable
 import systems.ShipSystem
 import tile.SystemType

@@ -1,7 +1,7 @@
-package systems.shields
+package persistence
 
 import systems.ShipSystem
-import persistence.PersistedSystem
+import systems.shields.Shield
 
 class PersistedShield(
     val health: Int,

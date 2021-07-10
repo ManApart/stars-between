@@ -1,7 +1,7 @@
-package airflow
+package persistence
 
+import airflow.Vent
 import systems.ShipSystem
-import persistence.PersistedSystem
 
 class PersistedVent(
     val health: Int,

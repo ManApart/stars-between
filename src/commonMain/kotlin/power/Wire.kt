@@ -4,6 +4,7 @@ import systems.ShipSystem
 import tile.Tile
 import tile.SystemType
 import persistence.PersistedSystem
+import persistence.PersistedWire
 
 class Wire(
     name: String,

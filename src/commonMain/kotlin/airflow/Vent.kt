@@ -5,6 +5,7 @@ import systems.ShipSystem
 import tile.SystemType
 import tile.Tile
 import persistence.PersistedSystem
+import persistence.PersistedVent
 import kotlin.math.abs
 
 class Vent(

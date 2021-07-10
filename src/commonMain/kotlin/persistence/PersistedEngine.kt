@@ -1,9 +1,11 @@
-package power
+package persistence
 
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
-import persistence.PersistedSystem
+import power.Engine
 
-class PersistedEngine(
+@Serializable
+data class PersistedEngine(
     val health: Int,
     val powerProduced: Int,
     val totalPowerCapacity: Int,

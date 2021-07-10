@@ -1,5 +1,7 @@
 package tile
 
+import kotlinx.serialization.Serializable
+
 enum class SystemType {
     ENGINE,
     FLOOR,

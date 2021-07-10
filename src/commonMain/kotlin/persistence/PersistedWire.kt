@@ -1,8 +1,8 @@
-package power
+package persistence
 
 import systems.ShipSystem
 import tile.SystemType
-import persistence.PersistedSystem
+import power.Wire
 
 class PersistedWire(
     val name: String,

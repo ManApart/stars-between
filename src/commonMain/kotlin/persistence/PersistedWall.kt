@@ -1,7 +1,7 @@
-package shipStructor
+package persistence
 
 import systems.ShipSystem
-import persistence.PersistedSystem
+import shipStructor.Wall
 
 class PersistedWall(
     val health: Int

@@ -1,7 +1,7 @@
-package shipStructor
+package persistence
 
 import systems.ShipSystem
-import persistence.PersistedSystem
+import shipStructor.SPACE_SYSTEM
 
 class PersistedSpace : PersistedSystem {
     override fun toSystem(): ShipSystem {

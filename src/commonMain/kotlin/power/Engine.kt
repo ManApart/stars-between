@@ -1,5 +1,6 @@
 package power
 
+import persistence.PersistedEngine
 import systems.ShipSystem
 import tile.Tile
 import tile.SystemType

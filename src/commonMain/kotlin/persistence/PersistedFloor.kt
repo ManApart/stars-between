@@ -1,7 +1,7 @@
-package shipStructor
+package persistence
 
 import systems.ShipSystem
-import persistence.PersistedSystem
+import shipStructor.Floor
 
 class PersistedFloor(
     val health: Int

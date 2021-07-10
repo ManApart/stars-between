@@ -20,23 +20,25 @@ apply<KorgeGradlePlugin>()
 
 
 plugins {
-    id("com.soywiz.korge")
+//    id("com.soywiz.korge")
+    kotlin("plugin.serialization") version "1.5.20"
 }
 
 korge {
     id = "org.rak.manapart"
     targetJvm()
     targetJs()
+    serializationJson()
 }
 
 
-kotlin {
-    sourceSets {
-        val commonMain by getting {
-            kotlin.srcDir("src/commonMain/kotlin")
-            dependencies {
-                implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.4")
-            }
-        }
-    }
-}
+//kotlin {
+//    sourceSets {
+//        val commonMain by getting {
+//            kotlin.srcDir("src/commonMain/kotlin")
+//            dependencies {
+////                implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.4")
+//            }
+//        }
+//    }
+//}

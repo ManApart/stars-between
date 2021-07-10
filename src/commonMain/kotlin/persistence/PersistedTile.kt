@@ -1,11 +1,13 @@
 package persistence
 
 import floorplan.Position
+import kotlinx.serialization.Serializable
 import tile.Adjacency
 import tile.SystemType
 import tile.Tile
 
-class PersistedTile(
+@Serializable
+data class PersistedTile(
     val type: SystemType,
     val system: PersistedSystem,
     val x: Int,

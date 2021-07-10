@@ -1,5 +1,6 @@
 package shipStructor
 
+import persistence.PersistedSpace
 import systems.ShipSystem
 import tile.SystemType
 import persistence.PersistedSystem

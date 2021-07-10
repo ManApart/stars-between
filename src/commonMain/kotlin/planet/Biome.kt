@@ -1,16 +1,19 @@
 package planet
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.soywiz.korim.color.Colors
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.math.abs
 
 //val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", Color(93, 56, 45))
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 class Biome(
     val id: String,
     private val name: String,
-    color: String,
+    private val colorString: String,
 
     private val altitude: Int = 0,
     private val temperature: Int = 0,
@@ -20,7 +23,8 @@ class Biome(
     private val temperatureVariation: Int = 0,
     private val precipitationVariation: Int = 0,
 ) {
-    val color = Colors[color]
+    @Transient
+    val color = Colors[colorString]
 
     override fun toString(): String {
         return "$name a:$altitude, t:$temperature, p:$precipitation"
