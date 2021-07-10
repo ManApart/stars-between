@@ -14,18 +14,29 @@ buildscript {
     }
     dependencies {
         classpath("com.soywiz.korlibs.korge.plugins:korge-gradle-plugin:$korgePluginVersion")
-//        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
     }
 }
 apply<KorgeGradlePlugin>()
+
+
+plugins {
+    id("com.soywiz.korge")
+}
 
 korge {
     id = "org.rak.manapart"
     targetJvm()
     targetJs()
-//
-//    dependencies {
-//        add("commonMainApi", "com.fasterxml.jackson.module:jackson-module-kotlin")
-//    }
+}
+
+
+kotlin {
+    sourceSets {
+        val commonMain by getting {
+            kotlin.srcDir("src/commonMain/kotlin")
+            dependencies {
+                implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.4")
+            }
+        }
+    }
 }

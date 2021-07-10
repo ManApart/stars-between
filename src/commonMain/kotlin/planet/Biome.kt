@@ -1,12 +1,12 @@
 package planet
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.soywiz.korim.color.Colors
 import kotlin.math.abs
 
 //val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", Color(93, 56, 45))
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Biome(
     val id: String,
     private val name: String,
