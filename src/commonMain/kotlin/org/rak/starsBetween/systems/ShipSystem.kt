@@ -3,7 +3,7 @@ package org.rak.starsBetween.systems
 import org.rak.starsBetween.floorplan.FloorPlan
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
-import org.rak.starsBetween.views.persistence.PersistedSystem
+import org.rak.starsBetween.persistence.PersistedSystem
 
 abstract class ShipSystem(
     val name: String,

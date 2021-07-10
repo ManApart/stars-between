@@ -1,7 +1,7 @@
 package org.rak.starsBetween.systems.shields
 
 import org.rak.starsBetween.systems.ShipSystem
-import org.rak.starsBetween.views.persistence.PersistedSystem
+import org.rak.starsBetween.persistence.PersistedSystem
 
 class PersistedShield(
     val health: Int,

@@ -2,7 +2,7 @@ package org.rak.starsBetween
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.rak.starsBetween.views.planetView.ColorSpectrum
+import org.rak.starsBetween.planet.planetView.ColorSpectrum
 import java.awt.Color
 
 class ColorSpectrumTest {

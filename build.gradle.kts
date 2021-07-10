@@ -14,6 +14,7 @@ buildscript {
     }
     dependencies {
         classpath("com.soywiz.korlibs.korge.plugins:korge-gradle-plugin:$korgePluginVersion")
+//        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     }
 }
@@ -23,4 +24,8 @@ korge {
     id = "org.rak.manapart"
     targetJvm()
     targetJs()
+//
+//    dependencies {
+//        add("commonMainApi", "com.fasterxml.jackson.module:jackson-module-kotlin")
+//    }
 }

@@ -1,4 +1,4 @@
-package org.rak.starsBetween.views.persistence
+package org.rak.starsBetween.persistence
 
 import org.rak.starsBetween.floorplan.Position
 import org.rak.starsBetween.tile.Adjacency

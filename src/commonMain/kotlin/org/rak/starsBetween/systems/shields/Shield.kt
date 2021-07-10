@@ -5,7 +5,7 @@ import org.rak.starsBetween.power.Powerable
 import org.rak.starsBetween.systems.ShipSystem
 import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.Tile
-import org.rak.starsBetween.views.persistence.PersistedSystem
+import org.rak.starsBetween.persistence.PersistedSystem
 import kotlin.math.min
 
 class Shield(

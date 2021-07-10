@@ -12,7 +12,6 @@ import org.rak.starsBetween.tile.SystemType
 import org.rak.starsBetween.tile.WALL
 
 object Game {
-    var currentView = ViewType.OVERVIEW
     var floorPlan = createFloorPlan(10)
     val crew = mutableMapOf<Int, CrewMan>()
 
