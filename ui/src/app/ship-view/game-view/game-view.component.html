@@ -1,9 +1,0 @@
-<div *ngIf="data">
-  <table>
-    <tr *ngFor="let row of data">
-      <td *ngFor="let tile of row; trackBy: trackTile">
-        <tile [tile]="tile" [mode]="mode" (click)="clickTile(tile)"></tile>
-      </td>
-    </tr>
-  </table>
-</div>

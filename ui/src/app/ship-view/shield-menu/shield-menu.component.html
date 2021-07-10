@@ -1,5 +1,0 @@
-<!-- <td *ngFor="let shield of shields; trackBy: trackTile"> -->
-<div *ngFor="let entry of shields | keyvalue">
-  <!-- <shield-panel [shield]="entry.value"></shield-panel> -->
-  <shield-panel [shield]="entry.value" (shieldUpdated)="shieldUpdated($event)"></shield-panel>
-</div>
