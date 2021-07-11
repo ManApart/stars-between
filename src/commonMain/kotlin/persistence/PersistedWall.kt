@@ -1,11 +1,13 @@
 package persistence
 
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 import shipStructor.Wall
 
+@Serializable
 class PersistedWall(
     val health: Int
-) : PersistedSystem(){
+) : PersistedSystem{
     constructor(wall: Wall): this(
         wall.health
     )

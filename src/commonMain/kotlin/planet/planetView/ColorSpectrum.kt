@@ -72,7 +72,7 @@ val altitudeSpectrum = ColorSpectrum(
 
 val precipitationSpectrum = ColorSpectrum(
     mapOf(
-//        0 to RGBA(1f, 1f, .99f),
+        0 to RGBA(255, 255, 250),
 //        20 to RGBA(1f, 1f, .6f),
 //        50 to RGBA(.2f, .8f, 0f),
 //        100 to RGBA(.1f, 0f, .5f)

@@ -1,15 +1,17 @@
 package persistence
 
 import airflow.Vent
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 
+@Serializable
 class PersistedVent(
     val health: Int,
     val airProduced: Int,
     val totalPowerCapacity: Int,
     val powerConsumedPerTick: Int,
     val power: Int
-) : PersistedSystem() {
+) : PersistedSystem {
 
     constructor(vent: Vent) : this(
         vent.health,

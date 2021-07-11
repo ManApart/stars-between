@@ -1,16 +1,18 @@
 package persistence
 
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 import tile.SystemType
 import power.Wire
 
+@Serializable
 class PersistedWire(
     val name: String,
     val type: SystemType,
     val health: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem(){
+) : PersistedSystem{
     constructor(wire: Wire) : this(
         wire.name,
         wire.type,

@@ -1,8 +1,9 @@
 package persistence
 
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 import systems.shields.Shield
-
+@Serializable
 class PersistedShield(
     val health: Int,
     val radius: Int,
@@ -11,7 +12,7 @@ class PersistedShield(
     val maxPowerConsumedPerTick: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem() {
+) : PersistedSystem {
     constructor(shield: Shield): this(
         shield.health,
         shield.radius,

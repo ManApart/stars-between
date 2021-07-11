@@ -1,6 +1,7 @@
 package persistence
 
 import floorplan.Position
+import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.Serializable
 import tile.Adjacency
 import tile.SystemType

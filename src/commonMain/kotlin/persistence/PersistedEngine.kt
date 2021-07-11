@@ -10,7 +10,7 @@ data class PersistedEngine(
     val powerProduced: Int,
     val totalPowerCapacity: Int,
     val power: Int
-) : PersistedSystem() {
+) : PersistedSystem {
     constructor(engine: Engine) : this(
         engine.health,
         engine.powerProduced,

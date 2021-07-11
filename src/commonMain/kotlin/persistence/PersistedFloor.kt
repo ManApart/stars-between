@@ -1,11 +1,13 @@
 package persistence
 
+import kotlinx.serialization.Serializable
 import systems.ShipSystem
 import shipStructor.Floor
 
-class PersistedFloor(
+@Serializable
+data class PersistedFloor(
     val health: Int
-) : PersistedSystem() {
+) : PersistedSystem {
     constructor(floor: Floor) : this(
         floor.health
     )

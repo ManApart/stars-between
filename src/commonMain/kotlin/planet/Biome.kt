@@ -1,14 +1,13 @@
 package planet
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.soywiz.korim.color.Colors
+import com.soywiz.korim.color.RGBA
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlin.math.abs
 
-//val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", Color(93, 56, 45))
+val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", RGBA(93, 56, 45).hexString)
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
 @Serializable
 class Biome(
     val id: String,
