@@ -24,6 +24,7 @@ val mapper = Json {
             subclass(PersistedWall::class, PersistedWall.serializer())
             subclass(PersistedWire::class, PersistedWire.serializer())
         }
+        ignoreUnknownKeys = true
     }
 }
 

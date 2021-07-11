@@ -2,6 +2,7 @@ package planet
 
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlin.math.abs
@@ -12,6 +13,7 @@ val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", RGBA(93, 56, 45).hexStr
 class Biome(
     val id: String,
     private val name: String,
+    @SerialName("color")
     private val colorString: String,
 
     private val altitude: Int = 0,

@@ -1,5 +1,5 @@
 import com.soywiz.korim.color.Colors
-import planet.planetView.ColorSpectrum
+import ui.planetScene.planetView.ColorSpectrum
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -2,7 +2,7 @@ package planet.generation
 
 import planet.Planet
 
-class PlanetGenerator() {
+class PlanetGenerator {
     private val heightmapGen = HeightmapGenerator()
     private val temperatureGen = TemperatureGenerator()
     private val precipitationGen = PrecipitationGenerator()

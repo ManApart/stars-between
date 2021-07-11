@@ -1,4 +1,4 @@
-package planet.planetView
+package ui.planetScene.planetView
 
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA

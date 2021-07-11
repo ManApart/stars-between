@@ -1,4 +1,4 @@
-package org.rak.starsBetween.views.planetView
+package ui.planetScene.planetView
 
 enum class PlanetViewType {
     ALTITUDE,

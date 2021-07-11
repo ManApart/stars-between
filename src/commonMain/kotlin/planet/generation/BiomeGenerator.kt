@@ -1,22 +1,18 @@
 package planet.generation
 
-//import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-//import com.fasterxml.jackson.module.kotlin.readValue
+import kotlinx.serialization.decodeFromString
 import planet.Biome
 import planet.BiomeType
-import wiring.ResourceHelper
+import ui.Resources
+import wiring.mapper
 
 class BiomeGenerator {
-    private val biomes = parseBiomes()
-//    private fun parseFile(path: String): List<Biome> = jacksonObjectMapper().readValue(this::class.java.getResourceAsStream(path)!!)
-    private fun parseFile(path: String): List<Biome> = listOf()
+    private val biomes = parseBiomes(Resources.biomes)
 
-    private fun parseBiomes(): Map<String, List<Biome>> {
-        val biomePath = "/biomes"
-        return ResourceHelper().getResourceFiles(biomePath, true)
-            .associate { fileName ->
-                fileName.replace("/biomes/", "").replace(".json", "") to parseFile(fileName)
-            }
+    private fun parseBiomes(biomeFiles: Map<String, String>): Map<String, List<Biome>> {
+        return biomeFiles.entries.associate { (fileName, fileContents) ->
+           fileName.replace(".json", "") to mapper.decodeFromString(fileContents)
+        }
     }
 
     fun getBiomes(type: BiomeType) : List<Biome> {
