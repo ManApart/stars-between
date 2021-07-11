@@ -8,7 +8,7 @@ import power.Wire
 @Serializable
 class PersistedWire(
     val name: String,
-    val type: SystemType,
+    val systemType: SystemType,
     val health: Int,
     val totalPowerCapacity: Int,
     val power: Int
@@ -21,6 +21,6 @@ class PersistedWire(
         wire.power
     )
     override fun toSystem(): ShipSystem {
-        return Wire(name, type, health, totalPowerCapacity).also { it.power = power }
+        return Wire(name, systemType, health, totalPowerCapacity).also { it.power = power }
     }
 }

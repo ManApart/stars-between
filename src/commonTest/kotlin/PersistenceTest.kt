@@ -1,10 +1,9 @@
 import floorplan.Position
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import persistence.PersistedTile
 import power.Engine
-import shipStructor.Floor
+import shipStructor.Space
 import tile.Tile
 import wiring.mapper
 import kotlin.test.Test
@@ -14,7 +13,6 @@ class PersistenceTest {
 
     @Test
     fun jsonParseInterface() {
-
         val tile = Tile(Position(1,2), Engine())
         tile.system.health = 43
         val prePersisted = PersistedTile(tile)
@@ -29,8 +27,7 @@ class PersistenceTest {
 
     @Test
     fun spaceSystem() {
-        val tile = Tile(Position(1,2), Floor())
-        tile.system.health = 43
+        val tile = Tile(Position(1,2), Space())
         val prePersisted = PersistedTile(tile)
         val json: String = mapper.encodeToString(prePersisted)
 
@@ -38,7 +35,6 @@ class PersistenceTest {
         val postTile = postPersisted.toTile()
 
         assertEquals(tile.position, postTile.position)
-        assertEquals(tile.system.health, postTile.system.health)
     }
 
 }

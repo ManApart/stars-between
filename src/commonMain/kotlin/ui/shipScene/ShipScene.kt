@@ -14,8 +14,8 @@ import wiring.saveGame
 class ShipScene() : Scene() {
 
     override suspend fun Container.sceneInit() {
-//        loadGame()
         saveGame()
+        loadGame()
 
         fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
             solidRect(40, 40, Colors.BLUE)
