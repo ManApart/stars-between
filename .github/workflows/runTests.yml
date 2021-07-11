@@ -23,4 +23,4 @@ jobs:
       - name: Make Executable
         run: chmod +x gradlew && chmod +x gradle/wrapper/gradle-wrapper.jar
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew jvmTest
