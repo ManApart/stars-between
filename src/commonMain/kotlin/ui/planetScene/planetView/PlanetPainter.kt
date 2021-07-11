@@ -2,6 +2,8 @@ package ui.planetScene.planetView
 
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.circle
+import com.soywiz.korge.view.clipContainer
+import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.RGBA
 import planet.Planet
 import planet.generation.PlanetViewOptions
@@ -11,10 +13,6 @@ import ui.planetScene.PlanetManager
 
 fun Container.paint(planet: Planet, type: PlanetViewType) {
 
-    if (PlanetManager.viewOptions.sphere) {
-        paintSphereOverlay(planet.regions.size)
-    }
-
     when (type) {
         PlanetViewType.ALTITUDE -> paintAltitude(planet)
         PlanetViewType.PRECIPITATION -> paintPrecipitation(planet)
@@ -22,6 +20,10 @@ fun Container.paint(planet: Planet, type: PlanetViewType) {
         PlanetViewType.SATELLITE -> paintSatellite(planet)
         else -> paintBiomes(planet, PlanetManager.viewOptions)
     }
+
+    //    if (PlanetManager.viewOptions.sphere) {
+    paintSphereOverlay(planet.regions.size)
+//    }
 
 }
 
@@ -89,11 +91,8 @@ private fun Container.paintSatellite(planet: Planet) {
 }
 
 private fun Container.paintSphereOverlay(size: Int) {
-//        graphics {
-//            shape(Shape)
-//        }
-    val r = size / 2.toDouble()
-    circle(r, fill = RGBA(0, 0), strokeThickness = 20.0)
+//    val r = size / 2.toDouble()
+//    circle(r, fill = RGBA(0, 0), strokeThickness = 20.0)
 //        val ellipse = Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat())
 //        g.clip(ellipse)
 }
