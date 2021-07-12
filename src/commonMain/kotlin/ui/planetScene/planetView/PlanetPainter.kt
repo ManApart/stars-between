@@ -1,10 +1,11 @@
 package ui.planetScene.planetView
 
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.circle
-import com.soywiz.korge.view.clipContainer
-import com.soywiz.korge.view.graphics
+import com.soywiz.klogger.AnsiEscape
+import com.soywiz.korge.view.*
+import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
+import com.soywiz.korma.geom.vector.ellipse
+import com.soywiz.korma.geom.vector.rect
 import planet.Planet
 import planet.generation.PlanetViewOptions
 import ui.pixel
@@ -21,9 +22,9 @@ fun Container.paint(planet: Planet, type: PlanetViewType) {
         else -> paintBiomes(planet, PlanetManager.viewOptions)
     }
 
-    //    if (PlanetManager.viewOptions.sphere) {
-    paintSphereOverlay(planet.regions.size)
-//    }
+    if (PlanetManager.viewOptions.sphere) {
+        paintSphereOverlay(planet.regions.size)
+    }
 
 }
 
@@ -45,7 +46,7 @@ private fun Container.paintBiomes(planet: Planet, options: PlanetViewOptions) {
         }
     }
 
-        if (options.shadow) {
+    if (options.shadow) {
 //            val size = planet.regions.size
 //            val offset = -size / 10f
 //            g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)
@@ -57,7 +58,7 @@ private fun Container.paintBiomes(planet: Planet, options: PlanetViewOptions) {
 //            shadow.subtract(cutOut)
 //
 //            g.fill(shadow)
-        }
+    }
 }
 
 private fun Container.paintPrecipitation(planet: Planet) {
@@ -91,9 +92,11 @@ private fun Container.paintSatellite(planet: Planet) {
 }
 
 private fun Container.paintSphereOverlay(size: Int) {
-//    val r = size / 2.toDouble()
-//    circle(r, fill = RGBA(0, 0), strokeThickness = 20.0)
-//        val ellipse = Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat())
-//        g.clip(ellipse)
+    graphics {
+        fill(Colors.BLACK) {}
+        rect(0, 0, size + 1, size + 1)
+        ellipse(0, 0, size, size)
+        endFill()
+    }
 }
 
