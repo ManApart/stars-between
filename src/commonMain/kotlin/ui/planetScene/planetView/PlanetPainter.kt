@@ -47,17 +47,14 @@ private fun Container.paintBiomes(planet: Planet, options: PlanetViewOptions) {
     }
 
     if (options.shadow) {
-//            val size = planet.regions.size
-//            val offset = -size / 10f
-//            g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)
-//            g.color = Color.BLACK
-//
-//            val shadow = Area(Ellipse2D.Float(0f, 0f, size.toFloat(), size.toFloat()))
-//            val cutOut = Area(Ellipse2D.Float(offset, offset, size.toFloat(), size.toFloat()))
-//
-//            shadow.subtract(cutOut)
-//
-//            g.fill(shadow)
+        val size = planet.regions.size
+        val offset = -size / 10f
+        graphics {
+            fill(Colors.BLACK, 0.5) {}
+            ellipse(0, 0, size, size)
+            ellipse(offset, offset, size.toFloat(), size.toFloat())
+            endFill()
+        }
     }
 }
 
