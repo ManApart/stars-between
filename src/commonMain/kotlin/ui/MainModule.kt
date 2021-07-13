@@ -6,7 +6,8 @@ import com.soywiz.korma.geom.*
 import ui.planetScene.PlanetScene
 import ui.shipScene.ShipScene
 
-const val WINDOW_SIZE = 640
+const val WINDOW_SIZE = 800
+const val VIRTUAL_SIZE = 640
 
 object MainModule : Module() {
     override val mainScene = PlanetScene::class

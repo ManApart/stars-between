@@ -1,22 +1,18 @@
 package ui.planetScene
 
 import com.soywiz.korev.Key
-import com.soywiz.korge.component.docking.dockedTo
 import com.soywiz.korge.input.keys
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.Colors
-import com.soywiz.korma.geom.vector.line
-import planet.Planet
 import ui.Resources
-import ui.WINDOW_SIZE
+import ui.VIRTUAL_SIZE
 import ui.planetScene.planetView.paint
 
 class PlanetScene : Scene() {
     private lateinit var planetContainer: Container
     override suspend fun Container.sceneInit() {
         Resources.init()
-        fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
+        fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             val controls = fixedSizeContainer(200, 600, clip = true) {
                 solidRect(200, 600)
                 createControls(::repaint)

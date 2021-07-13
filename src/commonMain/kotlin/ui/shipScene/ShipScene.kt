@@ -7,7 +7,7 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.fixedSizeContainer
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korim.color.Colors
-import ui.WINDOW_SIZE
+import ui.VIRTUAL_SIZE
 import wiring.loadGame
 import wiring.saveGame
 
@@ -17,7 +17,7 @@ class ShipScene() : Scene() {
         saveGame()
         loadGame()
 
-        fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
+        fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             solidRect(40, 40, Colors.BLUE)
         }
 
