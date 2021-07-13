@@ -14,7 +14,6 @@ class PlanetScene : Scene() {
         Resources.init()
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             val controls = fixedSizeContainer(200, 600, clip = true) {
-                solidRect(200, 600)
                 createControls(::repaint)
             }
             planetContainer = fixedSizeContainer(100, 100, clip = true) {

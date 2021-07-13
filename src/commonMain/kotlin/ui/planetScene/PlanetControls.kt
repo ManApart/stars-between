@@ -5,7 +5,6 @@ import com.soywiz.korge.view.Container
 import ui.planetScene.planetView.PlanetViewType
 
 fun Container.createControls(repaint: () -> Unit) {
-//    uiComboBox(items = PlanetViewType.values().toList()).onSelectionUpdate {
     uiComboBox(items = PlanetViewType.values().toList()) {
         selectedItem = PlanetViewType.BIOME
         onSelectionUpdate {
