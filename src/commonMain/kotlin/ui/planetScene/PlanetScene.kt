@@ -18,10 +18,10 @@ class PlanetScene : Scene() {
         val planet = PlanetManager.getPlanet(0)
 
         fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
-//            scaleView(WINDOW_SIZE, WINDOW_SIZE, 1.0, filtering = false) {
-            scaleView(WINDOW_SIZE, WINDOW_SIZE, 2.5, filtering = false) {
-                val controls = fixedSizeContainer(40, 300, clip = true) {
-                    solidRect(200, 300)
+            scaleView(WINDOW_SIZE, WINDOW_SIZE, 1.0, filtering = false) {
+//            scaleView(WINDOW_SIZE, WINDOW_SIZE, 2.5, filtering = false) {
+                val controls = fixedSizeContainer(200, 600, clip = true) {
+                    solidRect(200, 600)
                     createControls()
                 }
                 fixedSizeContainer(100, 100, clip = true) {
