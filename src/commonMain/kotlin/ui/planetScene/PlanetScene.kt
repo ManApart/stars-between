@@ -17,15 +17,13 @@ class PlanetScene : Scene() {
     override suspend fun Container.sceneInit() {
         Resources.init()
         fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
-            scaleView(WINDOW_SIZE, WINDOW_SIZE, 1.0, filtering = false) {
-//            scaleView(WINDOW_SIZE, WINDOW_SIZE, 2.5, filtering = false) {
-                val controls = fixedSizeContainer(200, 600, clip = true) {
-                    solidRect(200, 600)
-                    createControls(::repaint)
-                }
-                planetContainer = fixedSizeContainer(100, 100, clip = true) {
-                    alignLeftToRightOf(controls)
-                }
+            val controls = fixedSizeContainer(200, 600, clip = true) {
+                solidRect(200, 600)
+                createControls(::repaint)
+            }
+            planetContainer = fixedSizeContainer(100, 100, clip = true) {
+                alignLeftToRightOf(controls)
+                scale = 5.0
             }
         }
 
