@@ -13,20 +13,18 @@ import ui.WINDOW_SIZE
 import ui.planetScene.planetView.paint
 
 class PlanetScene : Scene() {
+    private lateinit var planetContainer: Container
     override suspend fun Container.sceneInit() {
         Resources.init()
-        val planet = PlanetManager.getPlanet(0)
-
         fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
             scaleView(WINDOW_SIZE, WINDOW_SIZE, 1.0, filtering = false) {
 //            scaleView(WINDOW_SIZE, WINDOW_SIZE, 2.5, filtering = false) {
                 val controls = fixedSizeContainer(200, 600, clip = true) {
                     solidRect(200, 600)
-                    createControls()
+                    createControls(::repaint)
                 }
-                fixedSizeContainer(100, 100, clip = true) {
+                planetContainer = fixedSizeContainer(100, 100, clip = true) {
                     alignLeftToRightOf(controls)
-                    paint(planet, PlanetManager.viewType)
                 }
             }
         }
@@ -37,5 +35,12 @@ class PlanetScene : Scene() {
             }
         }
 
+        repaint()
+    }
+
+    private fun repaint() {
+        val planet = PlanetManager.getPlanet(0)
+        planetContainer.removeChildren()
+        planetContainer.paint(planet, PlanetManager.viewType)
     }
 }
