@@ -1,6 +1,7 @@
 package ui.planetScene
 
 import com.soywiz.korev.Key
+import com.soywiz.korge.component.docking.dockedTo
 import com.soywiz.korge.input.keys
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
@@ -17,8 +18,16 @@ class PlanetScene : Scene() {
         val planet = PlanetManager.getPlanet(0)
 
         fixedSizeContainer(WINDOW_SIZE, WINDOW_SIZE, clip = false) {
+//            scaleView(WINDOW_SIZE, WINDOW_SIZE, 1.0, filtering = false) {
             scaleView(WINDOW_SIZE, WINDOW_SIZE, 2.5, filtering = false) {
-                paint(planet, PlanetManager.viewType)
+                val controls = fixedSizeContainer(40, 300, clip = true) {
+                    solidRect(200, 300)
+                    createControls()
+                }
+                fixedSizeContainer(100, 100, clip = true) {
+                    alignLeftToRightOf(controls)
+                    paint(planet, PlanetManager.viewType)
+                }
             }
         }
 

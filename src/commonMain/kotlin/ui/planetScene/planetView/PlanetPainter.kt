@@ -1,9 +1,8 @@
 package ui.planetScene.planetView
 
-import com.soywiz.klogger.AnsiEscape
-import com.soywiz.korge.view.*
+import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.Colors
-import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.vector.ellipse
 import com.soywiz.korma.geom.vector.rect
 import planet.Planet
@@ -13,7 +12,6 @@ import ui.planetScene.PlanetManager
 
 
 fun Container.paint(planet: Planet, type: PlanetViewType) {
-
     when (type) {
         PlanetViewType.ALTITUDE -> paintAltitude(planet)
         PlanetViewType.PRECIPITATION -> paintPrecipitation(planet)
