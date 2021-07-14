@@ -2,6 +2,10 @@
 
 [![Build and Test](https://github.com/ManApart/stars_between/actions/workflows/runTests.yml/badge.svg?branch=master)](https://github.com/ManApart/stars_between/actions/workflows/runTests.yml)
 
+Explore Space
+
+[![](./example/floorplan2.png)](https://austinkucera.com/games/stars-between)
+
 ## Running
 
 ```
@@ -27,5 +31,4 @@ View the swagger at `http://localhost:8080/swagger-ui.html`
 ### Examples
 
 ![](./example/floorplan.png)
-![](./example/floorplan2.png)
 ![](./example/planet.png)
