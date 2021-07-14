@@ -73,9 +73,9 @@ val altitudeSpectrum = ColorSpectrum(
 val precipitationSpectrum = ColorSpectrum(
     mapOf(
         0 to RGBA(255, 255, 250),
-//        20 to RGBA(1f, 1f, .6f),
-//        50 to RGBA(.2f, .8f, 0f),
-//        100 to RGBA(.1f, 0f, .5f)
+        20 to RGBA.float(1f, 1f, .6f),
+        50 to RGBA.float(.2f, .8f, 0f),
+        100 to RGBA.float(.1f, 0f, .5f)
     )
 )
 
@@ -94,12 +94,12 @@ val temperatureSpectrum = ColorSpectrum(
 
 val satelliteSpectrum = ColorSpectrum(
     mapOf(
-//        -120 to RGBA(0.0f, 0.19607843458652496f, 0.5882353186607361f),
-//        0 to RGBA(0.0f, 0.3921568691730499f, 0.7843137383460999f),
-//        5 to RGBA(0.0784313753247261f, 0.3921568691730499f, 0.19607843458652496f),
-//        10 to RGBA(0.0784313753247261f, 0.3921568691730499f, 0f),
-//        20 to RGBA(0.19607843458652496f, 0.5882353186607361f, 0f),
-//        60 to RGBA(0.19607843458652496f, 0.7843137383460999f, 0f),
+        -120 to RGBA.float(0.0f, 0.19607843458652496f, 0.5882353186607361f),
+        0 to RGBA.float(0.0f, 0.3921568691730499f, 0.7843137383460999f),
+        5 to RGBA.float(0.0784313753247261f, 0.3921568691730499f, 0.19607843458652496f),
+        10 to RGBA.float(0.0784313753247261f, 0.3921568691730499f, 0f),
+        20 to RGBA.float(0.19607843458652496f, 0.5882353186607361f, 0f),
+        60 to RGBA.float(0.19607843458652496f, 0.7843137383460999f, 0f),
         80 to Colors.DARKGRAY,
         120 to Colors.WHITE
     )
