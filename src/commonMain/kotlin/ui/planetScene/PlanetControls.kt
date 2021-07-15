@@ -1,8 +1,14 @@
 package ui.planetScene
 
 import com.soywiz.korge.annotations.KorgeExperimental
+import com.soywiz.korge.input.onClick
+import com.soywiz.korge.input.onOut
+import com.soywiz.korge.input.onOver
+import com.soywiz.korge.input.onUp
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.collidesWith
+import com.soywiz.korge.view.findCollision
 import epochMillis
 import planet.BiomeType
 import planet.generation.PlanetOptions
@@ -20,6 +26,8 @@ fun Container.createControls(
     removeChildren()
     uiVerticalStack(width = 300.0) {
 
+        // hack to prevent activating random seed when pressing the dropdown
+        var comboActive = false
         uiComboBox(items = PlanetViewType.values().toList()) {
             selectedItem = PlanetViewType.BIOME
             onSelectionUpdate {
@@ -28,6 +36,8 @@ fun Container.createControls(
                     repaint()
                 }
             }
+            onOver { comboActive = true }
+            onOut { comboActive = false }
         }
 
         uiCheckBox(text = "Auto Update", checked = options.autoUpdate) {
@@ -39,9 +49,11 @@ fun Container.createControls(
         uiPropertyNumberRow("Seed", *UIEditableNumberPropsList(options::seed, min = 0.0, max = 9000.0))
         uiButton(text = "Random Seed") {
             onPress {
-                options.seed = randRange(epochMillis(), 0, 9000).toDouble()
-                regenerate(options)
-                this@createControls.createControls(regenerate, repaint, options)
+                if (!comboActive) {
+                    options.seed = randRange(epochMillis(), 0, 9000).toDouble()
+                    regenerate(options)
+                    this@createControls.createControls(regenerate, repaint, options)
+                }
             }
         }
 
