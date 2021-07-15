@@ -16,7 +16,7 @@ class HeightmapGenerator() {
     }
 
     private fun createNoiseGen(options: PlanetOptions): NoiseGen {
-        return NoiseGen(options.seed, options.octaves, options.roughness, options.noiseScale)
+        return NoiseGen(options.seed.toLong(), options.octaves, options.roughness, options.noiseScale)
     }
 
 }

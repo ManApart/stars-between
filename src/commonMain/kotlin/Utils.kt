@@ -29,8 +29,7 @@ fun clamp(value: Float, min: Float, max: Float): Float {
 }
 
 fun randRange(min: Int, max: Int): Int {
-    return 0
-//    return min + (Math.random() * (max - min + 1)).toInt()
+    return min + (rand(0) * (max - min + 1))
 }
 
 fun randRange(seed: Long, min: Int, max: Int): Int {

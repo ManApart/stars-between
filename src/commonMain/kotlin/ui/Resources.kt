@@ -12,7 +12,7 @@ object Resources {
     }
 
     private suspend fun readBiomes() {
-        //Doing this until resourcesVfs["biomes/"].listSimple() works
+        //Doing this until resourcesVfs["biomes/"].listSimple() works on js
         readBiome("EarthlikeBiomes")
         readBiome("GassBiomes")
         readBiome("RockyBiomes")
