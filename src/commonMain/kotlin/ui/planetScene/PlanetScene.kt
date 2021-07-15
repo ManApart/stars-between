@@ -14,10 +14,10 @@ class PlanetScene : Scene() {
     override suspend fun Container.sceneInit() {
         Resources.init()
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
-            val controls = fixedSizeContainer(200, 600, clip = true) {
+            val controls = fixedSizeContainer(300, 600, clip = true) {
                 createControls(::regenerate, ::repaint)
             }
-            planetContainer = fixedSizeContainer(100, 100, clip = true) {
+            planetContainer = fixedSizeContainer(120, 120, clip = true) {
                 alignLeftToRightOf(controls)
                 scale = 5.0
             }
