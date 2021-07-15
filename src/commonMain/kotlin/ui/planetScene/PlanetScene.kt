@@ -5,6 +5,7 @@ import com.soywiz.korge.input.keys
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import planet.generation.PlanetOptions
+import planet.generation.PlanetOptionsUI
 import ui.Resources
 import ui.VIRTUAL_SIZE
 import ui.planetScene.planetView.paint
@@ -32,8 +33,8 @@ class PlanetScene : Scene() {
         repaint()
     }
 
-    private fun regenerate(options: PlanetOptions) {
-        PlanetManager.generatePlanet(0, options)
+    private fun regenerate(options: PlanetOptionsUI) {
+        PlanetManager.generatePlanet(0, options.toOptions())
         repaint()
     }
 
