@@ -19,7 +19,7 @@ import ui.planetScene.planetView.PlanetViewType
 @OptIn(KorgeExperimental::class)
 fun Container.createControls(
     regenerate: (PlanetOptionsUI) -> Unit,
-    repaint: () -> Unit,
+    repaint: (PlanetOptionsUI) -> Unit,
     optionsUI: PlanetOptionsUI? = null
 ) {
     val options = optionsUI ?: PlanetOptionsUI(regenerate)
@@ -32,8 +32,8 @@ fun Container.createControls(
             selectedItem = PlanetViewType.BIOME
             onSelectionUpdate {
                 if (it.selectedItem != null) {
-                    PlanetManager.viewType = it.selectedItem!!
-                    repaint()
+                    options.viewType = it.selectedItem!!
+                    repaint(options)
                 }
             }
             onOver { comboActive = true }
@@ -43,6 +43,18 @@ fun Container.createControls(
         uiCheckBox(text = "Auto Update", checked = options.autoUpdate) {
             onChange {
                 options.autoUpdate = it.checked
+            }
+        }
+
+        uiCheckBox(text = "Sphere", checked = options.sphere) {
+            onChange {
+                options.sphere = it.checked
+            }
+        }
+
+        uiCheckBox(text = "Shadow", checked = options.shadow) {
+            onChange {
+                options.shadow = it.checked
             }
         }
 
@@ -62,7 +74,7 @@ fun Container.createControls(
             onSelectionUpdate {
                 if (it.selectedItem != null) {
                     options.biomeType = selectedItem!!
-                    repaint()
+                    repaint(options)
                 }
             }
         }

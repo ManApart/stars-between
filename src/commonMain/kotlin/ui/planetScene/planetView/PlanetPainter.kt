@@ -8,19 +8,18 @@ import com.soywiz.korma.geom.vector.rect
 import planet.Planet
 import planet.generation.PlanetViewOptions
 import ui.pixel
-import ui.planetScene.PlanetManager
 
 
-fun Container.paint(planet: Planet, type: PlanetViewType) {
-    when (type) {
+fun Container.paint(planet: Planet, options: PlanetViewOptions) {
+    when (options.viewType) {
         PlanetViewType.ALTITUDE -> paintAltitude(planet)
         PlanetViewType.PRECIPITATION -> paintPrecipitation(planet)
         PlanetViewType.TEMPERATURE -> paintTemperature(planet)
         PlanetViewType.SATELLITE -> paintSatellite(planet)
-        else -> paintBiomes(planet, PlanetManager.viewOptions)
+        else -> paintBiomes(planet, options)
     }
 
-    if (PlanetManager.viewOptions.sphere) {
+    if (options.sphere) {
         paintSphereOverlay(planet.regions.size)
     }
 

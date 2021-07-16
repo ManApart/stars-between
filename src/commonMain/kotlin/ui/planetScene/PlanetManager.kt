@@ -7,8 +7,6 @@ import planet.generation.PlanetViewOptions
 import ui.planetScene.planetView.PlanetViewType
 
 object PlanetManager {
-    var viewType = PlanetViewType.BIOME
-    var viewOptions = PlanetViewOptions()
     private val generator = PlanetGenerator()
     private val planets = mutableMapOf<Int, Planet>()
 

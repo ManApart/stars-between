@@ -30,17 +30,17 @@ class PlanetScene : Scene() {
             }
         }
 
-        repaint()
+        repaint(PlanetOptionsUI())
     }
 
     private fun regenerate(options: PlanetOptionsUI) {
         PlanetManager.generatePlanet(0, options.toOptions())
-        repaint()
+        repaint(options)
     }
 
-    private fun repaint() {
+    private fun repaint(options: PlanetOptionsUI) {
         val planet = PlanetManager.getPlanet(0)
         planetContainer.removeChildren()
-        planetContainer.paint(planet, PlanetManager.viewType)
+        planetContainer.paint(planet, options.toViewOptions())
     }
 }
