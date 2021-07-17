@@ -14,9 +14,9 @@ import ui.pixel
 
 
 fun Container.paint(scaledPlanetSize: Int, clickPlanet: (Point) -> Unit, planet: Planet, options: PlanetViewOptions) {
-    val planetSize = planet.regions.size
-    val scaleSize = scaledPlanetSize.toDouble() / planetSize
-    fixedSizeContainer(planetSize, planetSize, clip = true) {
+    val displaySize = planet.regions.size
+    val scaleSize = scaledPlanetSize.toDouble() / displaySize
+    fixedSizeContainer(displaySize, displaySize, clip = true) {
         scale = scaleSize
         paint(planet, options)
 

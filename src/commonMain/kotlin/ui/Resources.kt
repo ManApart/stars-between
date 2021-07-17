@@ -3,10 +3,12 @@ package ui
 import com.soywiz.korio.file.std.resourcesVfs
 
 object Resources {
+    var inited = false
     val biomes: MutableMap<String, String> = mutableMapOf()
 
     suspend fun init() {
-        if (biomes.isEmpty()) {
+        if (!inited) {
+            inited = true
             readBiomes()
         }
     }
