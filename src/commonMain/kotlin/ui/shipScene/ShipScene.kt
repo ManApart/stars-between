@@ -41,7 +41,7 @@ class ShipScene : Scene() {
         repaint()
     }
 
-    private fun repaint() {
+    private suspend fun repaint() {
         shipContainer.removeChildren()
         shipContainer.paint(shipViewSize, Game.floorPlan, ::clickTile)
     }

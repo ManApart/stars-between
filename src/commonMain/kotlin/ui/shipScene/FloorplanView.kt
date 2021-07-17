@@ -1,23 +1,25 @@
 package ui.shipScene
 
 import com.soywiz.korge.input.onClick
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.fixedSizeContainer
-import com.soywiz.korge.view.position
-import com.soywiz.korge.view.solidRect
+import com.soywiz.korge.view.*
+import com.soywiz.korim.bitmap.Bitmap
+import com.soywiz.korim.bitmap.BitmapSlice
 import com.soywiz.korim.color.Colors
+import com.soywiz.korma.geom.degrees
 import floorplan.FloorPlan
+import tile.Adjacency
 import tile.Tile
+import ui.Resources
 
 private const val TILE_SIZE = 10
 
-fun Container.paint(
+suspend fun Container.paint(
     shipViewSize: Int,
     floorPlan: FloorPlan,
     click: (Tile) -> Unit,
     options: ShipViewOptions = ShipViewOptions()
 ) {
-    val displaySize = floorPlan.size
+    val displaySize = floorPlan.size * TILE_SIZE
     val scaleSize = shipViewSize.toDouble() / displaySize
     fixedSizeContainer(displaySize, displaySize, clip = true) {
         scale = scaleSize
@@ -29,7 +31,7 @@ fun Container.paint(
     }
 }
 
-private fun Container.paint(
+private suspend fun Container.paint(
     floorPlan: FloorPlan,
     click: (Tile) -> Unit,
     options: ShipViewOptions = ShipViewOptions(),
@@ -37,11 +39,38 @@ private fun Container.paint(
     y: Int
 ) {
     val tile = floorPlan.getTile(x, y)
-    solidRect(TILE_SIZE, TILE_SIZE, color = Colors.PINK) {
-        position(x * TILE_SIZE, y * TILE_SIZE)
+    val image = getTileImage(tile)
+    val displayX = x * TILE_SIZE.toDouble()
+    val displayY = y * TILE_SIZE.toDouble()
+    image(image, anchorX = displayX + TILE_SIZE.toDouble()/2, anchorY = displayY + TILE_SIZE.toDouble()/2) {
+        position(displayX, displayY)
+        smoothing = false
+        centered
+        rotation = tile.rotation.degrees
         onClick {
             click(tile)
         }
     }
 
+}
+
+private suspend fun getTileImage(tile: Tile): BitmapSlice<Bitmap> {
+    val col = when (tile.adjacency) {
+        Adjacency.NONE -> 2
+        Adjacency.ONE_SIDE -> 1
+        Adjacency.TWO_SIDE -> 0
+        Adjacency.CORNER -> 2
+        Adjacency.THREE_SIDE -> 1
+        Adjacency.ALL -> 0
+    }
+    val row = when (tile.adjacency) {
+        Adjacency.NONE -> 1
+        Adjacency.ONE_SIDE -> 1
+        Adjacency.TWO_SIDE -> 1
+        Adjacency.CORNER -> 0
+        Adjacency.THREE_SIDE -> 0
+        Adjacency.ALL -> 0
+    }
+
+    return Resources.getTileImage(tile.system.type, TILE_SIZE, col, row)
 }
