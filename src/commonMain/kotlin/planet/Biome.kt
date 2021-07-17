@@ -12,13 +12,13 @@ val DEFAULT_BIOME = Biome("DefaultBiome", "Barren Rock", RGBA(93, 56, 45).hexStr
 @Serializable
 class Biome(
     val id: String,
-    private val name: String,
+    val name: String,
     @SerialName("color")
     private val colorString: String,
 
-    private val altitude: Int = 0,
-    private val temperature: Int = 0,
-    private val precipitation: Int = 0,
+    val altitude: Int = 0,
+    val temperature: Int = 0,
+    val precipitation: Int = 0,
 
     private val altitudeVariation: Int = 0,
     private val temperatureVariation: Int = 0,

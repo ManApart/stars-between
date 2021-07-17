@@ -6,14 +6,15 @@ import com.soywiz.korma.geom.*
 import ui.planetScene.PlanetScene
 import ui.shipScene.ShipScene
 
-const val WINDOW_SIZE = 800
+const val WINDOW_WIDTH = 1000
+const val WINDOW_HEIGHT = 800
 const val VIRTUAL_SIZE = 640
 
 object MainModule : Module() {
     override val mainScene = PlanetScene::class
 //    override val mainScene = ShipScene::class
     override val title: String = "Stars Between"
-    override val size: SizeInt = SizeInt(Size(WINDOW_SIZE, WINDOW_SIZE))
+    override val size: SizeInt = SizeInt(Size(WINDOW_WIDTH, WINDOW_HEIGHT))
     override val windowSize = size
     override val icon: String = "images/tiles/space.png"
     override val scaleMode: ScaleMode = ScaleMode.NO_SCALE

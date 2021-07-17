@@ -7,6 +7,8 @@ import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.AlphaTransition
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
+import com.soywiz.korge.ui.uiText
+import com.soywiz.korge.ui.uiVerticalStack
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.alignLeftToRightOf
 import com.soywiz.korge.view.alignTopToBottomOf
@@ -23,17 +25,16 @@ import kotlin.math.roundToInt
 
 class PlanetScene : Scene() {
     private lateinit var planetContainer: Container
-    private lateinit var selectedRegion: Region
+    private lateinit var regionContainer: Container
 
     override suspend fun Container.sceneInit() {
         Resources.init()
-        selectedRegion = PlanetManager.getPlanet(0).regions[0][0]
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             val controls = fixedSizeContainer(300, 600, clip = true) {
                 createControls(::regenerate, ::repaint)
             }
-            planetContainer = fixedSizeContainer(120, 120, clip = true) {
+            planetContainer = fixedSizeContainer(105, 105, clip = true) {
                 alignLeftToRightOf(controls)
                 scale = 5.0
 
@@ -41,7 +42,10 @@ class PlanetScene : Scene() {
                     clickPlanet(it.currentPosLocal)
                 }
             }
-            uiButton(text= "Ship") {
+            regionContainer = fixedSizeContainer(200, 400, clip = false) {
+                alignLeftToRightOf(planetContainer)
+            }
+            uiButton(text = "Ship") {
                 alignTopToBottomOf(controls)
                 onPress {
                     loadShipScene()
@@ -55,16 +59,16 @@ class PlanetScene : Scene() {
             }
         }
 
-
         repaint(PlanetOptionsUI())
+        repaintRegionInfo(PlanetManager.getPlanet(0).regions[0][0])
     }
 
     private fun clickPlanet(clickedPoint: Point) {
         val planet = PlanetManager.getPlanet(0)
-        val x = kotlin.math.min(clickedPoint.x, planet.regions.size-1.toDouble()).roundToInt()
-        val y = kotlin.math.min(clickedPoint.x, planet.regions.size-1.toDouble()).roundToInt()
+        val x = kotlin.math.min(clickedPoint.x, planet.regions.size - 1.toDouble()).roundToInt()
+        val y = kotlin.math.min(clickedPoint.y, planet.regions.size - 1.toDouble()).roundToInt()
         val region = planet.regions[x][y]
-        println(region)
+        repaintRegionInfo(region, x, y)
     }
 
     private fun regenerate(options: PlanetOptionsUI) {
@@ -78,7 +82,23 @@ class PlanetScene : Scene() {
         planetContainer.paint(planet, options.toViewOptions())
     }
 
-    private fun loadShipScene(){
+    private fun repaintRegionInfo(region: Region, x: Int = 0, y: Int = 0) {
+        regionContainer.removeChildren()
+        regionContainer.apply {
+            uiVerticalStack(width = 200.0) {
+                uiText("Position: $x $y")
+                uiText("Altitiude: ${region.altitude}")
+                uiText("Temperature: ${region.temperature}")
+                uiText("Precipitation: ${region.precipitation}")
+                uiText("Biome Name: ${region.biome.name}")
+                uiText("Biome Altitude: ${region.biome.altitude}")
+                uiText("Biome Temperature: ${region.biome.temperature}")
+                uiText("Biome Precipitation: ${region.biome.precipitation}")
+            }
+        }
+    }
+
+    private fun loadShipScene() {
         launchImmediately {
             sceneContainer.changeTo<ShipScene>(
                 transition = AlphaTransition,
