@@ -27,6 +27,10 @@ val defaultTiles = listOf(
     Tile(Position(), Wire("Wall Wire", SystemType.WIRE_WALL)),
 )
 
+fun getDefault(type: SystemType): Tile {
+    return defaultTiles.firstOrNull{ it.system.type == type } ?: DEFAULT_TILE
+}
+
 data class Tile(
     val position: Position = Position(),
     val system: ShipSystem

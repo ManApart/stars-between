@@ -3,6 +3,7 @@ package ui
 import com.soywiz.korge.scene.Module
 import com.soywiz.korinject.AsyncInjector
 import com.soywiz.korma.geom.*
+import game.Game
 import ui.planetScene.PlanetScene
 import ui.shipScene.ShipScene
 
@@ -22,7 +23,8 @@ object MainModule : Module() {
     override val scaleAnchor: Anchor = Anchor.TOP_LEFT
 
     override suspend fun AsyncInjector.configure() {
+        mapPrototype { Game.floorPlan }
         mapPrototype { PlanetScene() }
-        mapPrototype { ShipScene() }
+        mapPrototype { ShipScene(get()) }
     }
 }

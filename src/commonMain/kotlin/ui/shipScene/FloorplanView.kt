@@ -11,9 +11,9 @@ import tile.Adjacency
 import tile.Tile
 import ui.Resources
 
-private const val TILE_SIZE = 10
+const val TILE_SIZE = 10
 
-suspend fun Container.paint(
+fun Container.paint(
     shipViewSize: Int,
     floorPlan: FloorPlan,
     click: (Tile) -> Unit,
@@ -31,7 +31,7 @@ suspend fun Container.paint(
     }
 }
 
-private suspend fun Container.paint(
+private fun Container.paint(
     floorPlan: FloorPlan,
     click: (Tile) -> Unit,
     options: ShipViewOptions = ShipViewOptions(),
@@ -39,7 +39,7 @@ private suspend fun Container.paint(
     y: Int
 ) {
     val tile = floorPlan.getTile(x, y)
-    val image = getTileImage(tile)
+    val image = tile.getTileImage()
     val displayX = x * TILE_SIZE.toDouble()
     val displayY = y * TILE_SIZE.toDouble()
     image(image, anchorX = displayX + TILE_SIZE.toDouble()/2, anchorY = displayY + TILE_SIZE.toDouble()/2) {
@@ -54,8 +54,8 @@ private suspend fun Container.paint(
 
 }
 
-private suspend fun getTileImage(tile: Tile): BitmapSlice<Bitmap> {
-    val col = when (tile.adjacency) {
+fun Tile.getTileImage(): BitmapSlice<Bitmap> {
+    val col = when (adjacency) {
         Adjacency.NONE -> 2
         Adjacency.ONE_SIDE -> 1
         Adjacency.TWO_SIDE -> 0
@@ -63,7 +63,7 @@ private suspend fun getTileImage(tile: Tile): BitmapSlice<Bitmap> {
         Adjacency.THREE_SIDE -> 1
         Adjacency.ALL -> 0
     }
-    val row = when (tile.adjacency) {
+    val row = when (adjacency) {
         Adjacency.NONE -> 1
         Adjacency.ONE_SIDE -> 1
         Adjacency.TWO_SIDE -> 1
@@ -72,5 +72,5 @@ private suspend fun getTileImage(tile: Tile): BitmapSlice<Bitmap> {
         Adjacency.ALL -> 0
     }
 
-    return Resources.getTileImage(tile.system.type, TILE_SIZE, col, row)
+    return Resources.getTileImage(system.type, TILE_SIZE, col, row)
 }

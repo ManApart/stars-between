@@ -11,29 +11,31 @@ import tile.SystemType
 object Resources {
     var inited = false
     val biomes: MutableMap<String, String> = mutableMapOf()
-    private val images = mutableMapOf<String, Bitmap>()
+    private val tiles = mutableMapOf<SystemType, Bitmap>()
 
     suspend fun init() {
         if (!inited) {
             inited = true
             readBiomes()
+            readTiles()
         }
     }
 
-    suspend fun getTileImage(tile: SystemType, size: Int, col: Int, row: Int): BitmapSlice<Bitmap> {
-        return getImage("images/tiles/${tile.name.lowercase()}.png").sliceWithSize(col * size, row * size, size, size)
-    }
-
-    suspend fun getImage(path: String): Bitmap {
-        return images.getOrPut(path) {
-            resourcesVfs[path].readBitmap()
-        }
+    fun getTileImage(tile: SystemType, size: Int, col: Int = 2, row: Int = 1): BitmapSlice<Bitmap> {
+        return tiles[tile]!!.sliceWithSize(col * size, row * size, size, size)
     }
 
     private suspend fun readBiomes() {
         BiomeType.values().forEach {
             val name = it.fileName
             biomes[name] = resourcesVfs["biomes/$name.json"].readString()
+        }
+    }
+
+    private suspend fun readTiles() {
+        SystemType.values().forEach {
+            val name = it.name.lowercase()
+            tiles[it] = resourcesVfs["images/tiles/$name.png"].readBitmap()
         }
     }
 }
