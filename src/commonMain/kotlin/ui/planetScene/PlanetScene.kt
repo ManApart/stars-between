@@ -3,7 +3,6 @@ package ui.planetScene
 import com.soywiz.klock.TimeSpan
 import com.soywiz.korev.Key
 import com.soywiz.korge.input.keys
-import com.soywiz.korge.input.onClick
 import com.soywiz.korge.scene.AlphaTransition
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
@@ -26,6 +25,7 @@ import kotlin.math.roundToInt
 class PlanetScene : Scene() {
     private lateinit var planetContainer: Container
     private lateinit var regionContainer: Container
+    private val scaledPlanetSize = 525
 
     override suspend fun Container.sceneInit() {
         Resources.init()
@@ -34,13 +34,10 @@ class PlanetScene : Scene() {
             val controls = fixedSizeContainer(300, 600, clip = true) {
                 createControls(::regenerate, ::repaint)
             }
-            planetContainer = fixedSizeContainer(105, 105, clip = true) {
-                alignLeftToRightOf(controls)
-                scale = 5.0
 
-                onClick {
-                    clickPlanet(it.currentPosLocal)
-                }
+            planetContainer = fixedSizeContainer(scaledPlanetSize, scaledPlanetSize, clip = true) {
+                alignLeftToRightOf(controls)
+
             }
             regionContainer = fixedSizeContainer(200, 400, clip = false) {
                 alignLeftToRightOf(planetContainer)
@@ -79,7 +76,7 @@ class PlanetScene : Scene() {
     private fun repaint(options: PlanetOptionsUI) {
         val planet = PlanetManager.getPlanet(0)
         planetContainer.removeChildren()
-        planetContainer.paint(planet, options.toViewOptions())
+        planetContainer.paint(scaledPlanetSize, ::clickPlanet, planet, options.toViewOptions())
     }
 
     private fun repaintRegionInfo(region: Region, x: Int = 0, y: Int = 0) {

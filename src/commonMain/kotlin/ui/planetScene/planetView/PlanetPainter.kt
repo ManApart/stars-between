@@ -1,14 +1,30 @@
 package ui.planetScene.planetView
 
+import com.soywiz.korge.input.onClick
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.fixedSizeContainer
 import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.Colors
+import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.ellipse
 import com.soywiz.korma.geom.vector.rect
 import planet.Planet
 import planet.generation.PlanetViewOptions
 import ui.pixel
 
+
+fun Container.paint(scaledPlanetSize: Int, clickPlanet: (Point) -> Unit, planet: Planet, options: PlanetViewOptions) {
+    val planetSize = planet.regions.size
+    val scaleSize = scaledPlanetSize.toDouble() / planetSize
+    fixedSizeContainer(planetSize, planetSize, clip = true) {
+        scale = scaleSize
+        paint(planet, options)
+
+        onClick {
+            clickPlanet(it.currentPosLocal)
+        }
+    }
+}
 
 fun Container.paint(planet: Planet, options: PlanetViewOptions) {
     when (options.viewType) {
