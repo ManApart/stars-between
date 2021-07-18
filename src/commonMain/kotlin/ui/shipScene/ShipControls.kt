@@ -58,6 +58,7 @@ fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
     removeChildren()
     when (options.mode) {
         ShipViewMode.BUILD -> createBuildControls(options)
+        ShipViewMode.AIR -> createBuildControls(options)
         else -> createBlankControls(options)
     }
 }

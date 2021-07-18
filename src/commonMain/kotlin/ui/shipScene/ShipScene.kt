@@ -1,13 +1,12 @@
 package ui.shipScene
 
+import com.soywiz.kds.iterators.fastForEach
 import com.soywiz.klock.TimeSpan
+import com.soywiz.klock.timesPerSecond
 import com.soywiz.korge.scene.AlphaTransition
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.alignLeftToRightOf
-import com.soywiz.korge.view.alignTopToBottomOf
-import com.soywiz.korge.view.fixedSizeContainer
+import com.soywiz.korge.view.*
 import com.soywiz.korio.async.launchImmediately
 import floorplan.FloorPlan
 import game.Game
@@ -21,6 +20,7 @@ import wiring.loadGame
 class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     private lateinit var shipContainer: Container
     private lateinit var controls: Container
+    private lateinit var tiles: List<TileView>
     private val shipViewSize = 500
     private val options = ShipViewOptions()
 
@@ -31,7 +31,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             controls = fixedSizeContainer(300, 600, clip = true) {
-                createControls(views, ::repaint, ::loadShipScene, options)
+                createControls(views, ::paintShip, ::loadShipScene, options)
             }
             shipContainer = fixedSizeContainer(shipViewSize, shipViewSize, clip = true) {
                 alignLeftToRightOf(controls)
@@ -43,29 +43,39 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
                 }
             }
         }
-        repaint()
+        paintShip()
+
+        addFixedUpdater(10.timesPerSecond) {
+            tick()
+        }
     }
 
-    private fun repaint() {
+    private fun tick(){
+        Game.tick()
+        tiles.fastForEach { it.tick(options) }
+    }
+
+    private fun paintShip() {
         controls.removeChildren()
-        controls.createControls(views, ::repaint, ::loadShipScene, options)
+        controls.createControls(views, ::paintShip, ::loadShipScene, options)
 
         shipContainer.removeChildren()
-        shipContainer.paint(shipViewSize, floorPlan, ::clickTile)
+        tiles = shipContainer.paint(shipViewSize, floorPlan, ::clickTile)
     }
 
     private fun clickTile(tile: Tile) {
         println("Clicked $tile")
         when( options.mode){
             ShipViewMode.BUILD -> clickBuild(tile)
-            else -> clickBuild(tile)
+            ShipViewMode.AIR -> clickBuild(tile)
+            else -> {}
         }
     }
 
     private fun clickBuild(tile: Tile) {
         val newTile = getDefault(options.selectedTileType)
         floorPlan.setTile(newTile, tile.position)
-        repaint()
+        paintShip()
     }
 
     private fun loadPlanetScene() {

@@ -10,7 +10,7 @@ import kotlin.math.abs
 
 class Vent(
     health: Int = 100,
-    val airProduced: Int = 100,
+    val airProduced: Int = 50,
     override val totalPowerCapacity: Int = 0,
     override val powerConsumedPerTick: Int = 0
 ) : ShipSystem("Vent", SystemType.VENT, health), Powerable {

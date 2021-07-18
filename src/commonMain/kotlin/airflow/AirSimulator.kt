@@ -1,5 +1,6 @@
 package airflow
 
+import clamp
 import floorplan.Area
 import floorplan.FloorPlan
 import shipStructor.Space
@@ -20,13 +21,13 @@ fun simulateAir(floorPlan: FloorPlan) {
 private fun consumeAir(area: Area) {
     area.tiles.filter { it.system is Space }.forEach { it.air -= (it.system as Space).airConsumed }
     area.tiles.filter { it.system is Vent && it.system.airProduced > 0 }.forEach { tile ->
-        tile.air += (tile.system as Vent).airProduced
+        tile.air = clamp(tile.air + (tile.system as Vent).airProduced, 0, 100)
     }
 }
 
 private fun clampAir(area: Area) {
     area.tiles.forEach { tile ->
-        tile.air = min(100, max(0, tile.air))
+        tile.air = clamp(tile.air, 0, 100)
     }
 }
 

@@ -22,4 +22,8 @@ abstract class ShipSystem(
     open fun floorPlanUpdated(floorPlan: FloorPlan, parent: Tile) {}
 
     abstract fun persisted(): PersistedSystem
+
+    override fun toString(): String {
+        return "$name: $type, $health/$totalHealth"
+    }
 }

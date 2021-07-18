@@ -28,7 +28,6 @@ object Game {
         return floorPlan
     }
 
-
     private fun isWallPosition(position: Position, size: Int): Boolean {
         return (position.x == 1 || position.x == size - 2 || position.y == 1 || position.y == size - 2) && position.x != 0 && position.y != 0 && position.x != size - 1 && position.y != size - 1
     }

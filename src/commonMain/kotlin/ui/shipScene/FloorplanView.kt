@@ -4,6 +4,7 @@ import com.soywiz.korge.input.onClick
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.bitmap.BitmapSlice
+import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.degrees
 import floorplan.FloorPlan
 import tile.Adjacency
@@ -56,9 +57,9 @@ private fun Container.paint(
                 click(tile)
             }
         }
-        text = text("", textSize = 4.0)
+        text = text("", textSize = 4.0, color = Colors.SLATEGRAY)
     }
-    return TileView(x, y, square, squareImage, text)
+    return TileView(tile, square, squareImage, text)
 }
 
 fun Tile.getTileImage(): BitmapSlice<Bitmap> {
