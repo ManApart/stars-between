@@ -8,10 +8,14 @@ import com.soywiz.korim.bitmap.NinePatchBmpSlice
 import com.soywiz.korim.color.Colors
 import tile.SystemType
 import ui.Resources
+import wiring.loadGame
+import wiring.saveGame
 
 @OptIn(KorgeExperimental::class)
 fun Container.createControls(
+    views: Views,
     repaint: (ShipViewOptions) -> Unit,
+    loadShipScene: () -> Unit,
     options: ShipViewOptions = ShipViewOptions()
 ) {
     removeChildren()
@@ -21,12 +25,13 @@ fun Container.createControls(
             uiHorizontalFill {
                 uiButton(text = "Save") {
                     onPress {
-                        println("Save")
+                        views.saveGame()
                     }
                 }
                 uiButton(text = "Load") {
                     onPress {
-                        println("Load")
+                        views.loadGame()
+                        loadShipScene()
                     }
                 }
             }

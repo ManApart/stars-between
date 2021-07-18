@@ -19,18 +19,19 @@ import ui.VIRTUAL_SIZE
 import ui.planetScene.PlanetScene
 import wiring.loadGame
 
-class ShipScene(private val floorPlan: FloorPlan = Game.floorPlan) : Scene() {
+class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     private lateinit var shipContainer: Container
     private val shipViewSize = 500
     private val options = ShipViewOptions()
 
     override suspend fun Container.sceneInit() {
         Resources.init()
-        loadGame()
+        views.loadGame()
+        floorPlan = Game.floorPlan
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             val controls = fixedSizeContainer(300, 600, clip = true) {
-                createControls(::repaint, options)
+                createControls(views, ::repaint, ::loadShipScene, options)
             }
             shipContainer = fixedSizeContainer(shipViewSize, shipViewSize, clip = true) {
                 alignLeftToRightOf(controls)
@@ -64,10 +65,19 @@ class ShipScene(private val floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         repaint(options)
     }
 
-
     private fun loadPlanetScene() {
         launchImmediately {
             sceneContainer.changeTo<PlanetScene>(
+                transition = AlphaTransition,
+                time = TimeSpan(500.0)
+            )
+        }
+    }
+
+    private fun loadShipScene() {
+        launchImmediately {
+            sceneContainer.changeTo<ShipScene>(
+                Game.floorPlan,
                 transition = AlphaTransition,
                 time = TimeSpan(500.0)
             )

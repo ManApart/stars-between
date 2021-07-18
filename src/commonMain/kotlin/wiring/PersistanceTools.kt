@@ -1,7 +1,7 @@
 package wiring
 
-import com.soywiz.korio.file.std.resourcesVfs
-import com.soywiz.korio.lang.toByteArray
+import com.soywiz.korge.service.storage.storage
+import com.soywiz.korge.view.Views
 import game.Game
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -10,8 +10,6 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import persistence.*
 
-
-const val saveName = "./saves/save.json"
 
 val mapper = Json {
     serializersModule = SerializersModule {
@@ -28,17 +26,17 @@ val mapper = Json {
     }
 }
 
-suspend fun saveGame() {
+fun Views.saveGame() {
     val json = mapper.encodeToString(PersistedFloorPlan(Game.floorPlan))
-    resourcesVfs[saveName].write(json.toByteArray())
+    storage["save"] = json
 }
 
-suspend fun loadGame() {
-    if (resourcesVfs[saveName].exists()) {
-        val saveFile = resourcesVfs[saveName].readString()
+fun Views.loadGame() {
+    val saveFile = storage.getOrNull("save")
+    if (saveFile != null) {
         val simpleFloorPlan: PersistedFloorPlan = mapper.decodeFromString(saveFile)
         Game.floorPlan = simpleFloorPlan.toFloorPlan()
     } else {
-        println("Could not find save $saveName")
+        Game.floorPlan = Game.createFloorPlan(10)
     }
 }
