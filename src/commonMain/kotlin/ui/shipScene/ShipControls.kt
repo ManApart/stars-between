@@ -59,12 +59,13 @@ fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
     when (options.mode) {
         ShipViewMode.BUILD -> createBuildControls(options)
         ShipViewMode.AIR -> createBuildControls(options)
-        else -> createBlankControls(options)
+        else -> {
+        }
     }
 }
 
 fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
-    uiVerticalStack(width= 250.0) {
+    uiVerticalStack(width = 250.0) {
         uiHorizontalFill(height = 50.0) {
             val tileImage = Resources.getTileImage(options.selectedTileType, TILE_SIZE)
             fixedSizeContainer(50.0, 50.0, clip = true) {
@@ -76,7 +77,7 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
             text("Current: " + options.selectedTileType.name)
 
         }
-        uiHorizontalFill(height= 20.0)
+        uiHorizontalFill(height = 20.0)
         SystemType.values().filter { it != SystemType.VOID }.forEach { tileType ->
             val tileImage = Resources.getTileImage(tileType, TILE_SIZE)
             uiHorizontalFill(height = 50.0) {
@@ -95,8 +96,4 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
             }
         }
     }
-}
-
-fun FixedSizeContainer.createBlankControls(options: ShipViewOptions) {
-
 }

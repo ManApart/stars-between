@@ -4,8 +4,8 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Text
 import com.soywiz.korim.color.Colors
-import com.soywiz.korim.color.RGBA
-import tile.SPACE
+import power.Engine
+import power.Powerable
 import tile.SystemType
 import tile.Tile
 
@@ -18,6 +18,7 @@ data class TileView(
     fun tick(options: ShipViewOptions) {
         when (options.mode) {
             ShipViewMode.AIR -> updateAir()
+            ShipViewMode.POWER -> updatePower()
             else -> {
             }
         }
@@ -34,6 +35,16 @@ data class TileView(
             } else {
                 image.tint = Colors.WHITE
             }
+        }
+    }
+
+    private fun updatePower() {
+        if (tile.system.type == SystemType.ENGINE) {
+            val engine = tile.system as Engine
+            text.text = engine.power.toString()
+        } else if (tile.system is Powerable) {
+            val system = tile.system as Powerable
+            text.text = system.power.toString()
         }
     }
 }
