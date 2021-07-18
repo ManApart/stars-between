@@ -4,8 +4,6 @@ import com.soywiz.korge.annotations.KorgeExperimental
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
-import com.soywiz.korim.bitmap.NinePatchBmpSlice
-import com.soywiz.korim.color.Colors
 import tile.SystemType
 import ui.Resources
 import wiring.loadGame
@@ -67,14 +65,14 @@ fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
 fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
     uiVerticalStack(width = 250.0) {
         uiHorizontalFill(height = 50.0) {
-            val tileImage = Resources.getTileImage(options.selectedTileType, TILE_SIZE)
+            val tileImage = Resources.getTileImage(options.buildTileType, TILE_SIZE)
             fixedSizeContainer(50.0, 50.0, clip = true) {
                 image(tileImage) {
                     scale = 5.0
                     smoothing = false
                 }
             }
-            text("Current: " + options.selectedTileType.name)
+            text("Current: " + options.buildTileType.name)
 
         }
         uiHorizontalFill(height = 20.0)
@@ -89,7 +87,7 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
                 }
                 text(tileType.name)
                 onClick {
-                    options.selectedTileType = tileType
+                    options.buildTileType = tileType
                     this@createBuildControls.removeChildren()
                     this@createBuildControls.createBuildControls(options)
                 }

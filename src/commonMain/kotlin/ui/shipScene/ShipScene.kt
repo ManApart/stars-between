@@ -30,7 +30,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         floorPlan = Game.floorPlan
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
-            controls = fixedSizeContainer(300, 600, clip = true) {
+            controls = fixedSizeContainer(300, VIRTUAL_SIZE-40, clip = true) {
                 createControls(views, ::paintShip, ::loadShipScene, options)
             }
             shipContainer = fixedSizeContainer(shipViewSize, shipViewSize, clip = true) {
@@ -65,6 +65,9 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
 
     private fun clickTile(tile: Tile) {
         println("Clicked $tile")
+        options.selectedTile = tile
+        floorPlan.setSelectedTile(tile)
+
         when( options.mode){
             ShipViewMode.BUILD -> clickBuild(tile)
             ShipViewMode.AIR -> clickBuild(tile)
@@ -73,7 +76,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     }
 
     private fun clickBuild(tile: Tile) {
-        val newTile = getDefault(options.selectedTileType)
+        val newTile = getDefault(options.buildTileType)
         floorPlan.setTile(newTile, tile.position)
         paintShip()
     }

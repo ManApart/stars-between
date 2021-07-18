@@ -29,6 +29,7 @@ val mapper = Json {
 fun Views.saveGame() {
     val json = mapper.encodeToString(PersistedFloorPlan(Game.floorPlan))
     storage["save"] = json
+    println("Saved!")
 }
 
 fun Views.loadGame() {

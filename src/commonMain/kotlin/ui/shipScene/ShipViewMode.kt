@@ -1,8 +1,10 @@
 package ui.shipScene
 
 enum class ShipViewMode {
-    BUILD,
     AIR,
+    BUILD,
+    CREW,
     DISTANCE,
-    POWER
+    POWER,
+    SHIELDS
 }

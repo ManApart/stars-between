@@ -19,6 +19,7 @@ data class TileView(
         when (options.mode) {
             ShipViewMode.AIR -> updateAir()
             ShipViewMode.POWER -> updatePower()
+            ShipViewMode.DISTANCE -> updateDistance()
             else -> {
             }
         }
@@ -45,6 +46,12 @@ data class TileView(
         } else if (tile.system is Powerable) {
             val system = tile.system as Powerable
             text.text = system.power.toString()
+        }
+    }
+
+    private fun updateDistance() {
+        if (tile.distanceFromSelected != Int.MAX_VALUE) {
+            text.text = tile.distanceFromSelected.toString()
         }
     }
 }
