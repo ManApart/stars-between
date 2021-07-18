@@ -12,7 +12,7 @@ import kotlin.math.min
 class Shield(
     health: Int = 100,
     //1-10
-    var frequency: Int = 1,
+    var frequency: Double = 1.0,
     //How many tiles this shield protects
     val radius: Int = 1,
     //How much damage is blocked per unit of power
@@ -29,21 +29,21 @@ class Shield(
     override var lastReceivedPowerFrom: Tile? = null
 
     //Current amount of power to pull each tick
-    var currentDesiredPower = 0
+    var currentDesiredPower = 0.0
 
     //Strength of shield; based on amount of power pulled last tick * shield strength factor
     var shieldStrength = 0f
 
     private var tilesToShield = listOf<Tile>()
 
-    override val powerConsumedPerTick: Int; get() = currentDesiredPower
+    override val powerConsumedPerTick: Int; get() = currentDesiredPower.toInt()
 
     override fun persisted(): PersistedSystem {
         return PersistedShield(this)
     }
 
     override fun tick(parent: Tile) {
-        val powerPulled = min(currentDesiredPower, power)
+        val powerPulled = min(currentDesiredPower.toInt(), power)
         if (powerPulled < minPowerConsumedPerTick) {
             shieldStrength = 0f
         } else {

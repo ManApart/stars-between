@@ -4,6 +4,9 @@ import com.soywiz.korge.annotations.KorgeExperimental
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
+import floorplan.FloorPlan
+import game.Game
+import systems.shields.Shield
 import tile.SystemType
 import ui.Resources
 import wiring.loadGame
@@ -55,8 +58,9 @@ fun Container.createControls(
 fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
     removeChildren()
     when (options.mode) {
-        ShipViewMode.BUILD -> createBuildControls(options)
         ShipViewMode.AIR -> createBuildControls(options)
+        ShipViewMode.BUILD -> createBuildControls(options)
+        ShipViewMode.SHIELDS -> createShieldControls(options)
         else -> {
         }
     }
@@ -92,6 +96,38 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
                     this@createBuildControls.createBuildControls(options)
                 }
             }
+        }
+    }
+}
+
+fun FixedSizeContainer.createShieldControls(options: ShipViewOptions) {
+    uiVerticalStack(width = 250.0) {
+        options.floorPlan.getSystems(SystemType.SHIELD).entries.forEach { (id, shieldTile) ->
+            val shield = shieldTile.system as Shield
+            uiHorizontalFill {
+                uiText("Id: $id")
+            }
+            uiHorizontalFill {
+                uiText("Radius: ${shield.radius}")
+            }
+            uiHorizontalFill {
+                uiPropertyNumberRow(
+                    "Frequency",
+                    *UIEditableNumberPropsList(shield::frequency, min = 0.0, max = 10.0, decimals = 0)
+                )
+            }
+            uiHorizontalFill {
+                uiPropertyNumberRow(
+                    "Desired Power",
+                    *UIEditableNumberPropsList(
+                        shield::currentDesiredPower,
+                        min = 0.0,
+                        max = shield.totalPowerCapacity.toDouble(),
+                        decimals = 0
+                    )
+                )
+            }
+            text("Power: ${shield.power}/${shield.totalPowerCapacity}")
         }
     }
 }

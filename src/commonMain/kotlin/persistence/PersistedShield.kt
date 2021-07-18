@@ -24,6 +24,6 @@ class PersistedShield(
     )
 
     override fun toSystem(): ShipSystem {
-        return Shield(health,0, radius, powerToStrength, minPowerConsumedPerTick, maxPowerConsumedPerTick, totalPowerCapacity)
+        return Shield(health,0.0, radius, powerToStrength, minPowerConsumedPerTick, maxPowerConsumedPerTick, totalPowerCapacity)
     }
 }

@@ -22,9 +22,10 @@ object Game {
         val floorTiles =
             floorPlan.getAllTiles().map { it.position }.filter { !spaceTiles.contains(it) && !wallTiles.contains(it) }
 
-        spaceTiles.forEach { floorPlan.setTile(SPACE, it) }
-        wallTiles.forEach { floorPlan.setTile(WALL, it) }
-        floorTiles.forEach { floorPlan.setTile(FLOOR, it) }
+        spaceTiles.forEach { floorPlan.setTileWithoutUpdates(SPACE, it) }
+        wallTiles.forEach { floorPlan.setTileWithoutUpdates(WALL, it) }
+        floorTiles.forEach { floorPlan.setTileWithoutUpdates(FLOOR, it) }
+        floorPlan.setTile(SPACE, Position(0,0))
         return floorPlan
     }
 

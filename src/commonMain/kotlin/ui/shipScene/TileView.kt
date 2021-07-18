@@ -4,13 +4,16 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.Text
 import com.soywiz.korim.color.Colors
+import floorplan.FloorPlan
 import power.Engine
 import power.Powerable
+import systems.shields.Shield
 import tile.SystemType
 import tile.Tile
 
 data class TileView(
     private val tile: Tile,
+    private val floorPlan: FloorPlan,
     private val square: Container,
     private val image: Image,
     private val text: Text
@@ -20,6 +23,7 @@ data class TileView(
             ShipViewMode.AIR -> updateAir()
             ShipViewMode.POWER -> updatePower()
             ShipViewMode.DISTANCE -> updateDistance()
+            ShipViewMode.SHIELDS -> updateShield()
             else -> {
             }
         }
@@ -52,6 +56,13 @@ data class TileView(
     private fun updateDistance() {
         if (tile.distanceFromSelected != Int.MAX_VALUE) {
             text.text = tile.distanceFromSelected.toString()
+        }
+    }
+
+    private fun updateShield() {
+        if (tile.system is Shield) {
+            val id = floorPlan.getId(tile.system)
+            text.text = "$id"
         }
     }
 }

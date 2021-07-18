@@ -28,6 +28,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         Resources.init()
         views.loadGame()
         floorPlan = Game.floorPlan
+        options.floorPlan = floorPlan
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             controls = fixedSizeContainer(300, VIRTUAL_SIZE-40, clip = true) {

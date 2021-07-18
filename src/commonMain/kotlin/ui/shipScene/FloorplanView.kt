@@ -59,7 +59,7 @@ private fun Container.paint(
         }
         text = text("", textSize = 4.0, color = Colors.SLATEGRAY)
     }
-    return TileView(tile, square, squareImage, text)
+    return TileView(tile, floorPlan, square, squareImage, text)
 }
 
 fun Tile.getTileImage(): BitmapSlice<Bitmap> {
