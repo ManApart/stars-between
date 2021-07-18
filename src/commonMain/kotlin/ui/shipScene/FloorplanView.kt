@@ -4,54 +4,61 @@ import com.soywiz.korge.input.onClick
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.bitmap.BitmapSlice
-import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.degrees
 import floorplan.FloorPlan
 import tile.Adjacency
 import tile.Tile
 import ui.Resources
+import kotlin.properties.Delegates
 
 const val TILE_SIZE = 10
 
 fun Container.paint(
     shipViewSize: Int,
     floorPlan: FloorPlan,
-    click: (Tile) -> Unit,
-    options: ShipViewOptions = ShipViewOptions()
-) {
+    click: (Tile) -> Unit
+): List<TileView> {
     val displaySize = floorPlan.size * TILE_SIZE
     val scaleSize = shipViewSize.toDouble() / displaySize
+    var tiles: List<TileView> by Delegates.notNull()
     fixedSizeContainer(displaySize, displaySize, clip = true) {
         scale = scaleSize
-        (0 until floorPlan.size).forEach { x ->
-            (0 until floorPlan.size).forEach { y ->
-                paint(floorPlan, click, options, x, y)
+        tiles = (0 until floorPlan.size).flatMap { x ->
+            (0 until floorPlan.size).map { y ->
+                paint(floorPlan, click, x, y)
             }
         }
     }
+    return tiles
 }
 
 private fun Container.paint(
     floorPlan: FloorPlan,
     click: (Tile) -> Unit,
-    options: ShipViewOptions = ShipViewOptions(),
     x: Int,
     y: Int
-) {
+): TileView {
     val tile = floorPlan.getTile(x, y)
     val image = tile.getTileImage()
     val displayX = x * TILE_SIZE.toDouble()
     val displayY = y * TILE_SIZE.toDouble()
-    image(image, anchorX = displayX + TILE_SIZE.toDouble()/2, anchorY = displayY + TILE_SIZE.toDouble()/2) {
-        position(displayX, displayY)
-        smoothing = false
-        centered
-        rotation = tile.rotation.degrees
-        onClick {
-            click(tile)
-        }
-    }
+    var squareImage: Image by Delegates.notNull()
+    var text: Text by Delegates.notNull()
 
+    val square = fixedSizeContainer(TILE_SIZE, TILE_SIZE) {
+        position(displayX, displayY)
+        squareImage = image(image) {
+            position(TILE_SIZE / 2, TILE_SIZE / 2)
+            smoothing = false
+            centered
+            rotation = tile.rotation.degrees
+            onClick {
+                click(tile)
+            }
+        }
+        text = text("", textSize = 4.0)
+    }
+    return TileView(x, y, square, squareImage, text)
 }
 
 fun Tile.getTileImage(): BitmapSlice<Bitmap> {

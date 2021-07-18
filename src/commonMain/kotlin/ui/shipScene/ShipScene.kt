@@ -12,7 +12,6 @@ import com.soywiz.korio.async.launchImmediately
 import floorplan.FloorPlan
 import game.Game
 import tile.Tile
-import tile.defaultTiles
 import tile.getDefault
 import ui.Resources
 import ui.VIRTUAL_SIZE
@@ -21,6 +20,7 @@ import wiring.loadGame
 
 class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     private lateinit var shipContainer: Container
+    private lateinit var controls: Container
     private val shipViewSize = 500
     private val options = ShipViewOptions()
 
@@ -30,7 +30,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         floorPlan = Game.floorPlan
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
-            val controls = fixedSizeContainer(300, 600, clip = true) {
+            controls = fixedSizeContainer(300, 600, clip = true) {
                 createControls(views, ::repaint, ::loadShipScene, options)
             }
             shipContainer = fixedSizeContainer(shipViewSize, shipViewSize, clip = true) {
@@ -43,10 +43,13 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
                 }
             }
         }
-        repaint(options)
+        repaint()
     }
 
-    private fun repaint(options: ShipViewOptions) {
+    private fun repaint() {
+        controls.removeChildren()
+        controls.createControls(views, ::repaint, ::loadShipScene, options)
+
         shipContainer.removeChildren()
         shipContainer.paint(shipViewSize, floorPlan, ::clickTile)
     }
@@ -62,7 +65,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     private fun clickBuild(tile: Tile) {
         val newTile = getDefault(options.selectedTileType)
         floorPlan.setTile(newTile, tile.position)
-        repaint(options)
+        repaint()
     }
 
     private fun loadPlanetScene() {

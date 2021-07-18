@@ -14,7 +14,7 @@ import wiring.saveGame
 @OptIn(KorgeExperimental::class)
 fun Container.createControls(
     views: Views,
-    repaint: (ShipViewOptions) -> Unit,
+    repaint: () -> Unit,
     loadShipScene: () -> Unit,
     options: ShipViewOptions = ShipViewOptions()
 ) {
@@ -37,11 +37,11 @@ fun Container.createControls(
             }
 
             uiComboBox(items = ShipViewMode.values().toList()) {
-                selectedItem = ShipViewMode.BUILD
+                selectedItem = options.mode
                 onSelectionUpdate {
                     if (it.selectedItem != null) {
                         options.mode = selectedItem!!
-                        repaint(options)
+                        repaint()
                     }
                 }
             }
@@ -58,7 +58,7 @@ fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
     removeChildren()
     when (options.mode) {
         ShipViewMode.BUILD -> createBuildControls(options)
-        else -> createBuildControls(options)
+        else -> createBlankControls(options)
     }
 }
 
@@ -94,4 +94,8 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
             }
         }
     }
+}
+
+fun FixedSizeContainer.createBlankControls(options: ShipViewOptions) {
+
 }
