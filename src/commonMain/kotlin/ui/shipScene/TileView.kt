@@ -70,6 +70,8 @@ data class TileView(
     private fun updateCrew(options: ShipViewOptions) {
         if (tile == options.selectedCrewMan?.goal) {
             text.text = "G"
+        } else {
+            text.text = ""
         }
     }
 }

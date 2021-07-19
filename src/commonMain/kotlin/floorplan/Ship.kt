@@ -5,14 +5,11 @@ import com.soywiz.kds.iterators.fastForEach
 import crew.CrewMan
 import crew.Division
 import power.simulatePower
-import tile.FLOOR
-import tile.SPACE
-import tile.SystemType
-import tile.WALL
+import tile.*
 
 class Ship(
     val floorPlan: FloorPlan = createFloorPlan(10),
-    val crew: MutableMap<Int, CrewMan> = mutableMapOf<Int, CrewMan>()
+    val crew: MutableMap<Int, CrewMan> = mutableMapOf()
 ) {
     fun tick() {
         tickSystems(floorPlan)
@@ -62,7 +59,7 @@ fun createFloorPlan(size: Int = 10): FloorPlan {
     spaceTiles.forEach { floorPlan.setTileWithoutUpdates(SPACE, it) }
     wallTiles.forEach { floorPlan.setTileWithoutUpdates(WALL, it) }
     floorTiles.forEach { floorPlan.setTileWithoutUpdates(FLOOR, it) }
-    floorPlan.setTile(SPACE, Position(0, 0))
+    floorPlan.doFullSetup()
     return floorPlan
 }
 

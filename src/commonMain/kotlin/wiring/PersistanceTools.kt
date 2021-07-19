@@ -29,18 +29,33 @@ val mapper = Json {
 }
 
 fun Views.saveGame() {
-    val json = mapper.encodeToString(PersistedFloorPlan(Game.ship.floorPlan))
-    storage["save"] = json
+    val floorPlan = mapper.encodeToString(PersistedFloorPlan(Game.ship.floorPlan))
+    val crew = mapper.encodeToString(Game.ship.crew.values.map { PersistedCrewMan(it) })
+    storage["floorPlan"] = floorPlan
+    storage["crew"] = crew
+
     println("Saved!")
 }
 
 fun Views.loadGame() {
-    val saveFile = storage.getOrNull("save")
-    if (saveFile != null) {
-        val simpleFloorPlan: PersistedFloorPlan = mapper.decodeFromString(saveFile)
+    val floorPlanSave = storage.getOrNull("floorPlan")
+    val floorPlan = if (floorPlanSave != null) {
+        val simpleFloorPlan: PersistedFloorPlan = mapper.decodeFromString(floorPlanSave)
         val floorPlan = simpleFloorPlan.toFloorPlan()
-        Game.ship = Ship(floorPlan)
+        floorPlan
     } else {
-        Game.ship = Ship(createFloorPlan(10))
+        createFloorPlan(10)
     }
+
+    val crewSave = storage.getOrNull("crew")
+    val crew = if (crewSave != null) {
+        val simpleCrew: List<PersistedCrewMan> = mapper.decodeFromString(crewSave)
+        simpleCrew
+            .mapIndexed { id, man -> man.toCrewMan(id, floorPlan) }
+            .associateBy { it.id }
+    } else {
+        mapOf()
+    }.toMutableMap()
+
+    Game.ship = Ship(floorPlan, crew)
 }

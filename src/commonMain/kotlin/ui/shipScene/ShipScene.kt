@@ -91,7 +91,7 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
         if (tile.crewMan != null) {
             println("Selected crewman ${tile.crewMan?.id}")
             options.selectedCrewMan = tile.crewMan
-        } else {
+        } else if (options.selectedCrewMan != null) {
             println("Ordered crewman ${options.selectedCrewMan?.id} to ${tile.position}")
             options.selectedCrewMan?.goal = tile
         }

@@ -19,10 +19,7 @@ class PersistedFloorPlan(val tiles: List<List<PersistedTile>>) {
         tiles.flatten().map {
             floorPlan.setTileWithoutUpdates(it.toTile(), it.x, it.y)
         }
-        floorPlan.getAllTiles().forEach { orient(it, floorPlan) }
-        floorPlan.updateAreas()
-        floorPlan.updateSystemsById()
-        floorPlan.notifySystemsThatFloorplanChanged()
+       floorPlan.doFullSetup()
 
         return floorPlan
     }

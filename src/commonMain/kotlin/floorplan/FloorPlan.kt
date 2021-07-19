@@ -129,6 +129,13 @@ class FloorPlan(val size: Int = 5) {
         getAllTiles().forEach { it.system.floorPlanUpdated(this, it) }
     }
 
+    fun doFullSetup(){
+        getAllTiles().forEach { orient(it, this) }
+        updateAreas()
+        updateSystemsById()
+        notifySystemsThatFloorplanChanged()
+    }
+
 }
 
 
