@@ -5,7 +5,7 @@ import game.Game
 import tile.SystemType
 
 class ShipViewOptions{
-    var mode: ShipViewMode = ShipViewMode.BUILD
+    var mode: ShipViewMode = ShipViewMode.CREW
     var buildTileType = SystemType.SPACE
     var ship = Game.ship
     var selectedTile = ship.floorPlan.getTile(0,0)

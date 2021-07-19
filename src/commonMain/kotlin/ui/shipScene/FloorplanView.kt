@@ -6,6 +6,7 @@ import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.bitmap.BitmapSlice
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.degrees
+import crew.CrewMan
 import floorplan.FloorPlan
 import tile.Adjacency
 import tile.Tile
@@ -81,4 +82,20 @@ fun Tile.getTileImage(): BitmapSlice<Bitmap> {
     }
 
     return Resources.getTileImage(system.type, TILE_SIZE, col, row)
+}
+
+fun Container.paintCrew(shipViewSize: Int, floorPlanSize: Int, crew: List<CrewMan>): List<CrewmanView> {
+    val displaySize = floorPlanSize * TILE_SIZE
+    val scaleSize = shipViewSize.toDouble() / displaySize
+    var crewViews: List<CrewmanView> by Delegates.notNull()
+    fixedSizeContainer(displaySize, displaySize, clip = true) {
+        scale = scaleSize
+        crewViews = crew.map { man ->
+            val circle = circle(TILE_SIZE.toDouble()/2, fill = man.division.color) {
+                position(man.tile.position.x * TILE_SIZE, man.tile.position.y * TILE_SIZE)
+            }
+            CrewmanView(man, circle)
+        }
+    }
+    return crewViews
 }

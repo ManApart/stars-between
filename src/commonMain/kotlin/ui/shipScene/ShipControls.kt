@@ -4,7 +4,6 @@ import com.soywiz.korge.annotations.KorgeExperimental
 import com.soywiz.korge.input.onClick
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
-import floorplan.FloorPlan
 import game.Game
 import systems.shields.Shield
 import tile.SystemType
@@ -50,18 +49,18 @@ fun Container.createControls(
     }
     fixedSizeContainer(300, 600, clip = true) {
         alignTopToBottomOf(mainOptions)
-        createModeControls(options)
+        createModeControls(options, repaint)
     }
 
 }
 
-fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
+fun FixedSizeContainer.createModeControls(options: ShipViewOptions, repaint: () -> Unit) {
     removeChildren()
     when (options.mode) {
         ShipViewMode.AIR -> createBuildControls(options)
         ShipViewMode.BUILD -> createBuildControls(options)
         ShipViewMode.SHIELDS -> createShieldControls(options)
-        ShipViewMode.CREW -> createCrewControls(options)
+        ShipViewMode.CREW -> createCrewControls(options, repaint)
         else -> {
         }
     }
@@ -133,18 +132,20 @@ fun FixedSizeContainer.createShieldControls(options: ShipViewOptions) {
     }
 }
 
-fun FixedSizeContainer.createCrewControls(options: ShipViewOptions) {
+fun FixedSizeContainer.createCrewControls(options: ShipViewOptions, repaint: () -> Unit) {
     uiVerticalStack(width = 300.0) {
         uiHorizontalFill {
             uiButton(text = "Add Crewman") {
                 onPress {
                     Game.ship.addCrewMan()
+                    repaint()
                 }
             }
             uiButton(text = "Remove CrewMan ") {
                 onPress {
                     if (options.selectedCrewMan != null) {
                         Game.ship.removeCrewMan(options.selectedCrewMan!!.id)
+                        repaint()
                     }
                 }
             }

@@ -21,6 +21,7 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
     private lateinit var shipContainer: Container
     private lateinit var controls: Container
     private lateinit var tiles: List<TileView>
+    private lateinit var crew: List<CrewmanView>
     private val shipViewSize = 500
     private val options = ShipViewOptions()
 
@@ -31,7 +32,7 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
         options.ship = ship
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
-            controls = fixedSizeContainer(300, VIRTUAL_SIZE-40, clip = true) {
+            controls = fixedSizeContainer(300, VIRTUAL_SIZE - 40, clip = true) {
                 createControls(views, ::paintShip, ::loadShipScene, options)
             }
             shipContainer = fixedSizeContainer(shipViewSize, shipViewSize, clip = true) {
@@ -51,9 +52,10 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
         }
     }
 
-    private fun tick(){
+    private fun tick() {
         Game.tick()
         tiles.fastForEach { it.tick(options) }
+        crew.fastForEach { it.tick() }
     }
 
     private fun paintShip() {
@@ -62,6 +64,7 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
 
         shipContainer.removeChildren()
         tiles = shipContainer.paint(shipViewSize, ship.floorPlan, ::clickTile)
+        crew = shipContainer.paintCrew(shipViewSize, ship.floorPlan.size, ship.crew.values.toList())
     }
 
     private fun clickTile(tile: Tile) {
@@ -69,11 +72,12 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
         options.selectedTile = tile
         ship.floorPlan.setSelectedTile(tile)
 
-        when( options.mode){
+        when (options.mode) {
             ShipViewMode.BUILD -> clickBuild(tile)
             ShipViewMode.AIR -> clickBuild(tile)
             ShipViewMode.CREW -> clickCrew(tile)
-            else -> {}
+            else -> {
+            }
         }
     }
 
@@ -84,7 +88,7 @@ class ShipScene(var ship: Ship = Game.ship) : Scene() {
     }
 
     private fun clickCrew(tile: Tile) {
-        if (tile.crewMan != null){
+        if (tile.crewMan != null) {
             println("Selected crewman ${tile.crewMan?.id}")
             options.selectedCrewMan = tile.crewMan
         } else {

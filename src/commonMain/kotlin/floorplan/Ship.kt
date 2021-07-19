@@ -1,6 +1,7 @@
 package floorplan
 
 import airflow.simulateAir
+import com.soywiz.kds.iterators.fastForEach
 import crew.CrewMan
 import crew.Division
 import power.simulatePower
@@ -17,12 +18,17 @@ class Ship(
         tickSystems(floorPlan)
         simulatePower(floorPlan)
         simulateAir(floorPlan)
+        tickCrew(crew.values.toList())
     }
 
     private fun tickSystems(floorPlan: FloorPlan) {
         floorPlan.getAllTiles().forEach {
             it.system.tick(it)
         }
+    }
+
+    private fun tickCrew(crew: List<CrewMan>) {
+        crew.fastForEach { it.tick() }
     }
 
     fun addCrewMan(): CrewMan {
