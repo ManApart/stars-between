@@ -1,5 +1,6 @@
 package ui.shipScene
 
+import crew.CrewMan
 import game.Game
 import tile.SystemType
 
@@ -8,4 +9,5 @@ class ShipViewOptions{
     var buildTileType = SystemType.SPACE
     var selectedTile = Game.floorPlan.getTile(0,0)
     var floorPlan = Game.floorPlan
+    var selectedCrewMan: CrewMan? = null
 }

@@ -61,6 +61,7 @@ fun FixedSizeContainer.createModeControls(options: ShipViewOptions) {
         ShipViewMode.AIR -> createBuildControls(options)
         ShipViewMode.BUILD -> createBuildControls(options)
         ShipViewMode.SHIELDS -> createShieldControls(options)
+        ShipViewMode.CREW -> createCrewControls(options)
         else -> {
         }
     }
@@ -128,6 +129,25 @@ fun FixedSizeContainer.createShieldControls(options: ShipViewOptions) {
                 )
             }
             text("Power: ${shield.power}/${shield.totalPowerCapacity}")
+        }
+    }
+}
+
+fun FixedSizeContainer.createCrewControls(options: ShipViewOptions) {
+    uiVerticalStack(width = 300.0) {
+        uiHorizontalFill {
+            uiButton(text = "Add Crewman") {
+                onPress {
+                    Game.addCrewMan()
+                }
+            }
+            uiButton(text = "Remove CrewMan ") {
+                onPress {
+                    if (options.selectedCrewMan != null) {
+                        Game.removeCrewMan(options.selectedCrewMan!!.id)
+                    }
+                }
+            }
         }
     }
 }

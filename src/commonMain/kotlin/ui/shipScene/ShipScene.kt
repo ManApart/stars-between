@@ -72,6 +72,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         when( options.mode){
             ShipViewMode.BUILD -> clickBuild(tile)
             ShipViewMode.AIR -> clickBuild(tile)
+            ShipViewMode.CREW -> clickCrew(tile)
             else -> {}
         }
     }
@@ -80,6 +81,16 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         val newTile = getDefault(options.buildTileType)
         floorPlan.setTile(newTile, tile.position)
         paintShip()
+    }
+
+    private fun clickCrew(tile: Tile) {
+        if (tile.crewMan != null){
+            println("Selected crewman ${tile.crewMan?.id}")
+            options.selectedCrewMan = tile.crewMan
+        } else {
+            println("Ordered crewman ${options.selectedCrewMan?.id} to ${tile.position}")
+            options.selectedCrewMan?.goal = tile
+        }
     }
 
     private fun loadPlanetScene() {

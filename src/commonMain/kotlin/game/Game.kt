@@ -25,7 +25,7 @@ object Game {
         spaceTiles.forEach { floorPlan.setTileWithoutUpdates(SPACE, it) }
         wallTiles.forEach { floorPlan.setTileWithoutUpdates(WALL, it) }
         floorTiles.forEach { floorPlan.setTileWithoutUpdates(FLOOR, it) }
-        floorPlan.setTile(SPACE, Position(0,0))
+        floorPlan.setTile(SPACE, Position(0, 0))
         return floorPlan
     }
 
@@ -45,15 +45,23 @@ object Game {
         }
     }
 
-    fun addCrewMan() {
+    fun addCrewMan(): CrewMan {
         val id = (crew.keys.maxOrNull() ?: 0) + 1
         val tile = floorPlan.getAllTiles()
             .firstOrNull { it.system.type == SystemType.FLOOR && it.crewMan == null }
-        if (tile != null) {
-            crew[id] = CrewMan(id, Division.values().random(), tile)
-            tile.crewMan = crew[id]
-        } else {
-            throw Exception("Could not find an open tile for the crewman")
+            ?: throw Exception("Could not find an open tile for the crewman")
+
+        val man = CrewMan(id, Division.values().random(), tile)
+        crew[id] = man
+        tile.crewMan = crew[id]
+        return man
+    }
+
+    fun removeCrewMan(id: Int) {
+        val man = crew[id]
+        if (man != null){
+            crew.remove(id)
+            man.tile.crewMan = null
         }
     }
 }
