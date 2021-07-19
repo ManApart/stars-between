@@ -2,6 +2,8 @@ package wiring
 
 import com.soywiz.korge.service.storage.storage
 import com.soywiz.korge.view.Views
+import floorplan.Ship
+import floorplan.createFloorPlan
 import game.Game
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -27,7 +29,7 @@ val mapper = Json {
 }
 
 fun Views.saveGame() {
-    val json = mapper.encodeToString(PersistedFloorPlan(Game.floorPlan))
+    val json = mapper.encodeToString(PersistedFloorPlan(Game.ship.floorPlan))
     storage["save"] = json
     println("Saved!")
 }
@@ -36,8 +38,9 @@ fun Views.loadGame() {
     val saveFile = storage.getOrNull("save")
     if (saveFile != null) {
         val simpleFloorPlan: PersistedFloorPlan = mapper.decodeFromString(saveFile)
-        Game.floorPlan = simpleFloorPlan.toFloorPlan()
+        val floorPlan = simpleFloorPlan.toFloorPlan()
+        Game.ship = Ship(floorPlan)
     } else {
-        Game.floorPlan = Game.createFloorPlan(10)
+        Game.ship = Ship(createFloorPlan(10))
     }
 }

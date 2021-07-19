@@ -103,7 +103,7 @@ fun FixedSizeContainer.createBuildControls(options: ShipViewOptions) {
 
 fun FixedSizeContainer.createShieldControls(options: ShipViewOptions) {
     uiVerticalStack(width = 250.0) {
-        options.floorPlan.getSystems(SystemType.SHIELD).entries.forEach { (id, shieldTile) ->
+        options.ship.floorPlan.getSystems(SystemType.SHIELD).entries.forEach { (id, shieldTile) ->
             val shield = shieldTile.system as Shield
             uiHorizontalFill {
                 uiText("Id: $id")
@@ -138,13 +138,13 @@ fun FixedSizeContainer.createCrewControls(options: ShipViewOptions) {
         uiHorizontalFill {
             uiButton(text = "Add Crewman") {
                 onPress {
-                    Game.addCrewMan()
+                    Game.ship.addCrewMan()
                 }
             }
             uiButton(text = "Remove CrewMan ") {
                 onPress {
                     if (options.selectedCrewMan != null) {
-                        Game.removeCrewMan(options.selectedCrewMan!!.id)
+                        Game.ship.removeCrewMan(options.selectedCrewMan!!.id)
                     }
                 }
             }

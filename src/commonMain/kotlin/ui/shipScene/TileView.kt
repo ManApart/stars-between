@@ -21,8 +21,9 @@ data class TileView(
     fun tick(options: ShipViewOptions) {
         when (options.mode) {
             ShipViewMode.AIR -> updateAir()
-            ShipViewMode.POWER -> updatePower()
+            ShipViewMode.CREW -> updateCrew(options)
             ShipViewMode.DISTANCE -> updateDistance()
+            ShipViewMode.POWER -> updatePower()
             ShipViewMode.SHIELDS -> updateShield()
             else -> {
             }
@@ -63,6 +64,12 @@ data class TileView(
         if (tile.system is Shield) {
             val id = floorPlan.getId(tile.system)
             text.text = "$id"
+        }
+    }
+
+    private fun updateCrew(options: ShipViewOptions) {
+        if (tile == options.selectedCrewMan?.goal) {
+            text.text = "G"
         }
     }
 }

@@ -23,7 +23,7 @@ object MainModule : Module() {
     override val scaleAnchor: Anchor = Anchor.TOP_LEFT
 
     override suspend fun AsyncInjector.configure() {
-        mapPrototype { Game.floorPlan }
+        mapPrototype { Game.ship }
         mapPrototype { PlanetScene() }
         mapPrototype { ShipScene(get()) }
     }

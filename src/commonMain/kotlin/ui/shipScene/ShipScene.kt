@@ -8,7 +8,7 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.view.*
 import com.soywiz.korio.async.launchImmediately
-import floorplan.FloorPlan
+import floorplan.Ship
 import game.Game
 import tile.Tile
 import tile.getDefault
@@ -17,7 +17,7 @@ import ui.VIRTUAL_SIZE
 import ui.planetScene.PlanetScene
 import wiring.loadGame
 
-class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
+class ShipScene(var ship: Ship = Game.ship) : Scene() {
     private lateinit var shipContainer: Container
     private lateinit var controls: Container
     private lateinit var tiles: List<TileView>
@@ -27,8 +27,8 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     override suspend fun Container.sceneInit() {
         Resources.init()
         views.loadGame()
-        floorPlan = Game.floorPlan
-        options.floorPlan = floorPlan
+        ship = Game.ship
+        options.ship = ship
 
         fixedSizeContainer(VIRTUAL_SIZE, VIRTUAL_SIZE, clip = false) {
             controls = fixedSizeContainer(300, VIRTUAL_SIZE-40, clip = true) {
@@ -61,13 +61,13 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
         controls.createControls(views, ::paintShip, ::loadShipScene, options)
 
         shipContainer.removeChildren()
-        tiles = shipContainer.paint(shipViewSize, floorPlan, ::clickTile)
+        tiles = shipContainer.paint(shipViewSize, ship.floorPlan, ::clickTile)
     }
 
     private fun clickTile(tile: Tile) {
         println("Clicked $tile")
         options.selectedTile = tile
-        floorPlan.setSelectedTile(tile)
+        ship.floorPlan.setSelectedTile(tile)
 
         when( options.mode){
             ShipViewMode.BUILD -> clickBuild(tile)
@@ -79,7 +79,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
 
     private fun clickBuild(tile: Tile) {
         val newTile = getDefault(options.buildTileType)
-        floorPlan.setTile(newTile, tile.position)
+        ship.floorPlan.setTile(newTile, tile.position)
         paintShip()
     }
 
@@ -105,7 +105,7 @@ class ShipScene(var floorPlan: FloorPlan = Game.floorPlan) : Scene() {
     private fun loadShipScene() {
         launchImmediately {
             sceneContainer.changeTo<ShipScene>(
-                Game.floorPlan,
+                Game.ship,
                 transition = AlphaTransition,
                 time = TimeSpan(500.0)
             )
