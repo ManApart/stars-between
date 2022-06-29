@@ -8,14 +8,13 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.ui.uiButton
 import com.soywiz.korge.ui.uiText
 import com.soywiz.korge.ui.uiVerticalStack
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.alignLeftToRightOf
-import com.soywiz.korge.view.alignTopToBottomOf
-import com.soywiz.korge.view.fixedSizeContainer
+import com.soywiz.korge.view.*
+import com.soywiz.korim.bitmap.Bitmap32
 import com.soywiz.korio.async.launchImmediately
 import com.soywiz.korma.geom.Point
 import planet.Region
 import planet.generation.PlanetOptionsUI
+import saveBMPToFile
 import ui.Resources
 import ui.VIRTUAL_SIZE
 import ui.planetScene.planetView.paint
@@ -42,10 +41,16 @@ class PlanetScene : Scene() {
             regionContainer = fixedSizeContainer(200, 400, clip = false) {
                 alignLeftToRightOf(planetContainer)
             }
-            uiButton(text = "Ship") {
+            val shipButton = uiButton(text = "Ship") {
                 alignTopToBottomOf(controls)
                 onPress {
                     loadShipScene()
+                }
+            }
+            uiButton(text = "Screenshot") {
+                alignTopToBottomOf(shipButton)
+                onPress {
+                    saveScreenshot(views)
                 }
             }
         }
@@ -101,6 +106,13 @@ class PlanetScene : Scene() {
                 transition = AlphaTransition,
                 time = TimeSpan(500.0)
             )
+        }
+    }
+
+    private fun saveScreenshot(views: Views) {
+        launchImmediately {
+            saveBMPToFile(planetContainer.renderToBitmap(views))
+            println("Saved pic")
         }
     }
 }

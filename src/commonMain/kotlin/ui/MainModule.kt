@@ -12,8 +12,8 @@ const val WINDOW_HEIGHT = 800
 const val VIRTUAL_SIZE = 640
 
 object MainModule : Module() {
-//    override val mainScene = PlanetScene::class
-    override val mainScene = ShipScene::class
+    override val mainScene = PlanetScene::class
+//    override val mainScene = ShipScene::class
     override val title: String = "Stars Between"
     override val size: SizeInt = SizeInt(Size(WINDOW_WIDTH, WINDOW_HEIGHT))
     override val windowSize = size
